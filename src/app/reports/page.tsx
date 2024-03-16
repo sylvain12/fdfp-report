@@ -1,7 +1,10 @@
+import ReportNav from "./report-nav";
 
 const ReportPage = () => {
-    return (
-        <div>Report Page</div>
-    )
-}
-export default ReportPage
+  return (
+    <div className="report-content pt-[4rem] px-[4rem]">
+      <div>Report Page</div>
+    </div>
+  );
+};
+export default ReportPage;

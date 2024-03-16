@@ -1,5 +1,6 @@
 
 @import '../components/component.css';
+@import './reports/report.css';
 
 @tailwind base;
 @tailwind components;
@@ -69,7 +70,7 @@ svg path {
 
 .main-container {
   display: grid;
-  grid-template-columns: 50px 1fr 50px;
+  grid-template-columns: 1fr;
   grid-template-rows: 8rem 1fr;
   grid-template-areas: 
   "navbar navbar"
@@ -111,8 +112,26 @@ svg path {
 }
 
 .main-content {
-  grid-column: 2/ -2;
+  grid-column: 1/ -1;
   grid-area: content;
+}
+
+
+
+/* Report global css
+ */
+.report-container {
+  display: grid;
+  grid-template-columns: 70px 1fr 300px 70px;
+  grid-template-rows: 8rem 1fr;
+}
+
+.report-nav {
+  /* box-shadow: #0000000d 0px 0px 5px 0px; */
+  border-bottom: 2px solid #0000000d;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  /* justify-items: center; */
 }
 
 /* @media (prefers-color-scheme: dark) {

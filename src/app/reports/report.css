@@ -1,0 +1,33 @@
+
+
+@layer components {
+    .report-nav {
+        @apply col-start-2 col-end-4
+    }
+
+    .report-nav-menu {
+        @apply col-start-1 col-end-2 flex items-center
+    }
+
+    .report-nav-menu-link {
+        @apply text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative
+    }
+
+    .report-nav-menu-link:nth-child(2) {
+        @apply px-[2rem]
+    }  
+
+    .report-nav-menu-link.active {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-fdfp-main after:content-[''] after:h-[2px] after:w-full text-fdfp-main font-normal
+    }
+
+
+
+    .report-nav-actions {
+        @apply col-start-2 col-end-3
+    }
+
+    .report-content{
+        @apply col-start-1 col-end-5 row-start-2 row-end-3
+    }
+}

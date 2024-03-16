@@ -1,12 +1,16 @@
-const ReportLayout = ({children}: Readonly<{
-children: React.ReactNode;
-}>) => {
-    return (
-        <div>
-            <h2>Report Layout</h2>
-            {children}
-        </div>
-    )
-}
+import ReportNav from "./report-nav";
 
-export default ReportLayout
+const ReportLayout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  return (
+    <div className="report-container">
+      <ReportNav />
+      {children}
+    </div>
+  );
+};
+
+export default ReportLayout;
