@@ -1,4 +1,34 @@
-/* :root {} */
+
+@import '../components/component.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+      --fdfp-main-color: #0f6b9d;
+      --fdfp-bg-color: #f5f5f6;
+  
+      --white-color: rgb(255, 254, 254);
+      --fdfp-text-color: #7a7a7a;
+
+      --fw-100: 100;
+      --fw-100: 200;
+      /* --fw-300: 300; */
+      --fw-400: 400;
+      --fw-500: 500;
+    }
+}
+
+:root {
+  --fdfp-main-color: #0f6b9d;
+  --fdfp-bg-color: #f5f5f6;
+
+  --white-color: rgb(255, 254, 254);
+  --fdfp-text-color: #7a7a7a;
+}
 
 /* @media (prefers-color-scheme: dark) {
   :root {}
@@ -10,15 +40,79 @@
   margin: 0;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
 }
 
+body {
+  font-family: var(--font-inter);
+  background-color: var(--fdfp-bg-color);
+  color: var(--fdfp-text-color);
+  font-size: 1.6rem;
+  font-weight: var(--fw-100);
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+svg path {
+  stroke-width: 1;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 8rem 1fr;
+  grid-template-areas: 
+  "navbar navbar"
+  "content content";
+  height: 100%;
+  min-height: 100vh;
+}
+
+.main-sidebar {
+  grid-column: 1/ 2;
+  grid-row: 1/ -1;
+  border-right: 1px solid;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-navbar {
+  display: grid;
+  grid-template-columns: 70px 100px 1fr 200px 70px;
+  grid-auto-rows: auto;
+  grid-area: navbar;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  grid-column: 1/ -1;
+  background-color: var(--white-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    font-size: 1.3rem;
+}
+
+.main-navbar > * {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  grid-column: 2/ -2;
+  grid-area: content;
 }
 
 /* @media (prefers-color-scheme: dark) {

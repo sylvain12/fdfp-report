@@ -39,7 +39,7 @@
    }
 
    .nav-right-menu-item {
-      @apply p-[1.5rem] border-l-fdfp-bg border-l
+      @apply p-[2rem] border-l-fdfp-bg border-l
    }
 
    .nav-right-menu-item-span {
