@@ -1,0 +1,55 @@
+
+@layer components {
+
+   /* Nav logout button */
+   .nav-logout {
+      @apply col-start-1 col-end-2 bg-fdfp-bg border-r border-r-fdfp-bg;
+   }
+
+   /* Nav logo */
+   .nav-logo {
+      @apply col-start-2 col-end-3;
+   }
+
+   /* Nav main menu */
+   .nav-main-menu {
+      @apply col-start-3 col-end-4 flex items-center h-full;
+   }
+
+   .nav-main-menu-link {
+      @apply uppercase relative text-[1.5rem] h-full flex items-center px-[1rem] transition-colors hover:text-fdfp-main gap-[1rem]
+   }
+
+   .nav-main-menu-link.active {
+      @apply font-normal opacity-100 text-fdfp-main after:content-[''] after:absolute after:h-[4px] after:w-full after:bg-fdfp-main after:block
+      after:bottom-0 after:left-0
+   }
+
+   /* Nav right */
+   .nav-right {
+      @apply col-start-4 col-end-5 gap-[1.5rem] flex items-center justify-end
+   }
+
+   .nav-right-user {
+      @apply flex items-center text-right flex-1 text-right justify-end;
+   }
+
+   .nav-right-menu {
+      @apply relative;
+   }
+
+   .nav-right-menu-item {
+      @apply p-[1.5rem] border-l-fdfp-bg border-l
+   }
+
+   .nav-right-menu-item-span {
+      @apply absolute grid place-items-center top-[.8rem] right-[1rem] rounded-full text-[1.1rem] text-white bg-fdfp-main h-[20px] w-[20px]
+   }
+
+   /* Nav Search */
+   .nav-search {
+      @apply col-start-5 col-end-6 border-l border-l-fdfp-bg bg-fdfp-bg;
+   }
+}
+
+
