@@ -1,0 +1,18 @@
+@layer components {
+    .btn {
+        @apply text-[1.2rem] border font-normal px-[1.15em] py-[0.725em]
+    }
+
+    .btn.btn-icon {
+        @apply flex items-center gap-6
+    }
+
+    .btn.btn-main {
+        @apply bg-fdfp-main text-fdfp-bg
+    }
+
+    .btn.btn-main-transparent {
+        @apply text-fdfp-main bg-transparent border-fdfp-main
+    }
+
+}

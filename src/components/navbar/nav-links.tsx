@@ -1,47 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import {
-  HomeIcon,
-  ChartBarSquareIcon,
-  InformationCircleIcon,
-} from "@heroicons/react/24/outline";
-import { TLink } from "@/types/navigation.type";
-import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
+import { mainNavs } from "@/app/reports/[slug]/nav-data";
+import { usePathname } from "next/navigation";
 
-const links: TLink[] = [
-  { name: "Acceuil", href: "/", icon: HomeIcon, active: true },
-  {
-    name: "Rapports",
-    href: "/reports",
-    icon: ChartBarSquareIcon,
-    active: false,
-  },
-  {
-    name: "A propos",
-    href: "reports",
-    icon: InformationCircleIcon,
-    active: false,
-  },
-];
+const getPathRoute = (path: string) => {
+  return path.split("/").slice(1)[0].trim();
+};
 
 export default function NavLinks() {
+  const navs = [...mainNavs];
   const pathname = usePathname();
+
   return (
     <div className="nav-main-menu">
-      {links.map((link) => {
+      {navs.map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link
             className={clsx("nav-main-menu-link", {
-              active: pathname === link.href,
+              active:
+                pathname.length > 1
+                  ? getPathRoute(pathname) === getPathRoute(link.href)
+                  : pathname === link.href,
             })}
             title={link.name}
             key={link.name}
             href={link.href}
           >
-            <LinkIcon className="w-10" />
+            {/* <LinkIcon className="w-10" /> */}
             {link.name}
           </Link>
         );

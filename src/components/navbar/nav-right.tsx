@@ -10,7 +10,7 @@ export default function NavRight() {
       <div className="nav-right-menu">
         <div className="nav-right-menu-item">
           <BellIcon className="w-10" />
-          <span className="nav-right-menu-item-span">3</span>
+          <span className="nav-right-menu-item-span font-manrope">3</span>
         </div>
       </div>
     </div>

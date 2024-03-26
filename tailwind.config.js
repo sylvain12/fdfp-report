@@ -16,10 +16,16 @@ module.exports = {
       colors: {
         'fdfp': {
           main: 'var(--fdfp-main-color)',
+          'main-light': 'var(--fdfp-main-color-light)',
+          second: 'var(--fdfp-second-color)',
           bg: 'var(--fdfp-bg-color)',
-          text: 'var(--fdfb-text-color)'
+          text: 'var(--fdfb-text-color)',
+          light: 'var(--fdfp-light-color)'
         }
-      }
+      },
+      fontFamily: {
+        manrope: ["Manrope", "sans-serif"],
+      },
     },
   },
   plugins: [

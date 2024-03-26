@@ -1,4 +1,4 @@
-import { Inter, Quicksand, Roboto } from "next/font/google";
+import { Inter, Manrope, Livvic } from "next/font/google";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -6,14 +6,14 @@ const inter = Inter({
   weight: ["100", "200", "400", "500"],
 });
 
-const quicksand = Quicksand({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "600"],
+  weight: ["200", "400", "600"],
 });
 
-const roboto = Roboto({
+const oxygen = Livvic({
   subsets: ["latin"],
   weight: ["100", "300", "500"],
 });
 
-export { inter, quicksand, roboto };
+export { inter, manrope, oxygen };

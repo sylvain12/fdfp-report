@@ -1,40 +1,21 @@
 "use client";
 
-import { TLink } from "@/types/navigation.type";
-import React from "react";
-import {
-  PresentationChartLineIcon,
-  DocumentMagnifyingGlassIcon,
-  BanknotesIcon,
-} from "@heroicons/react/24/outline";
-
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import Link from "next/link";
-
-const reportNavs: TLink[] = [
-  {
-    name: "Analyse globale",
-    href: "",
-    active: true,
-    icon: PresentationChartLineIcon,
-  },
-  {
-    name: "Demandes et Agréments",
-    href: "",
-    active: false,
-    icon: DocumentMagnifyingGlassIcon,
-  },
-  {
-    name: "Remboursements et liquidations",
-    href: "",
-    active: false,
-    icon: BanknotesIcon,
-  },
-];
+import Actions from "@/components/actions/actions";
+import { stringify } from "querystring";
+import {
+  globalAnalyzeNavs,
+  applicationsAndApprovalsNavs,
+  refundsAndSettlementsNavs,
+  reportNavs,
+} from "./[slug]/nav-data";
+import { useEffect } from "react";
 
 export default function ReportNav() {
   const pathname = usePathname();
+
   return (
     <div className="report-nav">
       <div className="report-nav-menu">
@@ -48,13 +29,15 @@ export default function ReportNav() {
                 active: pathname === nav.href,
               })}
             >
-              <ReportIcon className="w-10" />
+              <ReportIcon className="w-12" />
               {nav.name}
             </Link>
           );
         })}
       </div>
-      <div className="report-nav-actions"></div>
+      <div className="report-nav-actions">
+        <Actions />
+      </div>
     </div>
   );
 }

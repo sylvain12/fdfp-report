@@ -1,8 +1,6 @@
-
-
 @layer components {
     .report-nav {
-        @apply col-start-2 col-end-4
+        @apply col-start-1 col-end-5 pr-[20px]
     }
 
     .report-nav-menu {
@@ -10,18 +8,14 @@
     }
 
     .report-nav-menu-link {
-        @apply text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative
+        @apply text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative px-[2rem]
+        border-r
     }
-
-    .report-nav-menu-link:nth-child(2) {
-        @apply px-[2rem]
-    }  
 
     .report-nav-menu-link.active {
-        @apply relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-fdfp-main after:content-[''] after:h-[2px] after:w-full text-fdfp-main font-normal
+        @apply  bg-fdfp-main text-white
+        /* relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-fdfp-main after:content-[''] after:h-full after:w-full text-white font-normal */
     }
-
-
 
     .report-nav-actions {
         @apply col-start-2 col-end-3
@@ -29,5 +23,43 @@
 
     .report-content{
         @apply col-start-1 col-end-5 row-start-2 row-end-3
+    }
+
+    .report-list-container {
+        @apply h-full w-full
+    }
+
+    .report-content-sidebar {
+        @apply flex items-center h-full 
+        col-start-1 col-end-6 row-start-1 row-end-2
+        /* bg-white px-[10rem] */
+    }
+
+    .report-content-sidebar-link {
+        @apply p-8 h-full w-full font-normal text-[1.2rem] text-fdfp-text flex items-center justify-center gap-4 uppercase bg-white opacity-65
+    }
+
+    .report-content-sidebar-link.active {
+        @apply  text-fdfp-main opacity-100 font-normal relative after:absolute after:content-[''] after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:w-full after:bg-fdfp-main border-b-0
+    }
+
+    .report-content-sidebar-link.active span {
+        @apply text-fdfp-main
+    }
+
+    .report-content-sidebar-link span {
+        @apply text-[5rem] font-normal
+    }
+
+    .report-content-sidebar-link p {
+        @apply leading-[1.2rem]
+    }
+
+    .report-content-text {
+        @apply col-start-1 col-end-6 row-start-2 row-end-3 h-full
+    }
+
+    .report-card {
+        @apply bg-blue-50 bg-white
     }
 }
