@@ -1,7 +1,7 @@
 export type TLink = {
   name: string;
   href: string;
-  active: boolean;
+  active?: boolean;
   icon?: any;
   query?: string[];
 };

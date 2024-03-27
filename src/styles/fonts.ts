@@ -1,4 +1,4 @@
-import { Inter, Manrope, Livvic } from "next/font/google";
+import { Inter, Manrope, Livvic, Epilogue } from "next/font/google";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,9 +11,9 @@ const manrope = Manrope({
   weight: ["200", "400", "600"],
 });
 
-const oxygen = Livvic({
+const oxygen = Epilogue({
   subsets: ["latin"],
-  weight: ["100", "300", "500"],
+  weight: ["200", "300", "400"],
 });
 
 export { inter, manrope, oxygen };

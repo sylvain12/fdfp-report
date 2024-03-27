@@ -8,7 +8,7 @@
     }
 
     .report-nav-menu-link {
-        @apply text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative px-[2rem]
+        @apply font-normal text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative px-[2rem]
         border-r
     }
 
@@ -61,5 +61,9 @@
 
     .report-card {
         @apply bg-blue-50 bg-white
+    }
+
+    .report-details-container {
+        @apply w-full h-full col-start-1 col-end-5 py-[2rem] px-[10rem]
     }
 }

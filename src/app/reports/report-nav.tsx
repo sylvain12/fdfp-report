@@ -26,7 +26,7 @@ export default function ReportNav() {
               href={nav.href}
               key={nav.name}
               className={clsx("report-nav-menu-link", {
-                active: pathname === nav.href,
+                active: pathname === nav.href || pathname.includes(nav.href),
               })}
             >
               <ReportIcon className="w-12" />

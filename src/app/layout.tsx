@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className={oxygen.className}>
         <div className="main-container">
           {/* <div className="sidebar">
             <Sidebar />

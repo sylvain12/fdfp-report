@@ -194,6 +194,10 @@ svg path {
   grid-row: 2 / -1;
 }
 
+.breadcrumb {
+  /* box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px; */
+}
+
 /* .report-nav-menu-link-2 {
   display: flex ;
   align-items: center;

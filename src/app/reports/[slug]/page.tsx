@@ -20,6 +20,9 @@ type TReport = {
 };
 
 const ReportDetails = () => {
+  const params = useSearchParams();
+  const reportName = params.get("name");
+
   let navs: TLink[] = [];
   const pathname = usePathname();
 
@@ -36,15 +39,13 @@ const ReportDetails = () => {
 
   return (
     <div className="report-content">
-      {/* <ReportSidebar navs={navs} details={34} /> */}
-
-      {navs.length ? (
-        <ReportList links={navs} />
-      ) : (
-        <div className="report-content-text">
-          <NoReport />
-        </div>
-      )}
+      {reportName !== null ? <ReportDetails /> : <ReportList links={navs} />}
+      {/* {  navs.length ? (
+      <ReportList links={navs} />) : (
+      <div className="report-content-text">
+        <NoReport />
+      </div>
+      )} */}
     </div>
   );
 };
