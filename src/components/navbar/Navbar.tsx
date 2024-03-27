@@ -1,6 +1,6 @@
 import NavLinks from "./nav-links";
 import NavLogo from "./nav-logo";
-import NavLogout from "./nav-logout";
+import NavDarkMode from "./nav-darkmode";
 import NavRight from "./nav-right";
 import NavSearch from "./nav-search";
 // import "./navbar.module.css";
@@ -8,7 +8,7 @@ import NavSearch from "./nav-search";
 const Navbar = () => {
   return (
     <>
-      <NavLogout />
+      <NavDarkMode />
       <NavLogo />
       <NavLinks />
       <NavRight />

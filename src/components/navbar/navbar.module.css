@@ -22,8 +22,8 @@
 
    .nav-main-menu-link.active {
       @apply font-semibold text-fdfp-main 
-      /* after:content-[''] after:absolute after:h-[4px] after:w-full after:bg-fdfp-main after:block */
-      /* after:bottom-0 after:left-0 */
+      /* after:content-[''] after:absolute after:h-[4px] after:w-full after:bg-fdfp-main after:block
+      after:bottom-0 after:left-0 */
    }
 
    /* Nav right */
