@@ -19,12 +19,15 @@ module.exports = {
           'main-light': 'var(--fdfp-main-color-light)',
           second: 'var(--fdfp-second-color)',
           bg: 'var(--fdfp-bg-color)',
+          bgsecond: 'var(--fdfp-bg-color-second)',
           text: 'var(--fdfb-text-color)',
+          textsecond: 'var(--fdfb-text-second-color)',
           light: 'var(--fdfp-light-color)'
         }
       },
       fontFamily: {
         manrope: ["Manrope", "sans-serif"],
+        serif: 'var(--ff-serif)'
       },
     },
   },

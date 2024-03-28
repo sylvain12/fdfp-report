@@ -20,10 +20,10 @@ const BreadcrumbItem = ({
       <Link
         href={link.href}
         className={clsx({
-          uppercase: isCurrent,
+          "uppercase font-bold": isCurrent,
         })}
       >
-        {showIcon ? <ItemIcon className="w-8" /> : title}
+        {showIcon ? <ItemIcon className="w-10" /> : title}
       </Link>
       {!isCurrent ? <ChevronRightIcon className="w-8" /> : <></>}
     </div>

@@ -8,7 +8,7 @@
     }
 
     .report-nav-menu-link {
-        @apply font-normal text-[1.2rem] h-full uppercase flex items-center gap-[1rem] relative px-[2rem]
+        @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
         border-r
     }
 

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { inter, manrope, oxygen } from "@/fonts";
+import { inter, manrope, epilogue } from "@/fonts";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
-import { Sidebar } from "@/components/sidebar/Sidebar";
-
-// const inter = Inter({ subsets: ["latin"] });
+// import { Sidebar } from "@/components/sidebar/Sidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={oxygen.className}>
+      <body className={manrope.className}>
         <div className="main-container">
           {/* <div className="sidebar">
             <Sidebar />

@@ -2,8 +2,8 @@
 @layer components {
 
    /* Nav logout button */
-   .nav-logout {
-      @apply col-start-1 col-end-2 bg-fdfp-bg border-r border-r-fdfp-bg;
+   .nav-darkmode {
+      @apply col-start-1 col-end-2;
    }
 
    /* Nav logo */
@@ -17,7 +17,7 @@
    }
 
    .nav-main-menu-link {
-      @apply uppercase relative text-[1.5rem] h-full flex items-center px-[1rem] transition-colors hover:text-fdfp-main gap-[1rem]
+      @apply relative text-[1.5rem] h-full flex items-center px-[1rem] transition-colors hover:text-fdfp-main gap-[1rem]
    }
 
    .nav-main-menu-link.active {
