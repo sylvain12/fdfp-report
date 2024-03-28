@@ -1,25 +1,35 @@
+import { useTable } from "@/store/table.store";
 import {
   IReportRefundsAndSettlements,
   IReportRefundsAndSettlementsTotal,
+  TableNumber,
 } from "../../report.model";
+import RefundsAndSettlementsTable from "./refunds-and-settlements-table";
+import {
+  generateReportRefundsAndSettlementsData,
+  generateReportRefundsAndSettlementsTotalData,
+} from "@/lib/data";
 
-type TReportDetails = {
-  title: string;
-  tables: IReportRefundsAndSettlements[];
-  summary: IReportRefundsAndSettlementsTotal;
-};
+const tableData = generateReportRefundsAndSettlementsData();
+const tableTotal = generateReportRefundsAndSettlementsTotalData();
 
-export default function ReportTableDetails({
-  title,
-  tables,
-  summary,
-}: TReportDetails) {
+export default function ReportTableDetails() {
+  const { showedTable, show } = useTable();
+
   return (
-    <div className="report-table">
-      {/* <h1 className="text-[2.1rem] font-normal font-manrope">{title}</h1> */}
-      <h2 className="text-[3rem] font-serif">Adobe Analytics</h2>
-      <div>{tables.length}</div>
-      <div className="font-manrope">{summary.year}</div>
+    <div className="">
+      {/* RefundsAndASettlements table part 3 */}
+      {/* <div>{tables.length}</div> */}
+      {/* <div className="font-manrope">{summary.year}</div> */}
+      {showedTable == TableNumber.RefundsAndASettlements ? (
+        <RefundsAndSettlementsTable
+          tables={tableData}
+          summary={tableTotal}
+          title={"Plans liquidés"}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

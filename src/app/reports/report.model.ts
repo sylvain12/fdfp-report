@@ -29,3 +29,15 @@ export interface IReportRefundsAndSettlementsTotal {
   totalAmountOfLiquidationOnShare: string;
   shareOfAmountLiquidated: string;
 }
+
+export type TReportDetails = {
+  title: string;
+  tables: IReportRefundsAndSettlements[];
+  summary: IReportRefundsAndSettlementsTotal;
+};
+
+export enum TableNumber {
+  GlobalAnalyze = 1,
+  ApplicationsAndApprovals,
+  RefundsAndASettlements,
+}

@@ -1,6 +1,6 @@
 @layer components {
     .btn {
-        @apply text-[1.2rem] border font-normal px-[1.15em] py-[0.725em]
+        @apply text-[1.2rem] border font-bold px-[1.15em] py-[0.725em]
     }
 
     .btn.btn-icon {
@@ -8,11 +8,11 @@
     }
 
     .btn.btn-main {
-        @apply bg-fdfp-main text-fdfp-bg
+        @apply border-fdfp-main bg-fdfp-main text-fdfp-bg hover:bg-transparent hover:text-fdfp-textsecond
     }
 
     .btn.btn-main-transparent {
-        @apply text-fdfp-main bg-transparent border-fdfp-main
+        @apply text-fdfp-textsecond bg-transparent border-fdfp-main hover:bg-fdfp-main hover:text-white
     }
 
 }

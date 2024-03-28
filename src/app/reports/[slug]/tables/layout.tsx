@@ -10,12 +10,7 @@ import {
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { stringify } from "querystring";
 import { useEffect, useState } from "react";
-import BreadcrumbItem from "@/components/breadcrumb/breadcrumb-item";
 import { getReportPathDetails } from "@/lib/utils";
-import {
-  generateReportRefundsAndSettlementsData,
-  generateReportRefundsAndSettlementsTotalData,
-} from "@/lib/data";
 
 const reportBreadCrumb: TBreadcrumb = {
   separator: ">",
@@ -37,9 +32,6 @@ const defaultItem = [
     showIcon: true,
   },
 ];
-
-const tableData = generateReportRefundsAndSettlementsData();
-const tableTotal = generateReportRefundsAndSettlementsTotalData();
 
 export const ReportDetailsLayout = () => {
   const [breadcrumb, setBreadcrumb] = useState<TBreadcrumb>({
@@ -85,11 +77,7 @@ export const ReportDetailsLayout = () => {
   return (
     <div className="report-details-container">
       <Breadcrumb {...breadcrumb} />
-      <ReportTableDetails
-        title={currentPageName!}
-        tables={tableData}
-        summary={tableTotal}
-      />
+      <ReportTableDetails />
     </div>
   );
 };

@@ -1,3 +1,10 @@
+/* @font-face {
+  font-family: "Recoleta";
+  src:
+    local("Recoleta"),
+    url("../styles/Recoleta-RegularDEMO.otf") format("opentype"),
+}; */
+
 @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
 @import '../components/component.css';
 @import './reports/report.css';
@@ -27,7 +34,7 @@
       --fw-400: 400;
       --fw-500: 500;
       --ff-second: "manrope";
-      --ff-serif: "Libre Bodoni", serif;
+      --ff-serif: "Merry", serif;
     }
 }
 
@@ -61,8 +68,8 @@ body {
 
 body {
   font-family: var(--font-manrope);
-  background-color: var(--fdfp-bg-color);
-  /* background-color: var(--fdfp-bg-color-second); */
+  /* background-color: var(--fdfp-bg-color); */
+  background-color: var(--fdfp-bg-color-second);
   color: var(--fdfp-text-color-second);
   font-size: 1.6rem;
   font-weight: var(--fw-300);
