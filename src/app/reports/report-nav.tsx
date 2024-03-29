@@ -35,9 +35,9 @@ export default function ReportNav() {
           );
         })}
       </div>
-      <div className="report-nav-actions">
+      {/* <div className="report-nav-actions">
         <Actions />
-      </div>
+      </div> */}
     </div>
   );
 }

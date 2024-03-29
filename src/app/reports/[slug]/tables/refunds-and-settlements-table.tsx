@@ -4,6 +4,8 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
   ArrowPathIcon,
+  ListBulletIcon,
+  ChartPieIcon,
 } from "@heroicons/react/24/outline";
 
 export default function RefundsAndSettlementsTable({
@@ -13,114 +15,55 @@ export default function RefundsAndSettlementsTable({
 }: TReportDetails) {
   return (
     <div>
-      <div className="flex items-end justify-end gap-[4rem] bg-white mt-[4rem] px-5 py-10 border-b">
-        {/* <h3 className="text-[2.75rem] font-medium flex-1 ml-0 font-serif">
-          {title}
-        </h3> */}
-        {/* Filter year */}
-        <div className="flex flex-col gap-2 text-[1.4rem]">
-          <label htmlFor="" className="font-medium">
-            Année
-          </label>
-          <button
-            id="dropdownSearchButton"
-            data-dropdown-toggle="dropdownSearch"
-            data-dropdown-placement="bottom"
-            className="w-[100px] border border-fdfp-text font-light text-[1.4rem] px-5 py-3 text-center inline-flex items-center justify-between gap-[1.2rem]"
-            type="button"
-          >
-            ...
-            <ChevronDownIcon className="w-6" />
-          </button>
-
-          {/* <!-- Dropdown menu --> */}
-          <div
-            id="dropdownSearch"
-            className="z-10 hidden bg-white rounded-lg shadow w-6"
-          >
-            <ul
-              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownSearchButton"
+      <div className="flex items-end justify-end gap-[1rem] bg-white mt-[4rem] px-5 py-10 border-b">
+        <form className="flex items-end text-[1.3rem] gap-4">
+          <div>
+            <label htmlFor="years" className="block font-medium">
+              Année
+            </label>
+            <select
+              id="years"
+              className="w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white"
             >
-              <li>
-                <div className="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                  <label
-                    htmlFor="checkbox-item-17"
-                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                  >
-                    Roberta Casas
-                  </label>
-                </div>
-              </li>
-            </ul>
+              <option selected>...</option>
+              <option value="2021">2021</option>
+              <option value="2021">2021</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+            </select>
           </div>
-        </div>
-
-        {/* Filter Status */}
-        <div className="flex flex-col gap-2 text-[1.4rem]">
-          <label htmlFor="" className="font-medium">
-            Montant proposé en remboursement selon:
-          </label>
-          <button
-            id="dropdownSearchButton"
-            data-dropdown-toggle="dropdownSearch"
-            data-dropdown-placement="bottom"
-            className="border border-fdfp-text font-light text-[1.4rem] px-5 py-3 text-center inline-flex items-center justify-between gap-[1.2rem]"
-            type="button"
-          >
-            Veuillez faire votre selection <ChevronDownIcon className="w-6" />
-          </button>
-
-          {/* <!-- Dropdown menu --> */}
-          <div
-            id="dropdownSearch"
-            className="z-10 hidden bg-white rounded-lg shadow w-6"
-          >
-            <div className="p-3">
-              <label htmlFor="input-group-search" className="sr-only">
-                Search
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <MagnifyingGlassIcon className="w-8" />
-                </div>
-                <input
-                  type="text"
-                  id="input-group-search"
-                  className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search user"
-                />
-              </div>
-            </div>
-            <ul
-              className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownSearchButton"
+          <div>
+            <label htmlFor="amounts" className="block font-medium">
+              Montant proposé en remboursement selon:
+            </label>
+            <select
+              id="amounts"
+              className="w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white"
             >
-              <li>
-                <div className="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                  <label
-                    htmlFor="checkbox-item-17"
-                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
-                  >
-                    Roberta Casas
-                  </label>
-                </div>
-              </li>
-            </ul>
+              <option selected className="bg-white">
+                ...
+              </option>
+              <option value="2021">2021</option>
+              <option value="2021">2021</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+            </select>
           </div>
-        </div>
-
-        <button className="btn btn-icon btn-main-transparent btn-main uppercase">
-          Charger
-          <ArrowPathIcon className="w-8" />
-        </button>
+          <button className="btn btn-icon btn-main-transparent btn-main uppercase">
+            Charger
+            <ArrowPathIcon className="w-8" />
+          </button>
+        </form>
 
         <div className="flex-1 mr-0">
           <ActionLink />
         </div>
       </div>
 
-      <div className="relative overflow-x-auto">
+      {/* Table details */}
+      <div className="relative overflow-x-auto ">
         <table className="w-full text-right rtl:text-right">
           <thead className="text-[1.2rem] bg-white border-b border-fdfp-light">
             <tr>
