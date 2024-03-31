@@ -41,3 +41,21 @@ export enum TableNumber {
   ApplicationsAndApprovals,
   RefundsAndASettlements,
 }
+
+export interface IDataRefundsAndSettlements {
+  "Statut d'Entreprise": string;
+  "Nombre d'Actions Agréées": string;
+  "Nombre d'Actions Demandées en Remboursement": string;
+  "Part Action Demandée en Remboursement": string;
+  "Montant Total Agréé sur Action (en FCFA)": string;
+  "% Agreer": string;
+  "Montant Total Demandé en Remboursement (en FCFA)": string;
+  "% Demander": string;
+  "Montant Total Proposé en Remboursement sur Action (en FCFA)": string;
+  "% Proposer": string;
+}
+
+export type TTReportTableData = {
+  items?: IDataRefundsAndSettlements[] | null;
+  columns: string[];
+};

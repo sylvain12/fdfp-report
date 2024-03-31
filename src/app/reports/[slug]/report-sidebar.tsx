@@ -8,14 +8,11 @@ import { useEffect } from "react";
 
 type TReportSidebar = {
   navs: TLink[];
-  details: any;
 };
 
-export default function ReportSidebar({ navs, details }: TReportSidebar) {
+export default function ReportSidebar({ navs }: TReportSidebar) {
   const searchParams = useSearchParams();
-  const name = searchParams.getAll("name")[0];
-
-  useEffect(() => {});
+  const name = searchParams.get("name") || "";
 
   return (
     <div className="report-content-sidebar">
@@ -28,7 +25,6 @@ export default function ReportSidebar({ navs, details }: TReportSidebar) {
             key={nav.name}
             href={nav.href}
           >
-            {/* <span> {details}</span> */}
             <p>{nav.name}</p>
           </Link>
         );

@@ -19,124 +19,121 @@ import { stringify } from "querystring";
 const globalAnalyzeNavs: TLink[] = [
   {
     name: "Plans de formations",
-    href: `/reports/global-analyze/tables/?${stringify({
+    href: `/reports/global-analyze/details/?${stringify({
       name: "plan de formation",
-      year: 2023,
     })}`,
-    active: true,
+    active: false,
     icon: ListBulletIcon,
-    query: ["plan de formation", "2024"],
+    query: ["plan de formation"],
   },
   {
     name: "Actions de formations",
-    href: `/reports/global-analyze/tables?name=${"actions de formations"}`,
+    href: `/reports/global-analyze/details?name=${"actions de formations"}`,
     active: false,
     icon: CursorArrowRaysIcon,
-    query: ["actions de formations", "2024"],
+    query: ["actions de formations"],
   },
   {
     name: "Projets de formations",
-    href: `/reports/global-analyze/tables?name=${"projets de formations"}`,
-    active: true,
+    href: `/reports/global-analyze/details?name=${"projets de formations"}`,
+    active: false,
     icon: InboxStackIcon,
-    query: ["projets de formations", "2024"],
+    query: ["projets de formations"],
   },
   {
     name: "Entreprises",
-    href: `/reports/global-analyze/tables?name=${"entreprises"}`,
-    active: true,
+    href: `/reports/global-analyze/details?name=${"entreprises"}`,
+    active: false,
     icon: BuildingLibraryIcon,
-    query: ["entreprises", "2024"],
+    query: ["entreprises"],
   },
   {
     name: "Cabinets de formations",
-    href: `/reports/global-analyze/tables?name=${"cabinets de formations"}`,
-    active: true,
+    href: `/reports/global-analyze/details?name=${"cabinets de formations"}`,
+    active: false,
     icon: ScaleIcon,
-    query: ["cabinets de formations", "2024"],
+    query: ["cabinets de formations"],
   },
 ];
 
 const applicationsAndApprovalsNavs: TLink[] = [
   {
     name: "Plans de formations",
-    href: `/reports/applications-and-approvals/tables?${stringify({
+    href: `/reports/applications-and-approvals/details?${stringify({
       name: "plan de formation",
-      year: 2023,
     })}`,
-    active: true,
+    active: false,
     icon: ListBulletIcon,
-    query: ["plan de formation", "2024"],
+    query: ["plan de formation"],
   },
   {
     name: "Actions de formations",
-    href: `/reports/applications-and-approvals/tables?name=${"actions de formations"}`,
-    active: true,
+    href: `/reports/applications-and-approvals/details?name=${"actions de formations"}`,
+    active: false,
     icon: CursorArrowRaysIcon,
-    query: ["actions de formations", "2024"],
+    query: ["actions de formations"],
   },
   {
     name: "Nombre de stagiaires par action",
-    href: `/reports/applications-and-approvals/tables?name=${stringify({
+    href: `/reports/applications-and-approvals/details?name=${stringify({
       name: "Nombre de stagiaires par action",
     })}`,
-    active: true,
+    active: false,
     icon: ChartPieIcon,
-    query: ["Nombre de stagiaires par action", "2024"],
+    query: ["Nombre de stagiaires par action"],
   },
   {
     name: "Domaine de formations",
-    href: `/reports/applications-and-approvals/tables/?${stringify({
+    href: `/reports/applications-and-approvals/details/?${stringify({
       name: "Domaine de formations",
     })}`,
-    active: true,
+    active: false,
     icon: PuzzlePieceIcon,
-    query: ["Domaine de formations", "2024"],
+    query: ["Domaine de formations"],
   },
   {
     name: "Cabinets de formations",
-    href: `/reports/applications-and-approvals/tables/?${stringify({
+    href: `/reports/applications-and-approvals/details/?${stringify({
       name: "Cabinets de formations",
     })}`,
-    active: true,
+    active: false,
     icon: ScaleIcon,
-    query: ["Cabinets de formations", "2024"],
+    query: ["Cabinets de formations"],
   },
   {
     name: "Projets initiés",
-    href: `/reports/applications-and-approvals/tables/?${stringify({
+    href: `/reports/applications-and-approvals/details/?${stringify({
       name: "Projets Projets initiés",
     })}`,
-    active: true,
+    active: false,
     icon: InboxStackIcon,
-    query: ["Projets initiés", "2024"],
+    query: ["Projets initiés"],
   },
 ];
 
 const refundsAndSettlementsNavs: TLink[] = [
   {
     name: "Actions demandés en remboursement",
-    href: `/reports/refunds-and-settlements/tables?${stringify({
+    href: `/reports/refunds-and-settlements/details?${stringify({
       name: "Actions demandés en remboursement",
-      year: 2023,
     })}`,
-    active: true,
+    active: false,
     icon: ListBulletIcon,
-    query: ["Actions demandés en remboursement", "2024"],
+    query: ["Actions demandés en remboursement"],
   },
   {
     name: "Actions liquidées",
-    href: `/reports/refunds-and-settlements/tables?name=${"Actions liquidées"}`,
-    active: true,
+    href: `/reports/refunds-and-settlements/details?name=${"Actions liquidées"}`,
+    active: false,
     icon: CursorArrowRaysIcon,
-    query: ["Actions liquidées", "2024"],
+    query: ["Actions liquidées"],
   },
   {
     name: "Plans liquidés",
-    href: `/reports/refunds-and-settlements/tables?name=${"Plans liquidés"}`,
-    active: true,
+    href: `/reports/refunds-and-settlements/details?name=${"Plans liquidés"}`,
+    active: false,
     icon: BookOpenIcon,
-    query: ["Plans liquidés", "2024"],
+    query: ["Plans liquidés"],
   },
 ];
 
@@ -144,7 +141,7 @@ const reportNavs: TLink[] = [
   {
     name: "Analyse globale",
     href: "/reports/global-analyze",
-    active: true,
+    active: false,
     icon: PresentationChartLineIcon,
   },
   {

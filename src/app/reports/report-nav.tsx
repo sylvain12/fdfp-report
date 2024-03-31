@@ -3,15 +3,12 @@
 import { usePathname, useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import Link from "next/link";
-import Actions from "@/components/actions/actions";
-import { stringify } from "querystring";
 import {
   globalAnalyzeNavs,
   applicationsAndApprovalsNavs,
   refundsAndSettlementsNavs,
   reportNavs,
 } from "./[slug]/nav-data";
-import { useEffect } from "react";
 
 export default function ReportNav() {
   const pathname = usePathname();
