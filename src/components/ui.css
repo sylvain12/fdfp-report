@@ -3,6 +3,10 @@
         @apply text-[1.2rem] border font-bold px-[1.15em] py-[0.725em]
     }
 
+    .btn:disabled {
+        @apply opacity-35 cursor-default pointer-events-none
+    }
+
     .btn.btn-icon {
         @apply flex items-center gap-6
     }
