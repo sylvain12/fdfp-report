@@ -1,6 +1,8 @@
 "use client";
 
 import ActionLink from "@/components/actions/action-link";
+import Pagination from "@/components/pagination";
+import { buildPagination } from "@/lib/utils";
 import { useGetData } from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +28,7 @@ const schema = z
 
 export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   const { data, loadTable } = useGetData();
+  let totalPages = 0;
 
   const {
     register,
@@ -41,6 +44,9 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
       loadTable("refunds.settlements", { ...formValue });
     }
   };
+
+  const pagination = buildPagination(data);
+  totalPages = pagination.totalPages;
 
   const isDisabled = () => watch("table") === "" || watch("year") === "";
   return (
@@ -96,7 +102,13 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
         </button>
       </form>
 
-      <div className="flex-1 mr-0">
+      <div className="flex-1 mr-0 flex items-end justify-end gap-[4rem]">
+        {data !== null && totalPages > 1 ? (
+          <Pagination totalPages={totalPages} />
+        ) : (
+          ""
+        )}
+        {/* <Pagination totalPages={1} /> */}
         <ActionLink />
       </div>
     </div>

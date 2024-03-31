@@ -26,4 +26,17 @@ const parseCookie = (cookie: string) => {
   return result;
 };
 
-export { getReportPathDetails, parseCookie };
+const buildPagination = (data: {}[], size: number = 5) => {
+  if (data === null) {
+    return { totalPages: 0, pageData: null };
+  }
+  const paginationData = [...data];
+  const results = [];
+  while (paginationData.length > 0) {
+    results.push(paginationData.splice(0, size));
+  }
+
+  return { totalPages: results.length, pageData: results };
+};
+
+export { getReportPathDetails, parseCookie, buildPagination };
