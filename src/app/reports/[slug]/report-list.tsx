@@ -1,4 +1,3 @@
-import { TLink } from "@/types/navigation.type";
 import { TReportListLink } from "../report.model";
 import ReportCard from "./report-card";
 
