@@ -31,9 +31,11 @@ export default function ReportTableData({ columns }: TTReportTableData) {
               >
                 <td
                   key={item[Object.keys(item)[0].trim()]}
-                  className="px-6 py-8 font-bold whitespace-nowrap text-left text-[1.1rem]"
+                  className="px-6 py-8 font-bold text-left text-[1.1rem] w-[130px]"
                 >
-                  {item[Object.keys(item)[0]]}
+                  <p style={{ maxWidth: "90%" }}>
+                    {item[Object.keys(item)[0]]}
+                  </p>
                 </td>
                 {columns.slice(1).map((column: string) => (
                   <td key={column} className="px-6 py-8">

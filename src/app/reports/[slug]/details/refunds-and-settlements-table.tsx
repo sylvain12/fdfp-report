@@ -1,11 +1,18 @@
-import { amountFiltersActionClaimedForReimbursement } from "../../data/filters.data";
+"use client";
+
+import {
+  amountFiltersActionClaimedForReimbursement,
+  amountFiltersLiquidatedPlans,
+  amountFiltersSharesLiquidated,
+} from "../../data/filters.data";
 import { TReportDetails } from "../../report.model";
 import ReportTablesFilters from "./report-table-filters";
 import ReportTableData from "./report-table-data";
 import { useGetData } from "@/store/table-data.store";
 import NoReport from "../no-report";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
-const amounts = amountFiltersActionClaimedForReimbursement;
 const data = [
   {
     "Entités ": "AGRICULTURE",
@@ -20,7 +27,7 @@ const data = [
     "% Proposer": "2.38%",
   },
 ];
-const defaultRefundsAndSettlementsDataColumns = [
+const refundsAndSettlementsDataColumns = [
   "Entités",
   "Nombre d'Actions Agréées",
   "Nombre d'Actions Demandées en Remboursement",
@@ -33,17 +40,72 @@ const defaultRefundsAndSettlementsDataColumns = [
   "% Proposer",
 ];
 
+const liquidatedShares = [
+  "Entités",
+  "Nombre d'Actions Demandées en Remboursement",
+  "Nombre d'Actions Demandées en Remboursement puis Liquidées",
+  "Montant Total Demandé en Remboursement (en FCFA) sur 0,6",
+  "% Part 0,6",
+  "Montant Total Demandé en Remboursement (en FCFA) sur FC",
+  "% Part FC",
+  "Montant Total Demandé en Remboursement (en FCFA)",
+  "Montant Total Proposé en Remboursement sur Action (en FCFA)",
+  "% Proposer",
+  "Montant Total de la Liquidation sur Action (en FCFA)",
+  "% Liquider",
+  "Part du Montant Liquidé sur Montant Proposé en Remboursement",
+];
+
+const liquidatedPlans = [
+  "Entités",
+  "Nombre de Plan Demandés",
+  "Nombre de Plan Agréés",
+  "Nombre de Plan Liquidés",
+  "Part des Plans Liquidés sur Plans Agréés",
+  "Montant du Plan 0,6 Annuel (en FCFA)",
+  "% Part Annuel 0,6",
+  "Montant Agréé du Plan 0,6 (en FCFA)",
+  "% Part Agréé 0,6",
+  "Montant Agréé FC du Plan (en FCFA)",
+  "% Part Agréé FC",
+  "Montant Total Agréé sur Plan (en FCFA)",
+  "% Part Total Agréé",
+  "Montant Total de la Tiquidation du Plan (en FCFA)",
+  "% Part Total Liquidé",
+];
+
 export default function RefundsAndSettlementsTable({
   title,
   tables,
   summary,
 }: TReportDetails) {
   const { data } = useGetData();
+  const searchPath = useSearchParams();
+  let amounts: { name: string; table: string }[] = [];
+  let columns: string[] = [];
+
+  const reportTableName = searchPath.get("name")!.toLowerCase();
+  if (reportTableName.includes("plans liquidés")) {
+    amounts = amountFiltersLiquidatedPlans;
+    columns = liquidatedPlans;
+  } else if (reportTableName.includes("actions liquidées")) {
+    amounts = amountFiltersSharesLiquidated;
+    columns = liquidatedShares;
+  } else if (reportTableName.includes("actions demandés en remboursement")) {
+    amounts = amountFiltersActionClaimedForReimbursement;
+    columns = refundsAndSettlementsDataColumns;
+  } else {
+    console.log("TODO: implement this section");
+  }
+
+  useEffect(() => {
+    console.log(amounts);
+  }, [searchPath]);
 
   return (
     <div>
       <ReportTablesFilters amounts={amounts} />
-      <ReportTableData columns={defaultRefundsAndSettlementsDataColumns} />
+      <ReportTableData columns={columns} />
     </div>
   );
 }
