@@ -1,3 +1,4 @@
+"use client";
 import { useTable } from "@/store/table.store";
 import {
   IReportRefundsAndSettlements,
@@ -9,19 +10,28 @@ import {
   generateReportRefundsAndSettlementsData,
   generateReportRefundsAndSettlementsTotalData,
 } from "@/lib/data";
+import { useCookies } from "next-client-cookies";
+import { useEffect } from "react";
+import { parseCookie } from "@/lib/utils";
+import { TABLETOSHOW } from "@/middleware";
 
 const tableData = generateReportRefundsAndSettlementsData();
 const tableTotal = generateReportRefundsAndSettlementsTotalData();
 
 export default function ReportTableDetails() {
-  const { showedTable, show } = useTable();
+  const { showedTable, setTable } = useTable();
+  const { cookie } = document;
+
+  useEffect(() => {
+    setTable(parseCookie(cookie)[TABLETOSHOW]);
+  }, [cookie, showedTable]);
 
   return (
     <div className="">
       {/* RefundsAndASettlements table part 3 */}
       {/* <div>{tables.length}</div> */}
       {/* <div className="font-manrope">{summary.year}</div> */}
-      {showedTable == TableNumber.RefundsAndASettlements ? (
+      {showedTable === TableNumber.RefundsAndASettlements ? (
         <RefundsAndSettlementsTable
           tables={tableData}
           summary={tableTotal}

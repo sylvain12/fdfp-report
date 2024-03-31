@@ -12,4 +12,18 @@ const getReportPathDetails = (pathname: string) => {
   };
 };
 
-export { getReportPathDetails };
+const parseCookie = (cookie: string) => {
+  const result = Object.create(null);
+  const cookieArr = cookie.split(";").map((cookie: string) => {
+    return cookie.trim().split("=");
+  });
+
+  cookieArr.forEach((item) => {
+    const [key, value] = item;
+    result[key] = parseInt(value);
+  });
+
+  return result;
+};
+
+export { getReportPathDetails, parseCookie };

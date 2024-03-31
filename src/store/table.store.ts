@@ -3,12 +3,12 @@ import { create } from "zustand";
 
 type ReportTableStore = {
   showedTable: TableNumber;
-  show: (tableNumber: number) => void;
+  setTable: (tableNumber: number) => void;
 };
 
 export const useTable = create<ReportTableStore>((set) => ({
   showedTable: 3,
-  show: (index: number) => {
+  setTable: (index: number) => {
     set({ showedTable: index });
   },
 }));
