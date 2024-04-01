@@ -14,6 +14,7 @@ import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
 import { parseCookie } from "@/lib/utils";
 import { TABLETOSHOW } from "@/middleware";
+import ApplicationAndApprovalsTable from "./applications-and-approvals-table";
 
 const tableData = generateReportRefundsAndSettlementsData();
 const tableTotal = generateReportRefundsAndSettlementsTotalData();
@@ -31,12 +32,13 @@ export default function ReportTableDetails() {
       {/* RefundsAndASettlements table part 3 */}
       {/* <div>{tables.length}</div> */}
       {/* <div className="font-manrope">{summary.year}</div> */}
+      {showedTable === TableNumber.ApplicationsAndApprovals ? (
+        <ApplicationAndApprovalsTable />
+      ) : (
+        ""
+      )}
       {showedTable === TableNumber.RefundsAndASettlements ? (
-        <RefundsAndSettlementsTable
-          tables={tableData}
-          summary={tableTotal}
-          title={"Plans liquidés"}
-        />
+        <RefundsAndSettlementsTable />
       ) : (
         ""
       )}

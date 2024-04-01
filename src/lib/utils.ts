@@ -26,8 +26,14 @@ const parseCookie = (cookie: string) => {
   return result;
 };
 
+/**
+ * Builds pagination for a given array of data.
+ * @param {Object[]} data - The array of data to paginate.
+ * @param {number} [size=5] - The number of items per page.
+ * @returns {{ totalPages: number, pageData: any[] }} - An object containing the total number of pages and paginated data.
+ */
 const buildPagination = (data: {}[], size: number = 5) => {
-  if (data === null) {
+  if (data === null || typeof data === "string") {
     return { totalPages: 0, pageData: null };
   }
   const paginationData = [...data];

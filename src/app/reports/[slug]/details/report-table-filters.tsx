@@ -3,11 +3,15 @@
 import ActionLink from "@/components/actions/action-link";
 import Pagination from "@/components/pagination";
 import { buildPagination } from "@/lib/utils";
+import { usePaginationStore } from "@/store/pagination.store";
 import { useGetData } from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef } from "react";
+import clsx from "clsx";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useDebouncedCallback } from "use-debounce";
 import { z } from "zod";
 
 type TReportTableFilter = {
@@ -28,6 +32,11 @@ const schema = z
 
 export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   const { data, loadTable } = useGetData();
+  const { currentPage, updatePage } = usePaginationStore();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
   let totalPages = 0;
 
   const {
@@ -38,8 +47,24 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
     formState: { errors, isDirty },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
 
+  const resetPageURL = () => {
+    const params = new URLSearchParams(searchParams);
+    if (params.get("page")) {
+      params.delete("page");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const setPageURL = () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   const formRef = useRef<HTMLFormElement>(null);
   const onSubmit: SubmitHandler<Inputs> = (formValue) => {
+    resetPageURL();
+    updatePage(1);
     if (formValue.table !== "" && formValue.year !== "") {
       loadTable("refunds.settlements", { ...formValue });
     }
@@ -64,7 +89,12 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             {...register("year")}
             name="year"
             id="year"
-            className="w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white"
+            className={clsx(
+              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white",
+              {
+                // "pointer-events-none opacity-25":
+              }
+            )}
           >
             <option defaultValue="test"></option>
             <option value="2021">2021</option>
@@ -97,7 +127,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
           type="submit"
           className="btn btn-icon btn-main-transparent btn-main uppercase"
         >
-          Charger
+          Envoyer
           <ArrowPathIcon className="w-8" />
         </button>
       </form>

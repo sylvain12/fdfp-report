@@ -42,8 +42,6 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   let nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
   let prevPage = currentPage - 1 < 1 ? currentPage : currentPage - 1;
 
-  console.log(currentPage, totalPages);
-
   return (
     <div className="flex justify-center items-center gap-4">
       <div className="font-bold text-[1.4rem] uppercase text-fdfp-second">

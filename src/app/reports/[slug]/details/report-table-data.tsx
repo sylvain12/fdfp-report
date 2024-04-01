@@ -5,6 +5,8 @@ import { TTReportTableData } from "../../report.model";
 import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { buildPagination } from "@/lib/utils";
+import clsx from "clsx";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 export default function ReportTableData({ columns }: TTReportTableData) {
   const { data, loading } = useGetData();
@@ -21,16 +23,28 @@ export default function ReportTableData({ columns }: TTReportTableData) {
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const injectCurrentPage = () => {
+    const params = new URLSearchParams(searchParams);
+    if (params.get("page") === null) {
+      params.set("page", "1");
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const pagination = buildPagination(data);
+  const filteredData =
+    pagination.pageData && typeof data !== "string"
+      ? pagination.pageData[currentPage - 1]
+      : null;
+
   useEffect(() => {
     if (data === null) {
       resetPageURL();
+    } else if (pagination.totalPages > 1) {
+      injectCurrentPage();
     }
-  }, []);
-
-  const pagination = buildPagination(data);
-  const filteredData = pagination.pageData
-    ? pagination.pageData[currentPage - 1]
-    : null;
+  }, [data, pagination]);
 
   return (
     <div className="relative overflow-x-auto ">
@@ -72,7 +86,9 @@ export default function ReportTableData({ columns }: TTReportTableData) {
                 </tr>
               ))
             ) : (
-              <td></td>
+              <tr>
+                <td></td>
+              </tr>
             )}
           </Suspense>
         </tbody>
@@ -87,8 +103,19 @@ export default function ReportTableData({ columns }: TTReportTableData) {
         ""
       )}
       {filteredData === null && !loading ? (
-        <div className="bg-white border-b text-[1.5rem] font-medium py-[5rem] text-center w-full">
-          Aucune information chargée
+        <div
+          className={clsx(
+            "bg-white border-b text-[1.5rem] font-medium py-[5rem] text-center w-full"
+          )}
+        >
+          {typeof data === "string" || columns.length === 0 ? (
+            <div className="text-red-300 uppercase text-[3rem] font-manrope flex items-center gap-4 justify-center">
+              <ExclamationTriangleIcon className="w-20" />
+              Information non disponible
+            </div>
+          ) : (
+            <div>Aucune information chargée</div>
+          )}
         </div>
       ) : (
         ""

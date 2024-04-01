@@ -74,7 +74,11 @@ const liquidatedPlans = [
   "% Part Total Liquidé",
 ];
 
-export default function RefundsAndSettlementsTable() {
+export default function RefundsAndSettlementsTable({
+  title,
+  tables,
+  summary,
+}: TReportDetails) {
   const { data } = useGetData();
   const searchPath = useSearchParams();
   let amounts: { name: string; table: string }[] = [];

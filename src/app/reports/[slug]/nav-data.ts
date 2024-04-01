@@ -60,11 +60,11 @@ const applicationsAndApprovalsNavs: TLink[] = [
   {
     name: "Plans de formations",
     href: `/reports/applications-and-approvals/details?${stringify({
-      name: "plan de formation",
+      name: "plan de formations",
     })}`,
     active: false,
     icon: ListBulletIcon,
-    query: ["plan de formation"],
+    query: ["plan de formations"],
   },
   {
     name: "Actions de formations",
@@ -75,7 +75,7 @@ const applicationsAndApprovalsNavs: TLink[] = [
   },
   {
     name: "Nombre de stagiaires par action",
-    href: `/reports/applications-and-approvals/details?name=${stringify({
+    href: `/reports/applications-and-approvals/details/?${stringify({
       name: "Nombre de stagiaires par action",
     })}`,
     active: false,
