@@ -23,7 +23,7 @@ const defaultItem = [
   },
 ];
 
-export const ReportDetailsLayout = () => {
+const ReportDetailsLayout = () => {
   const [breadcrumb, setBreadcrumb] = useState<TBreadcrumb>({
     separator: ">",
     items: defaultItem,
