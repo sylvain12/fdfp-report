@@ -1,4 +1,4 @@
-import { TReportListLink } from "../report.model";
+import { TReportListLink } from "../navbar/report.model";
 import ReportCard from "./report-card";
 
 export default function ReportList({ links }: TReportListLink) {

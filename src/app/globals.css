@@ -1,5 +1,4 @@
 @import '../components/component.css';
-@import './reports/report.css';
 
 @tailwind base;
 @tailwind components;

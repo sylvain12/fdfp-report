@@ -1,7 +1,7 @@
 "use client";
 
 import { HomeIcon } from "@heroicons/react/24/outline";
-import ReportTableDetails from "./report-table-details";
+import ReportTableDetails from "@/components/reports/details/report-table-details";
 import Breadcrumb from "@/components/breadcrumb/breadcrumb";
 import {
   TBreadcrumb,
@@ -13,6 +13,7 @@ import { Suspense, useEffect, useState } from "react";
 import { getReportPathDetails } from "@/lib/utils";
 import Loader from "@/components/animation/loader";
 import { ErrorBoundary } from "react-error-boundary";
+import Fallback from "@/components/errors/fallback";
 
 const defaultItem = [
   {
@@ -66,7 +67,7 @@ const ReportDetailsLayout = () => {
 
   return (
     <div className="report-details-container">
-      <ErrorBoundary fallback={<div>Error</div>}>
+      <ErrorBoundary fallback={<Fallback />}>
         <Suspense fallback={<Loader />}>
           <Breadcrumb {...breadcrumb} />
           <ReportTableDetails />

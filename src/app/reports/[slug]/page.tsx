@@ -5,12 +5,12 @@ import {
   refundsAndSettlementsNavs,
   applicationsAndApprovalsNavs,
   globalAnalyzeNavs,
-} from "./nav-data";
+} from "../../../components/reports/data/nav-data";
 
 import { useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import NoReport from "./no-report";
-import ReportList from "./report-list";
+import NoReport from "../../../components/reports/no-report";
+import ReportList from "../../../components/reports/report-list";
 
 type TReport = {
   slug: string;

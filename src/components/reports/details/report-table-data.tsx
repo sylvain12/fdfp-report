@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetData } from "@/store/table-data.store";
-import { TTReportTableData } from "../../report.model";
+import { TTReportTableData } from "../../navbar/report.model";
 import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { buildPagination } from "@/lib/utils";

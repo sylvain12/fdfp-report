@@ -5,7 +5,7 @@ import {
   IReportRefundsAndSettlements,
   IReportRefundsAndSettlementsTotal,
   TableNumber,
-} from "../../report.model";
+} from "../../navbar/report.model";
 import RefundsAndSettlementsTable from "./refunds-and-settlements-table";
 import { useEffect } from "react";
 import { parseCookie } from "@/lib/utils";

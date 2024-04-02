@@ -12,7 +12,7 @@ import {
   filterTrainingCabinet,
   filterTrainingDomain,
   filterTrainingPlan,
-} from "../../data/filters2.data";
+} from "../data/filters2.data";
 
 const trainingPlanColumns = [
   "entity",

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { clsx } from "clsx";
-import { mainNavs } from "@/app/reports/[slug]/nav-data";
+import { mainNavs } from "@/components/reports/data/nav-data";
 import { usePathname } from "next/navigation";
 
 const getPathRoute = (path: string) => {

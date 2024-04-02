@@ -1,4 +1,4 @@
-import { reportNavPathTitle } from "@/app/reports/[slug]/nav-data";
+import { reportNavPathTitle } from "@/components/reports/data/nav-data";
 
 export const getReportPathLink = (pathname: string) =>
   pathname.split("/").slice(0, 3).join("/");

@@ -1,6 +1,4 @@
-import { Suspense } from "react";
-import ReportNav from "./report-nav";
-import Loader from "@/components/animation/loader";
+import ReportNav from "@/components/reports/report-nav";
 
 const ReportLayout = ({
   children,

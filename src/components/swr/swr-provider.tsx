@@ -1,8 +1,7 @@
 "use client";
 
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { SWRConfig } from "swr";
-import Fallback from "./fallback";
+import Fallback from "../errors/fallback";
 export const SWRProvider = ({
   children,
 }: Readonly<{

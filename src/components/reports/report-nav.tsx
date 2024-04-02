@@ -8,7 +8,7 @@ import {
   applicationsAndApprovalsNavs,
   refundsAndSettlementsNavs,
   reportNavs,
-} from "./[slug]/nav-data";
+} from "./data/nav-data";
 
 export default function ReportNav() {
   const pathname = usePathname();

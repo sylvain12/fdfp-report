@@ -1,4 +1,4 @@
-import { TableNumber } from "@/app/reports/report.model";
+import { TableNumber } from "@/components/navbar/report.model";
 import { create } from "zustand";
 
 type ReportTableStore = {

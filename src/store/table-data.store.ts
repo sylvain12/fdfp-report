@@ -1,7 +1,7 @@
 import {
   IDataRefundsAndSettlements,
   TTReportTableData,
-} from "@/app/reports/report.model";
+} from "@/components/navbar/report.model";
 import axios, { ParamsSerializerOptions } from "axios";
 import { config } from "process";
 import { stringify } from "querystring";

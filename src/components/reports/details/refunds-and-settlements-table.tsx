@@ -4,8 +4,8 @@ import {
   amountFiltersActionClaimedForReimbursement,
   amountFiltersLiquidatedPlans,
   amountFiltersSharesLiquidated,
-} from "../../data/filters.data";
-import { TReportDetails } from "../../report.model";
+} from "../data/filters.data";
+import { TReportDetails } from "../../navbar/report.model";
 import ReportTablesFilters from "./report-table-filters";
 import ReportTableData from "./report-table-data";
 import { useGetData } from "@/store/table-data.store";
@@ -74,7 +74,7 @@ const liquidatedPlans = [
   "% Part Total Liquidé",
 ];
 
-export default function GlobalAnalyzeTable() {
+export default function RefundsAndSettlementsTable() {
   const { data } = useGetData();
   const searchPath = useSearchParams();
   let amounts: { name: string; table: string }[] = [];

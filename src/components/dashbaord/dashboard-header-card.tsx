@@ -5,7 +5,7 @@ import { TPlan, baseURL } from "@/lib/data";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import useSWR from "swr";
-import Fallback from "./fallback";
+import Fallback from "../errors/fallback";
 
 const fetcher = (resource: string) => fetch(resource).then((res) => res.json());
 
