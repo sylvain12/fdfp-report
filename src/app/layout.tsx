@@ -3,7 +3,7 @@ import { inter, manrope, epilogue } from "@/fonts";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
-import { CookiesProvider } from "next-client-cookies/server";
+// import { SWRProvider } from "./swr-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,20 +16,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <SWRProvider>
     <html lang="fr">
       <body className={manrope.className}>
         <div className="main-container">
-          {/* <div className="sidebar">
-            <Sidebar />
-          </div> */}
           <div className="main-navbar">
             <Navbar />
           </div>
-          <div className="main-content">
-            <CookiesProvider>{children}</CookiesProvider>
-          </div>
+          <div className="main-content">{children}</div>
         </div>
       </body>
     </html>
+    // </SWRProvider>
   );
 }

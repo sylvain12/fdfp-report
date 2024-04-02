@@ -1,13 +1,28 @@
+"use client";
+
+import Loader from "@/components/animation/loader";
+import { Suspense } from "react";
+import DashboardHeaderCard from "./dashboard-header-card";
+import DashboardTableData from "./dashboard-table-data";
+import { ErrorBoundary } from "react-error-boundary";
+
 export default function Home() {
   return (
-    <div>
-      <h1 className="font-normal text-[4rem]">Finance Reports</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sint
-        repudiandae voluptate, temporibus recusandae enim ipsum maiores
-        exercitationem quam quisquam cumque dolore magnam ut nesciunt excepturi.
-        Eum impedit quam corporis?
-      </p>
+    <div className="px-[10rem] py-[6.5rem]">
+      {/* <div className="flex items-center">
+        <Loader />
+      </div> */}
+
+      <ErrorBoundary fallback={<div>Error</div>}>
+        <Suspense fallback={<Loader />}>
+          <DashboardHeaderCard />
+          <DashboardTableData />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }
+
+export const Error = () => {
+  return <div>Error</div>;
+};

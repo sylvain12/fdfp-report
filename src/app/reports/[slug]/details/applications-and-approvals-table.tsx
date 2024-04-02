@@ -1,6 +1,5 @@
 "use client";
 
-import { TReportDetails } from "../../report.model";
 import ReportTablesFilters from "./report-table-filters";
 import ReportTableData from "./report-table-data";
 import { useGetData } from "@/store/table-data.store";

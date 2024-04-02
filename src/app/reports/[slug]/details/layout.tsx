@@ -9,8 +9,10 @@ import {
 } from "@/components/breadcrumb/breadcrumb.model";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { stringify } from "querystring";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getReportPathDetails } from "@/lib/utils";
+import Loader from "@/components/animation/loader";
+import { ErrorBoundary } from "react-error-boundary";
 
 const reportBreadCrumb: TBreadcrumb = {
   separator: ">",
@@ -76,8 +78,12 @@ export const ReportDetailsLayout = () => {
 
   return (
     <div className="report-details-container">
-      <Breadcrumb {...breadcrumb} />
-      <ReportTableDetails />
+      <ErrorBoundary fallback={<div>Error</div>}>
+        <Suspense fallback={<Loader />}>
+          <Breadcrumb {...breadcrumb} />
+          <ReportTableDetails />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

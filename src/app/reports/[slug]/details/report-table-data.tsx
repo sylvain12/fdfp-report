@@ -7,6 +7,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { buildPagination } from "@/lib/utils";
 import clsx from "clsx";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import Loader from "@/components/animation/loader";
 
 export default function ReportTableData({ columns }: TTReportTableData) {
   const { data, loading } = useGetData();
@@ -62,35 +63,33 @@ export default function ReportTableData({ columns }: TTReportTableData) {
           </tr>
         </thead>
         <tbody>
-          <Suspense fallback={<h2>Loading...</h2>}>
-            {filteredData !== null ? (
-              filteredData.map((item: any, index: number) => (
-                <tr
-                  key={index}
-                  className="bg-white border-b text-[1.5rem] font-thin text-center"
+          {filteredData !== null ? (
+            filteredData.map((item: any, index: number) => (
+              <tr
+                key={index}
+                className="bg-white border-b text-[1.5rem] font-thin text-center"
+              >
+                <td
+                  key={item[Object.keys(item)[0].trim()]}
+                  className="px-6 py-8 font-bold text-left text-[1.1rem] w-[130px]"
                 >
-                  <td
-                    key={item[Object.keys(item)[0].trim()]}
-                    className="px-6 py-8 font-bold text-left text-[1.1rem] w-[130px]"
-                  >
-                    <p style={{ maxWidth: "90%" }}>
-                      {item[Object.keys(item)[0]]}
-                    </p>
+                  <p style={{ maxWidth: "90%" }}>
+                    {item[Object.keys(item)[0]]}
+                  </p>
+                </td>
+                {columns.slice(1).map((column: string) => (
+                  <td key={column} className="px-6 py-8">
+                    {" "}
+                    {item[column]}
                   </td>
-                  {columns.slice(1).map((column: string) => (
-                    <td key={column} className="px-6 py-8">
-                      {" "}
-                      {item[column]}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td></td>
+                ))}
               </tr>
-            )}
-          </Suspense>
+            ))
+          ) : (
+            <tr>
+              <td></td>
+            </tr>
+          )}
         </tbody>
       </table>
       {/* {filteredData !== null ? <Pagination totalPages={totalPages} /> : ""} */}
