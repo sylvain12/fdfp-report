@@ -1,6 +1,6 @@
 import ActionLink from "./action-link";
 
-export default function () {
+export default function Actions() {
   return (
     <>
       <ActionLink />

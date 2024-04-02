@@ -14,18 +14,6 @@ import { getReportPathDetails } from "@/lib/utils";
 import Loader from "@/components/animation/loader";
 import { ErrorBoundary } from "react-error-boundary";
 
-const reportBreadCrumb: TBreadcrumb = {
-  separator: ">",
-  items: [
-    {
-      title: "Acceuil",
-      link: { active: false, href: "/", name: "Acceuil", icon: HomeIcon },
-      isCurrent: false,
-      showIcon: true,
-    },
-  ],
-};
-
 const defaultItem = [
   {
     title: "Acceuil",
@@ -69,10 +57,10 @@ export const ReportDetailsLayout = () => {
   };
 
   useEffect(() => {
-    setBreadcrumb({
+    setBreadcrumb((b) => ({
       ...breadcrumb,
       items: [...breadcrumb.items, parentItem, currentItem],
-    });
+    }));
     return () => {};
   }, []);
 

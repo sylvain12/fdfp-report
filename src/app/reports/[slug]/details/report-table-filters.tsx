@@ -1,6 +1,6 @@
 "use client";
 
-import ActionLink from "@/components/actions/action-link";
+import Action from "@/components/actions/actions";
 import Pagination from "@/components/pagination";
 import { buildPagination } from "@/lib/utils";
 import { usePaginationStore } from "@/store/pagination.store";
@@ -139,7 +139,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
           ""
         )}
         {/* <Pagination totalPages={1} /> */}
-        {/* <ActionLink /> */}
+        {/* <Actions /> */}
       </div>
     </div>
   );

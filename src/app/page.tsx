@@ -5,15 +5,12 @@ import { Suspense } from "react";
 import DashboardHeaderCard from "./dashboard-header-card";
 import DashboardTableData from "./dashboard-table-data";
 import { ErrorBoundary } from "react-error-boundary";
+import Fallback from "./fallback";
 
 export default function Home() {
   return (
     <div className="px-[10rem] py-[6.5rem]">
-      {/* <div className="flex items-center">
-        <Loader />
-      </div> */}
-
-      <ErrorBoundary fallback={<div>Error</div>}>
+      <ErrorBoundary fallback={<Fallback />}>
         <Suspense fallback={<Loader />}>
           <DashboardHeaderCard />
           <DashboardTableData />
@@ -22,7 +19,3 @@ export default function Home() {
     </div>
   );
 }
-
-export const Error = () => {
-  return <div>Error</div>;
-};

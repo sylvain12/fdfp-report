@@ -1,4 +1,5 @@
 "use client";
+
 import { useTable } from "@/store/table.store";
 import {
   IReportRefundsAndSettlements,
@@ -13,7 +14,7 @@ import ApplicationAndApprovalsTable from "./applications-and-approvals-table";
 
 export default function ReportTableDetails() {
   const { showedTable, setTable } = useTable();
-  const { cookie } = document;
+  const { cookie } = typeof window === "object" ? document : { cookie: "" };
 
   useEffect(() => {
     setTable(parseCookie(cookie)[TABLETOSHOW]);
