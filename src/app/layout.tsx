@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, manrope, sora } from "@/fonts";
+import { sora } from "@/fonts";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
