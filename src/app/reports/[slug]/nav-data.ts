@@ -138,12 +138,12 @@ const refundsAndSettlementsNavs: TLink[] = [
 ];
 
 const reportNavs: TLink[] = [
-  {
-    name: "Analyse globale",
-    href: "/reports/global-analyze",
-    active: false,
-    icon: PresentationChartLineIcon,
-  },
+  // {
+  //   name: "Analyse globale",
+  //   href: "/reports/global-analyze",
+  //   active: false,
+  //   icon: PresentationChartLineIcon,
+  // },
   {
     name: "Demandes et Agréments",
     href: "/reports/applications-and-approvals",
@@ -162,7 +162,7 @@ const mainNavs: TLink[] = [
   { name: "Acceuil", href: "/", icon: HomeIcon, active: true },
   {
     name: "Rapports",
-    href: "/reports/global-analyze",
+    href: "/reports/applications-and-approvals",
     icon: ChartBarSquareIcon,
     active: false,
   },

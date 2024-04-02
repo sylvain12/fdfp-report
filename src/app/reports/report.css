@@ -8,8 +8,8 @@
     }
 
     .report-nav-menu-link {
-        @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
-        border-r
+        @apply font-normal text-[1.3rem] h-full flex items-center gap-[1rem] relative px-[2rem]
+        border-r uppercase
     }
 
     .report-nav-menu-link.active {
@@ -64,6 +64,6 @@
     }
 
     .report-details-container {
-        @apply w-full h-full col-start-1 col-end-5 py-[2rem] px-[10rem]
+        @apply w-full h-full col-start-1 col-end-5 py-[2rem] px-[10rem] pt-[5rem]
     }
 }
