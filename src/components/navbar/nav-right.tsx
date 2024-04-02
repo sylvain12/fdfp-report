@@ -4,7 +4,7 @@ export default function NavRight() {
   return (
     <div className="nav-right">
       <div className="nav-right-user">
-        <p className="text-[1.3rem] uppercase">Hi, Sylvain</p>
+        <p className="text-[1.3rem] uppercase">Bonjour, FDFP</p>
       </div>
 
       <div className="nav-right-menu">
