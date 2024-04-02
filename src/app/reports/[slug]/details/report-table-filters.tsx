@@ -75,7 +75,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
 
   const isDisabled = () => watch("table") === "" || watch("year") === "";
   return (
-    <div className="flex items-end justify-end gap-[1rem] bg-white mt-[4rem] px-5 py-10 border-b">
+    <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 py-10 border-b-none">
       <form
         ref={formRef}
         className="flex items-end text-[1.3rem] gap-4"
@@ -90,7 +90,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             name="year"
             id="year"
             className={clsx(
-              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white",
+              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-transparent",
               {
                 // "pointer-events-none opacity-25":
               }
@@ -112,7 +112,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             {...register("table")}
             name="table"
             id="table"
-            className="w-[450px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-white"
+            className="w-[450px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-transparent"
           >
             <option defaultValue=""></option>
             {amounts.sort().map((item) => (
@@ -132,14 +132,14 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
         </button>
       </form>
 
-      <div className="flex-1 mr-0 flex items-end justify-end gap-[4rem]">
+      <div className="flex-1 mr-0 flex items-end justify-end gap-[2rem]">
         {data !== null && totalPages > 1 ? (
           <Pagination totalPages={totalPages} />
         ) : (
           ""
         )}
         {/* <Pagination totalPages={1} /> */}
-        <ActionLink />
+        {/* <ActionLink /> */}
       </div>
     </div>
   );

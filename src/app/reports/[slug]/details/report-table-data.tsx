@@ -50,7 +50,7 @@ export default function ReportTableData({ columns }: TTReportTableData) {
   return (
     <div className="relative overflow-x-auto ">
       <table className="w-full text-right rtl:text-right">
-        <thead className="text-[1.2rem] bg-white border-b border-fdfp-light">
+        <thead className="text-[1.2rem] bg-gray-100 border-b border-fdfp-light">
           <tr>
             <th key={columns[0]} scope="col" className="px-6 py-6 text-left">
               {columns[0]}

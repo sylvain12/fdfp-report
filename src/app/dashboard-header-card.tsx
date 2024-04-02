@@ -22,7 +22,7 @@ export default function DashboardHeaderCard() {
           Tableau de bord
         </h1>
         <p className="font-medium text-fdfp-second text-[1.4rem]">
-          Des analyse globale
+          Des analyses globales
         </p>
       </div>
       <div className="flex items-center gap-[2rem]">

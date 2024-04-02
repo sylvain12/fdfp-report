@@ -56,7 +56,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={prevPage === 1}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 h-full bg-white border border-fdfp-second hover:bg-fdfp-textsecond hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
+                "flex items-center justify-center px-4 h-full bg-transparent border border-fdfp-second hover:bg-fdfp-textsecond hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
                 { disabled: prevPage === 1 }
               )}
             >
@@ -84,7 +84,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={nextPage === totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 h-full bg-white border border-fdfp-second hover:bg-gray-100 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
+                "flex items-center justify-center px-4 h-full bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
                 { disabled: nextPage === totalPages }
               )}
             >
