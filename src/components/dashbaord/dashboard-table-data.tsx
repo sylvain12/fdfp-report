@@ -32,7 +32,7 @@ export default function DashboardTableData() {
 
       <div className="relative overflow-x-auto ">
         <table className="w-full text-right rtl:text-right">
-          <thead className="text-[1.2rem] bg-gray-100 border-b border-fdfp-light">
+          <thead className="text-[1.2rem] bg-gray-100 border-b border-fdfp-light font-thin">
             <tr>
               <th scope="col" className="px-6 py-6 text-left">
                 Année du plan
@@ -64,30 +64,30 @@ export default function DashboardTableData() {
             {plansData.map((plan) => (
               <tr
                 key={plan.annee}
-                className="bg-white border-b text-[1.5rem] font-thin text-center"
+                className="bg-white border-b text-[1.5rem] font-normal text-center"
               >
-                <td className="px-6 py-8 font-bold text-left text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-left text-[1.4rem] w-[130px]">
                   {plan.annee}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.nb_plan}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.nb_plan_agree}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.proportion_plan_agree}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.mt_06}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.mt_demande}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.mt_agree}
                 </td>
-                <td className="px-6 py-8 font-bold text-center text-[1.4rem] w-[130px]">
+                <td className="px-6 py-8 text-center text-[1.4rem] w-[130px]">
                   {plan.part_mt}
                 </td>
               </tr>

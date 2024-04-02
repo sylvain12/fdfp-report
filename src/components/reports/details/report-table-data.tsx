@@ -67,7 +67,7 @@ export default function ReportTableData({ columns }: TTReportTableData) {
             filteredData.map((item: any, index: number) => (
               <tr
                 key={index}
-                className="bg-white border-b text-[1.5rem] font-thin text-center"
+                className="bg-white border-b text-[1.5rem] font-normal text-center"
               >
                 <td
                   key={item[Object.keys(item)[0].trim()]}

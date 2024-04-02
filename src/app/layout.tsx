@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, manrope, epilogue } from "@/fonts";
+import { inter, manrope, sora } from "@/fonts";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     // <SWRProvider>
     <html lang="fr">
-      <body className={manrope.className}>
+      <body className={sora.className}>
         <div className="main-container">
           <div className="main-navbar">
             <Navbar />

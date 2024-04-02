@@ -86,19 +86,15 @@ export default function DashboardHeaderCard() {
         <div className="grid grid-cols-2 grid-rows-2 gap-[1rem] w-[400px]">
           <div className="col-start-1 col-span-1 row-start-1 row-span-1 bg-fdfp-main text-white font-medium p-4">
             <p className="text-[1.3rem] uppercase">Nombre de plan</p>
-            <span className="text-[2.5rem] font-manrope">
-              {currentPlan.nb_plan}
-            </span>
+            <span className="text-[2.5rem]">{currentPlan.nb_plan}</span>
           </div>
           <div className="col-start-1 col-span-1 row-start-2 row-span-1 bg-fdfp-second text-white font-medium p-4">
             <p className="text-[1.3rem] uppercase">Nombre de plan agréé</p>
-            <span className="text-[2.5rem] font-manrope">
-              {currentPlan.nb_plan_agree}
-            </span>
+            <span className="text-[2.5rem]">{currentPlan.nb_plan_agree}</span>
           </div>
           <div className="col-start-2 col-span-1 row-start-1 row-span-2 bg-fdfp-light text-fdfp-main font-medium p-4 flex flex-col justify-center">
             <p className="text-[1.3rem] uppercase">Proportion plan agréé</p>
-            <span className="text-[4rem] font-manrope">
+            <span className="text-[4rem]">
               {currentPlan.proportion_plan_agree}
             </span>
           </div>

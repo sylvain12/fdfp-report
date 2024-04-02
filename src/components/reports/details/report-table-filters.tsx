@@ -90,13 +90,13 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             name="year"
             id="year"
             className={clsx(
-              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-transparent",
+              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
               {
                 // "pointer-events-none opacity-25":
               }
             )}
           >
-            <option defaultValue="test"></option>
+            <option defaultValue=""></option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
             <option value="2019">2019</option>
@@ -112,7 +112,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             {...register("table")}
             name="table"
             id="table"
-            className="w-[450px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-3 focus:outline-none hover:outline-none active:outline-none bg-transparent"
+            className="w-[450px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
           >
             <option defaultValue=""></option>
             {amounts.sort().map((item) => (

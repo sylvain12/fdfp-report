@@ -1,19 +1,28 @@
-import { Inter, Manrope, Epilogue, Croissant_One } from "next/font/google";
+import {
+  Inter,
+  Manrope,
+  Epilogue,
+  Croissant_One,
+  Sora,
+} from "next/font/google";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "200", "400", "500"],
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["200", "400", "600"],
+  display: "swap",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const epilogue = Epilogue({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500"],
 });
 
 const fontserif = Croissant_One({
@@ -21,4 +30,4 @@ const fontserif = Croissant_One({
   subsets: ["latin"],
 });
 
-export { inter, manrope, epilogue, fontserif };
+export { inter, manrope, epilogue, fontserif, sora };
