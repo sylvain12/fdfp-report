@@ -1,6 +1,5 @@
 .breadcrumb {
     padding: 2rem 0 2rem 0;
-    /* background-color: white; */
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -10,5 +9,4 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    /* font-size: 1.6rem; */
 }

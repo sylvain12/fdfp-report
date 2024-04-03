@@ -2,12 +2,11 @@
 
 import { useGetData } from "@/store/table-data.store";
 import { TTReportTableData } from "../../navbar/report.model";
-import { useEffect, Suspense } from "react";
+import { useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { buildPagination } from "@/lib/utils";
 import clsx from "clsx";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import Loader from "@/components/animation/loader";
 
 export default function ReportTableData({ columns }: TTReportTableData) {
   const { data, loading } = useGetData();

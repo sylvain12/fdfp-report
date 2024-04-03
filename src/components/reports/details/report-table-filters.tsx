@@ -31,7 +31,7 @@ const schema = z
   .required();
 
 export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
-  const { data, loadTable } = useGetData();
+  const { data, loadTable, loading } = useGetData();
   const { currentPage, updatePage } = usePaginationStore();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -42,7 +42,6 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   const {
     register,
     handleSubmit,
-    getFieldState,
     watch,
     formState: { errors, isDirty },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
@@ -75,7 +74,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
 
   const isDisabled = () => watch("table") === "" || watch("year") === "";
   return (
-    <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 py-10 border-b-none">
+    <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 pb-10 border-b-none">
       <form
         ref={formRef}
         className="flex items-end text-[1.3rem] gap-4"
@@ -123,7 +122,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
           </select>
         </div>
         <button
-          disabled={isDisabled()}
+          disabled={isDisabled() || loading}
           type="submit"
           className="btn btn-icon btn-main-transparent btn-main uppercase"
         >
