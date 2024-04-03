@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { sora } from "@/fonts";
+
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
 // import { SWRProvider } from "./swr-provider";
+import { sora } from "@/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",

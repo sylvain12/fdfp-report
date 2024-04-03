@@ -27,9 +27,9 @@ module.exports = {
         }
       },
       fontFamily: {
-        manrope: ["Manrope", "sans-serif"],
-        monospace: ["Work sans", ...fontFamily.mono],
-        serif: 'var(--ff-serif)'
+        manrope: ["Manrope", ...fontFamily.sans],
+        monospace: ['Major Mono Display', ...fontFamily.mono],
+        serif: ['var(--ff-serif)', ...fontFamily.serif]
       },
     },
   },
