@@ -24,9 +24,10 @@ export default function DashboardTableData() {
     : [];
   return (
     <>
-      <div className="mt-[6rem] mb-[3rem]">
-        <h1 className="font-normal text-[3rem] text-fdfp-main">
+      <div className="mt-[6rem] mb-[2rem]">
+        <h1 className="font-normal text-[2.2rem] text-fdfp-main">
           Historique des analyses
+          <div className="h-1 w-[35px] bg-fdfp-second"></div>
         </h1>
       </div>
 
