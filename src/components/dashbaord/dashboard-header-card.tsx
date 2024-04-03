@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import useSWR from "swr";
 import Fallback from "../errors/fallback";
+import { currencyFormatter } from "@/lib/utils";
 
 const fetcher = (resource: string) => fetch(resource).then((res) => res.json());
 
@@ -32,8 +33,11 @@ export default function DashboardHeaderCard() {
               Montant du 0.6 annuel
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light">
-              <p className="text-[3rem] font-bold">
-                {currentPlan.mt_06 || "-"}
+              <p className="text-[2.4rem] font-medium flex gap-2 items-center">
+                {currencyFormatter(currentPlan.mt_06) || "-"}
+                <span className="text-fdfp-second font-bold text-[1.1rem]">
+                  FCFA
+                </span>
               </p>
               <span className="font-medium text-fdfp-second text-[1.3rem]">
                 Plan de formations
@@ -52,7 +56,12 @@ export default function DashboardHeaderCard() {
               Montant demandé sur plan
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem]">
-              <p className="text-[3rem] font-bold">{currentPlan.mt_demande}</p>
+              <p className="text-[2.2rem] font-medium flex gap-2 items-center">
+                {currencyFormatter(currentPlan.mt_demande)}
+                <span className="text-fdfp-second font-bold text-[1.1rem]">
+                  FCFA
+                </span>
+              </p>
               <span className="font-medium text-fdfp-second text-[1.3rem]">
                 Plan de formations
               </span>
@@ -70,7 +79,12 @@ export default function DashboardHeaderCard() {
               Montant total agréé sur plan
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem] ">
-              <p className="text-[3rem] font-bold">{currentPlan.mt_agree}</p>
+              <p className="text-[2.4rem] font-medium flex gap-2 items-center">
+                {currencyFormatter(currentPlan.mt_agree)}
+                <span className="text-fdfp-second font-bold text-[1.1rem]">
+                  FCFA
+                </span>
+              </p>
               <span className="font-medium text-fdfp-second text-[1.3rem]">
                 Plan de formations
               </span>

@@ -1,5 +1,13 @@
 import { reportNavPathTitle } from "@/components/reports/data/nav-data";
 
+// enum ECurrency {
+//   DOLLAR = 1,
+//   EURO,
+//   XOF,
+//   POUND,
+//   YEN,
+// }
+
 export const getReportPathLink = (pathname: string) =>
   pathname.split("/").slice(0, 3).join("/");
 
@@ -56,6 +64,30 @@ export const flattenArray = (arr: any[]): any[] => {
       Array.isArray(val) ? acc.concat(flattenArray(val)) : acc.concat(val),
     []
   );
+};
+
+export const currencyFormatter = (amount: number | string) => {
+  amount = amount.toString();
+
+  const amountPart = amount.split(".");
+  const [amountValue, amountRemain] = amountPart;
+  const amountValueArr = amountValue
+    .split("")
+    .filter((item) => item.trim())
+    .reverse();
+
+  const amountResult = [];
+  while (amountValueArr.length > 0) {
+    amountResult.push(amountValueArr.splice(0, 3));
+  }
+
+  const newAmount = amountResult
+    .reverse()
+    .map((item) => item.join(""))
+    .join(",");
+
+  const newRemain = amountRemain || "00";
+  return `${newAmount}.${newRemain}`;
 };
 
 // export { getReportPathDetails, parseCookie, buildPagination };
