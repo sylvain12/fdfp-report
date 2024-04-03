@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss');
+const {fontFamily} = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 
@@ -27,6 +28,7 @@ module.exports = {
       },
       fontFamily: {
         manrope: ["Manrope", "sans-serif"],
+        monospace: ["Work sans", ...fontFamily.mono],
         serif: 'var(--ff-serif)'
       },
     },

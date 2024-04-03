@@ -33,7 +33,7 @@ export default function DashboardHeaderCard() {
               Montant du 0.6 annuel
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light">
-              <p className="text-[2.4rem] font-medium flex gap-2 items-center">
+              <p className="text-[2.4rem] font-medium flex gap-2 items-center font-monospace">
                 {currencyFormatter(currentPlan.mt_06) || "-"}
                 <span className="text-fdfp-second font-bold text-[1.1rem]">
                   FCFA
@@ -56,7 +56,7 @@ export default function DashboardHeaderCard() {
               Montant demandé sur plan
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem]">
-              <p className="text-[2.2rem] font-medium flex gap-2 items-center">
+              <p className="text-[2.2rem] font-medium flex gap-2 items-center font-monospace">
                 {currencyFormatter(currentPlan.mt_demande)}
                 <span className="text-fdfp-second font-bold text-[1.1rem]">
                   FCFA
@@ -79,7 +79,7 @@ export default function DashboardHeaderCard() {
               Montant total agréé sur plan
             </p>
             <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem] ">
-              <p className="text-[2.4rem] font-medium flex gap-2 items-center">
+              <p className="text-[2.4rem] font-medium flex gap-2 items-center font-monospace">
                 {currencyFormatter(currentPlan.mt_agree)}
                 <span className="text-fdfp-second font-bold text-[1.1rem]">
                   FCFA
@@ -100,15 +100,19 @@ export default function DashboardHeaderCard() {
         <div className="grid grid-cols-2 grid-rows-2 gap-[1rem] w-[400px]">
           <div className="col-start-1 col-span-1 row-start-1 row-span-1 bg-fdfp-main text-white font-medium p-4">
             <p className="text-[1.3rem] uppercase">Nombre de plan</p>
-            <span className="text-[2.5rem]">{currentPlan.nb_plan}</span>
+            <span className="text-[2.5rem] font-monospace">
+              {currentPlan.nb_plan}
+            </span>
           </div>
           <div className="col-start-1 col-span-1 row-start-2 row-span-1 bg-fdfp-second text-white font-medium p-4">
             <p className="text-[1.3rem] uppercase">Nombre de plan agréé</p>
-            <span className="text-[2.5rem]">{currentPlan.nb_plan_agree}</span>
+            <span className="text-[2.5rem] font-monospace">
+              {currentPlan.nb_plan_agree}
+            </span>
           </div>
           <div className="col-start-2 col-span-1 row-start-1 row-span-2 bg-fdfp-light text-fdfp-main font-medium p-4 flex flex-col justify-center">
             <p className="text-[1.3rem] uppercase">Proportion plan agréé</p>
-            <span className="text-[4rem]">
+            <span className="text-[4rem] font-monospace">
               {currentPlan.proportion_plan_agree}
             </span>
           </div>
