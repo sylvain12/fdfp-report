@@ -1,17 +1,21 @@
-import {
-  ArrowLeftStartOnRectangleIcon,
-  SunIcon,
-  MoonIcon,
-  PowerIcon,
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
+"use client";
+
+import { useDarkModeStore } from "@/store/navs.store";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 export default function NavDarkMode() {
+  const { isDark, toggleMode } = useDarkModeStore();
+
   return (
-    <div className="nav-darkmode border-r-fdfp-textsecond border-r bg-fdfp-second text-white">
-      <Link href={""}>
+    <div
+      onClick={toggleMode}
+      className="nav-darkmode border-r-fdfp-textsecond border-r bg-fdfp-second text-white cursor-pointer"
+    >
+      {isDark ? (
+        <SunIcon className="w-12 font-bold" />
+      ) : (
         <MoonIcon className="w-12 font-bold" />
-      </Link>
+      )}
     </div>
   );
 }
