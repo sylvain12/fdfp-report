@@ -1,12 +1,9 @@
 "use client";
 
-import Loader from "@/components/animation/loader";
 import { TPlan, baseURL } from "@/lib/data";
-import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import useSWR from "swr";
-import Fallback from "../errors/fallback";
 import { currencyFormatter } from "@/lib/utils";
+// import { useApplicationStore } from "@/store/application.store";
 
 const fetcher = (resource: string) => fetch(resource).then((res) => res.json());
 
@@ -17,7 +14,7 @@ export default function DashboardHeaderCard() {
   const currentPlan: TPlan = data;
 
   return (
-    <Suspense fallback={<Loader />}>
+    <>
       <div className="mb-[6rem]">
         <h1 className="font-normal text-[3.5rem] text-fdfp-main">
           Tableau de bord
@@ -118,6 +115,6 @@ export default function DashboardHeaderCard() {
           </div>
         </div>
       </div>
-    </Suspense>
+    </>
   );
 }
