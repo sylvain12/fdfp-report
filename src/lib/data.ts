@@ -10,6 +10,7 @@ const instance = axios.create({
 });
 
 export type TAction = {
+  annee?: string;
   mn_dmd_act_agr: string;
   mnt_agr_act: string;
   mnt_dmd_act: string;
