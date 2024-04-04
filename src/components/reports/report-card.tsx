@@ -14,7 +14,7 @@ export default function ReportCard({ href, name, icon, active }: TLink) {
         "pointer-events-none opacity-25": !active,
       })}
     >
-      <ReportCardIcon className="w-14 text-fdfp-main" />
+      <ReportCardIcon className="w-14 text-fdfp-second" />
       <p className="font-normal text-[1.4rem]">{name}</p>
     </Link>
   );

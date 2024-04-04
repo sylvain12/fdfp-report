@@ -168,7 +168,7 @@ svg path {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 4px solid var(--fdfp-main-color-light);
+  border-top: 4px solid var(--fdfp-main-color);
   gap: 1.5rem;
 }
 

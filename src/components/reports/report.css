@@ -8,8 +8,8 @@
     }
 
     .report-nav-menu-link {
-        @apply font-normal text-[1.3rem] h-full flex items-center gap-[1rem] relative px-[2rem]
-        border-r uppercase
+        @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
+        border-r
     }
 
     .report-nav-menu-link.active {

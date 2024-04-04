@@ -17,7 +17,7 @@
    }
 
    .nav-main-menu-link {
-      @apply relative text-[1.5rem] h-full flex items-center px-[1rem] transition-colors hover:text-fdfp-main gap-[1rem]
+      @apply relative text-[1.5rem] h-full flex items-center px-[1rem] transition-colors hover:text-fdfp-main gap-[1rem] uppercase
    }
 
    .nav-main-menu-link.active {
