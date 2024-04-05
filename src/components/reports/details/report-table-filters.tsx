@@ -1,5 +1,6 @@
 "use client";
 
+import Actions from "@/components/actions/actions";
 import Action from "@/components/actions/actions";
 import Pagination from "@/components/pagination";
 import { buildPagination } from "@/lib/utils";
@@ -13,6 +14,7 @@ import { useEffect, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
 import { z } from "zod";
+import { signal } from "@preact/signals";
 
 type TReportTableFilter = {
   amounts: { name: string; table: string }[];
@@ -29,6 +31,11 @@ const schema = z
     table: z.string(),
   })
   .required();
+
+export const filterFormValue = signal<{ year: string; table: string }>({
+  year: "",
+  table: "",
+});
 
 export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   const { data, loadTable, loading } = useGetData();
@@ -61,11 +68,31 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   };
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  const tableSelectInput =
+    formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
+  const yearSelectedInput =
+    formRef.current !== null ? (formRef.current![0] as HTMLSelectElement) : "";
+  filterFormValue.value = {
+    year: yearSelectedInput !== "" ? yearSelectedInput.value : "",
+    table:
+      tableSelectInput !== ""
+        ? tableSelectInput.options[tableSelectInput.selectedIndex].text
+        : "fdfp-export",
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (formValue) => {
     resetPageURL();
     updatePage(1);
     if (formValue.table !== "" && formValue.year !== "") {
       loadTable("refunds.settlements", { ...formValue });
+      filterFormValue.value = {
+        ...formValue,
+        table:
+          tableSelectInput !== ""
+            ? tableSelectInput.options[tableSelectInput.selectedIndex].text
+            : "fdfp-export",
+      };
     }
   };
 
@@ -138,7 +165,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
           ""
         )}
         {/* <Pagination totalPages={1} /> */}
-        {/* <Actions /> */}
+        <Actions />
       </div>
     </div>
   );

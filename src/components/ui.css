@@ -1,6 +1,6 @@
 @layer components {
     .btn {
-        @apply text-[1.2rem] border font-bold px-[1.15em] py-[0.725em]
+        @apply text-[1.2rem] border font-bold px-[1.05em] py-[0.725em]
     }
 
     .btn:disabled {
@@ -8,7 +8,7 @@
     }
 
     .btn.btn-icon {
-        @apply flex items-center gap-6
+        @apply flex items-center gap-4
     }
 
     .btn.btn-main {
