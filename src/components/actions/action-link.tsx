@@ -30,11 +30,28 @@ export default function ActionLink() {
     XLSX.writeFile(wb, filename);
   };
 
+  const handleExportToPDF = () => {
+    console.log(data);
+  };
+
   return (
-    <div className="flex items-center justify-end h-full gap-10">
+    <div className="flex items-center justify-end h-full gap-5">
+      <button
+        onClick={handleExportToPDF}
+        className={clsx("btn btn-icon btn-danger-transparent uppercase", {
+          "pointer-events-none opacity-35": data === null,
+        })}
+      >
+        <Icon
+          icon="vscode-icons:file-type-pdf2"
+          width={"24px"}
+          className="w-12"
+        />
+        Exporter PDF
+      </button>
       <button
         onClick={handleExportToExcel}
-        className={clsx("btn btn-icon btn-main-transparent uppercase", {
+        className={clsx("btn btn-icon btn-success uppercase", {
           "pointer-events-none opacity-35": data === null,
         })}
       >

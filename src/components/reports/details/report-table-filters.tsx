@@ -165,7 +165,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
           ""
         )}
         {/* <Pagination totalPages={1} /> */}
-        <Actions />
+        {/* <Actions /> */}
       </div>
     </div>
   );

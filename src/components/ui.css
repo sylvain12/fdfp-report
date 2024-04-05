@@ -19,4 +19,20 @@
         @apply text-fdfp-textsecond bg-transparent border-fdfp-main hover:bg-fdfp-main hover:text-white
     }
 
+    .btn.btn-danger {
+        @apply border-red-500 bg-red-500 text-fdfp-bg hover:bg-transparent hover:text-red-500
+    }
+
+    .btn.btn-danger-transparent {
+        @apply text-red-500 bg-transparent border-red-500 hover:bg-red-500 hover:text-white
+    }
+
+        .btn.btn-success {
+            @apply border-green-700 bg-green-700 text-fdfp-bg hover:bg-transparent hover:text-green-700
+        }
+    
+        .btn.btn-success-transparent {
+            @apply text-green-700 bg-transparent border-green-700 hover:bg-green-700 hover:text-white
+        }
+
 }

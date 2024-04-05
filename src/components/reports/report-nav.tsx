@@ -9,6 +9,7 @@ import {
   refundsAndSettlementsNavs,
   reportNavs,
 } from "./data/nav-data";
+import Actions from "../actions/actions";
 
 export default function ReportNav() {
   const pathname = usePathname();
@@ -32,9 +33,9 @@ export default function ReportNav() {
           );
         })}
       </div>
-      {/* <div className="report-nav-actions">
+      <div className="report-nav-actions">
         <Actions />
-      </div> */}
+      </div>
     </div>
   );
 }
