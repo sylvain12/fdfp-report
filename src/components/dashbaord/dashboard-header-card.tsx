@@ -41,17 +41,6 @@ export default function DashboardHeaderCard() {
 
   return (
     <>
-      <div className="mb-[9rem] flex justify-between items-center">
-        <div>
-          <h1 className="font-normal text-[3.5rem] text-fdfp-main">
-            Tableau de bord
-          </h1>
-          <p className="font-medium text-fdfp-second text-[1.4rem]">
-            Des analyses globales
-          </p>
-        </div>
-        <DashboardViewMenu />
-      </div>
       {view === EDashboardView.TRAINING_PLAN ? (
         <div className="flex items-center gap-[2rem]">
           <div className="flex-1 flex items-center h-full">
