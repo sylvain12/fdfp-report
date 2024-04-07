@@ -61,14 +61,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const setPageURL = () => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", "1");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
   const formRef = useRef<HTMLFormElement>(null);
-
   const tableSelectInput =
     formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
   const yearSelectedInput =
