@@ -53,11 +53,14 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
             <a
               onClick={(event) => handlePrevPage(event)}
               data-page={prevPage}
-              aria-disabled={prevPage === 1}
+              aria-disabled={currentPage <= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] h-full bg-transparent border border-fdfp-second hover:bg-fdfp-textsecond hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
-                { disabled: prevPage === 1 }
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                {
+                  "pointer-events-none cursor-default opacity-45":
+                    currentPage <= 1,
+                }
               )}
             >
               <ChevronLeftIcon className="w-12 text-fdfp-second" />
@@ -81,11 +84,14 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
             <a
               onClick={(event) => handleNextPage(event)}
               data-page={nextPage}
-              aria-disabled={nextPage === totalPages}
+              aria-disabled={currentPage >= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] h-full bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-25 disabled:cursor-default",
-                { disabled: nextPage === totalPages }
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                {
+                  "pointer-events-none cursor-default opacity-45":
+                    currentPage >= totalPages,
+                }
               )}
             >
               <ChevronRightIcon className="w-12 text-fdfp-second" />
