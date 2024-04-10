@@ -1,3 +1,5 @@
+import { itemToShowCount } from "@/components/reports/details/report-table-filters";
+import { buildPagination } from "@/lib/utils";
 import axios from "axios";
 import { stringify } from "querystring";
 import { create } from "zustand";
@@ -35,6 +37,7 @@ export const useGetData = create<TableDataStore>((set, get) => ({
   loadTable: async (path: string, params: { year?: string; table: string }) => {
     set({ ...initialState, loading: true });
     try {
+      console.log(itemToShowCount.value);
       const res = await axios.get(
         `${BASE_URL}/${path}/?${stringify({ ...params })}`
       );
@@ -45,4 +48,39 @@ export const useGetData = create<TableDataStore>((set, get) => ({
     }
   },
   resetTable: async () => set({ ...initialState }),
+}));
+
+type TFilterDataState = {
+  totalPagination: number;
+  filterData: any[];
+};
+
+type TFilterDataStore = {
+  totalPagination: number;
+  filterData: any[];
+  setFilterData: (
+    totalPagination: number,
+    data: any[],
+    currentPage: number
+  ) => void;
+};
+
+const initialFilterData: TFilterDataState = {
+  totalPagination: 0,
+  filterData: [],
+};
+
+export const useFilterData = create<TFilterDataStore>((set) => ({
+  ...initialFilterData,
+  setFilterData: (
+    totalPagination: number,
+    data: any[],
+    currentPage: number
+  ) => {
+    set({
+      ...initialFilterData,
+      totalPagination,
+      filterData: data ? data[currentPage - 1] : [],
+    });
+  },
 }));
