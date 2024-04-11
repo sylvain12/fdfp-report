@@ -5,15 +5,20 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import Fallback from "@/components/errors/fallback";
 import dynamic from "next/dynamic";
-import { mono } from "@/fonts";
 
-<style jsx global>
+{
+  /* <style jsx global>
   {`
     :root {
       --font-mono: ${mono.style.fontFamily};
     }
   `}
-</style>;
+</style>; */
+}
+
+// export const metadata = {
+//   title: "Acceuil",
+// };
 
 const SuspenseDashboardComponent = dynamic(
   () => import("@/components/dashbaord/dashboard"),
