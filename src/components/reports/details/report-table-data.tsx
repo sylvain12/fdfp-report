@@ -1,12 +1,13 @@
 "use client";
 
-import { useGetData } from "@/store/table-data.store";
+import { useFilterData, useGetData } from "@/store/table-data.store";
 import { TTReportTableData } from "../../navbar/report.model";
 import { useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { buildPagination } from "@/lib/utils";
 import clsx from "clsx";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { itemToShowCount } from "./report-table-filters";
 
 export default function ReportTableData({ columns }: TTReportTableData) {
   const { data, loading } = useGetData();
@@ -14,6 +15,7 @@ export default function ReportTableData({ columns }: TTReportTableData) {
   const pathname = usePathname();
   const { replace } = useRouter();
   const currentPage = Number(searchParams.get("page")) || 1;
+  const { totalPagination, filterData, setFilterData } = useFilterData();
 
   const resetPageURL = () => {
     const params = new URLSearchParams(searchParams);
@@ -32,19 +34,38 @@ export default function ReportTableData({ columns }: TTReportTableData) {
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const pagination = buildPagination(data);
-  const filteredData =
-    pagination.pageData && typeof data !== "string"
-      ? pagination.pageData[currentPage - 1]
-      : null;
+  if (data !== null) {
+    // let { totalPages, pageData } = buildPagination(data, itemToShowCount.value);
+    // setFilterData(totalPages, pageData, currentPage);
+  } else {
+    // resetPageURL();
+    // setFilterData(0, [], currentPage);
+  }
+
+  // paginationData.value = {
+  //   ...paginationData.value,
+  //   pageData:
+  //     paginationData.value.pageData &&
+  //     typeof data !== "string" &&
+  //     paginationData.value.pageData.length > 0
+  //       ? paginationData.value.pageData[currentPage - 1]
+  //       : [],
+  // };
 
   useEffect(() => {
     if (data === null) {
       resetPageURL();
-    } else if (pagination.totalPages > 1) {
+      setFilterData(0, [], currentPage);
+    } else if (totalPagination > 1) {
       injectCurrentPage();
+    } else {
+      let { totalPages, pageData } = buildPagination(
+        data,
+        itemToShowCount.value
+      );
+      setFilterData(totalPages, pageData, currentPage);
     }
-  }, [data, pagination]);
+  }, [data, itemToShowCount]);
 
   return (
     <div className="relative overflow-x-auto ">
@@ -62,8 +83,8 @@ export default function ReportTableData({ columns }: TTReportTableData) {
           </tr>
         </thead>
         <tbody>
-          {filteredData !== null ? (
-            filteredData.map((item: any, index: number) => (
+          {filterData !== null && filterData.length !== 0 ? (
+            filterData.map((item: any, index: number) => (
               <tr
                 key={index}
                 className="bg-white border-b text-[1.5rem] font-normal text-center"
@@ -93,14 +114,12 @@ export default function ReportTableData({ columns }: TTReportTableData) {
       </table>
       {/* {filteredData !== null ? <Pagination totalPages={totalPages} /> : ""} */}
 
-      {filteredData === null && loading ? (
+      {filterData.length === 0 && loading && (
         <div className="bg-white border-b text-[1.5rem] font-medium py-[5rem] text-center w-full">
           Chargement...
         </div>
-      ) : (
-        ""
       )}
-      {filteredData === null && !loading ? (
+      {filterData.length === 0 && !loading && (
         <div
           className={clsx(
             "bg-white border-b text-[1.5rem] font-medium py-[5rem] text-center w-full"
@@ -115,8 +134,6 @@ export default function ReportTableData({ columns }: TTReportTableData) {
             <div>Aucune information chargée</div>
           )}
         </div>
-      ) : (
-        ""
       )}
     </div>
   );

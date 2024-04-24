@@ -1,20 +1,17 @@
 "use client";
 
-import Actions from "@/components/actions/actions";
-import Action from "@/components/actions/actions";
 import Pagination from "@/components/pagination";
 import { buildPagination } from "@/lib/utils";
 import { usePaginationStore } from "@/store/pagination.store";
-import { useGetData } from "@/store/table-data.store";
+import { useFilterData, useGetData } from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDebouncedCallback } from "use-debounce";
 import { z } from "zod";
-import { signal } from "@preact/signals";
+import { effect, signal } from "@preact/signals";
 
 type TReportTableFilter = {
   amounts: { name: string; table: string }[];
@@ -37,14 +34,15 @@ export const filterFormValue = signal<{ year: string; table: string }>({
   table: "",
 });
 
+export const itemToShowCount = signal<number>(5);
+
 export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   const { data, loadTable, loading } = useGetData();
   const { currentPage, updatePage } = usePaginationStore();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-
-  let totalPages = 0;
+  const { totalPagination, setFilterData } = useFilterData();
 
   const {
     register,
@@ -89,10 +87,13 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
     }
   };
 
-  const pagination = buildPagination(data);
-  totalPages = pagination.totalPages;
+  const handleItemCountChange = (size: number) => {
+    const { totalPages, pageData } = buildPagination(data, size);
+    setFilterData(totalPages, pageData, currentPage);
+  };
 
   const isDisabled = () => watch("table") === "" || watch("year") === "";
+
   return (
     <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 pb-10 border-b-none">
       <form
@@ -109,10 +110,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             name="year"
             id="year"
             className={clsx(
-              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
-              {
-                // "pointer-events-none opacity-25":
-              }
+              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
             )}
           >
             <option defaultValue=""></option>
@@ -152,13 +150,35 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
       </form>
 
       <div className="flex-1 mr-0 flex items-end justify-end gap-[2rem]">
-        {data !== null && totalPages > 1 ? (
-          <Pagination totalPages={totalPages} />
-        ) : (
-          ""
+        <form>
+          <div className="flex items-center gap-4 text-fdfp-second mr-[1rem]">
+            <label htmlFor="itemsCount" className="block font-medium">
+              Affiché
+            </label>
+            <select
+              defaultValue={itemToShowCount.value}
+              onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+                handleItemCountChange(Number(event.target.value))
+              }
+              name="itemsCount"
+              id="itemsCount"
+              className={clsx(
+                "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
+                {
+                  // "pointer-events-none opacity-25":
+                }
+              )}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+        </form>
+        {data !== null && totalPagination > 1 && (
+          <Pagination totalPages={totalPagination} />
         )}
-        {/* <Pagination totalPages={1} /> */}
-        {/* <Actions /> */}
       </div>
     </div>
   );

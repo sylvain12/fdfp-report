@@ -80,7 +80,7 @@ export const useFilterData = create<TFilterDataStore>((set) => ({
     set({
       ...initialFilterData,
       totalPagination,
-      filterData: data ? data[currentPage - 1] : [],
+      filterData: (data && data.length !== 0) ? data[currentPage - 1] : [],
     });
   },
 }));
