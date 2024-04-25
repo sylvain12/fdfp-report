@@ -4,7 +4,7 @@ import { useFilterData, useGetData } from "@/store/table-data.store";
 import { TTReportTableData } from "../../navbar/report.model";
 import { useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { buildPagination } from "@/lib/utils";
+import { buildPagination, resetPageURL, injectCurrentPage } from "@/lib/utils";
 import clsx from "clsx";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { itemToShowCount } from "./report-table-filters";
@@ -16,31 +16,6 @@ export default function ReportTableData({ columns }: TTReportTableData) {
   const { replace } = useRouter();
   const currentPage = Number(searchParams.get("page")) || 1;
   const { totalPagination, filterData, setFilterData } = useFilterData();
-
-  const resetPageURL = () => {
-    const params = new URLSearchParams(searchParams);
-    if (params.get("page")) {
-      params.delete("page");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const injectCurrentPage = () => {
-    const params = new URLSearchParams(searchParams);
-    if (params.get("page") === null) {
-      params.set("page", "1");
-    }
-
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  if (data !== null) {
-    // let { totalPages, pageData } = buildPagination(data, itemToShowCount.value);
-    // setFilterData(totalPages, pageData, currentPage);
-  } else {
-    // resetPageURL();
-    // setFilterData(0, [], currentPage);
-  }
 
   // paginationData.value = {
   //   ...paginationData.value,
@@ -54,16 +29,19 @@ export default function ReportTableData({ columns }: TTReportTableData) {
 
   useEffect(() => {
     if (data === null) {
-      resetPageURL();
+      resetPageURL(searchParams, pathname, replace);
       setFilterData(0, [], currentPage);
     } else if (totalPagination > 1) {
-      injectCurrentPage();
+      // injectCurrentPage();
     } else {
       let { totalPages, pageData } = buildPagination(
         data,
         itemToShowCount.value
       );
       setFilterData(totalPages, pageData, currentPage);
+      if (totalPages > 1) {
+        injectCurrentPage(searchParams, pathname, replace);
+      }
     }
   }, [data, itemToShowCount]);
 

@@ -1,17 +1,19 @@
 "use client";
 
 import Pagination from "@/components/pagination";
-import { buildPagination } from "@/lib/utils";
+import { buildPagination, resetPageURL, injectCurrentPage } from "@/lib/utils";
 import { usePaginationStore } from "@/store/pagination.store";
 import { useFilterData, useGetData } from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { effect, signal } from "@preact/signals";
+import { signal } from "@preact/signals";
+import { itemToShowList, yearFilterList } from "@/lib/constant";
+import { useDebouncedCallback } from "use-debounce";
 
 type TReportTableFilter = {
   amounts: { name: string; table: string }[];
@@ -51,14 +53,6 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
     formState: { errors, isDirty },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
 
-  const resetPageURL = () => {
-    const params = new URLSearchParams(searchParams);
-    if (params.get("page")) {
-      params.delete("page");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
-
   const formRef = useRef<HTMLFormElement>(null);
   const tableSelectInput =
     formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
@@ -73,7 +67,7 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (formValue) => {
-    resetPageURL();
+    resetPageURL(searchParams, pathname, replace);
     updatePage(1);
     if (formValue.table !== "" && formValue.year !== "") {
       loadTable("refunds.settlements", { ...formValue });
@@ -88,8 +82,19 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
   };
 
   const handleItemCountChange = (size: number) => {
+    
     const { totalPages, pageData } = buildPagination(data, size);
-    setFilterData(totalPages, pageData, currentPage);
+
+    itemToShowCount.value = size;
+    updatePage(1);
+    resetPageURL(searchParams, pathname, replace);
+    injectCurrentPage(searchParams, pathname, replace);
+
+    if (currentPage > 1) {
+      setFilterData(totalPages, pageData, 1);
+    } else {
+      setFilterData(totalPages, pageData, currentPage);
+    }
   };
 
   const isDisabled = () => watch("table") === "" || watch("year") === "";
@@ -114,11 +119,13 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
             )}
           >
             <option defaultValue=""></option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
+            {yearFilterList
+              .sort((a, b) => b - a)
+              .map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
           </select>
         </div>
         <div>
@@ -165,14 +172,15 @@ export default function ReportTablesFilters({ amounts }: TReportTableFilter) {
               className={clsx(
                 "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
                 {
-                  // "pointer-events-none opacity-25":
+                  // "pointer-events-none opacity-25": totalPagination < 2,
                 }
               )}
             >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="20">20</option>
+              {itemToShowList.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
           </div>
         </form>

@@ -6,7 +6,7 @@ type PaginationStore = {
 };
 
 export const usePaginationStore = create<PaginationStore>((set) => ({
-  pages: [],
+  // pages: [],
   currentPage: 1,
   updatePage: (page: number) => {
     set({ currentPage: page });

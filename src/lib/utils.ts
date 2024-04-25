@@ -1,4 +1,5 @@
 import { reportNavPathTitle } from "@/components/reports/data/nav-data";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 // enum ECurrency {
 //   DOLLAR = 1,
@@ -40,9 +41,9 @@ export const parseCookie = (cookie: string) => {
  * @param {number} [size=5] - The number of items per page.
  * @returns {{ totalPages: number, pageData: any[] }} - An object containing the total number of pages and paginated data.
  */
-export const buildPagination = (data: {}[], size: number = 5) => {
+export const buildPagination = (data: any[], size: number = 5) => {
   if (data === null || typeof data === "string") {
-    return { totalPages: 0, pageData: null };
+    return { totalPages: 0, pageData: [] };
   }
   const paginationData = [...data];
   const results = [];
@@ -88,6 +89,32 @@ export const currencyFormatter = (amount: number | string) => {
 
   const newRemain = amountRemain || "00";
   return `${newAmount}.${newRemain}`;
+};
+
+// URL utils
+export const resetPageURL = (
+  searchParams: ReadonlyURLSearchParams,
+  pathname: string,
+  fn: CallableFunction
+) => {
+  const params = new URLSearchParams(searchParams);
+  if (params.get("page")) {
+    params.delete("page");
+  }
+  fn(`${pathname}?${params.toString()}`);
+};
+
+export const injectCurrentPage = (
+  searchParams: ReadonlyURLSearchParams,
+  pathname: string,
+  fn: CallableFunction
+) => {
+  const params = new URLSearchParams(searchParams);
+  if (params.get("page") === null) {
+    params.set("page", "1");
+  }
+
+  fn(`${pathname}?${params.toString()}`);
 };
 
 // export { getReportPathDetails, parseCookie, buildPagination };

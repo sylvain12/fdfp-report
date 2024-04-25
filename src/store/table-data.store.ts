@@ -1,5 +1,4 @@
 import { itemToShowCount } from "@/components/reports/details/report-table-filters";
-import { buildPagination } from "@/lib/utils";
 import axios from "axios";
 import { stringify } from "querystring";
 import { create } from "zustand";
@@ -37,7 +36,6 @@ export const useGetData = create<TableDataStore>((set, get) => ({
   loadTable: async (path: string, params: { year?: string; table: string }) => {
     set({ ...initialState, loading: true });
     try {
-      console.log(itemToShowCount.value);
       const res = await axios.get(
         `${BASE_URL}/${path}/?${stringify({ ...params })}`
       );
@@ -80,7 +78,7 @@ export const useFilterData = create<TFilterDataStore>((set) => ({
     set({
       ...initialFilterData,
       totalPagination,
-      filterData: (data && data.length !== 0) ? data[currentPage - 1] : [],
+      filterData: data && data.length !== 0 ? data[currentPage - 1] : [],
     });
   },
 }));

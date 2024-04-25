@@ -2,16 +2,21 @@
 
 import { usePaginationStore } from "@/store/pagination.store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useFilterData, useGetData } from "@/store/table-data.store";
+import { buildPagination } from "@/lib/utils";
+import { itemToShowCount } from "./reports/details/report-table-filters";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const { currentPage, updatePage } = usePaginationStore();
+  const { setFilterData } = useFilterData();
+  const { data } = useGetData();
 
   // const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
@@ -31,12 +36,16 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     const nextPage = currentPage + 1;
     replace(createPageURL(nextPage));
     updatePage(nextPage);
+    let { pageData } = buildPagination(data, itemToShowCount.value);
+    setFilterData(totalPages, pageData, nextPage);
   }, 300);
 
   const handlePrevPage = useDebouncedCallback((event: MouseEvent) => {
     const prevPage = currentPage - 1;
     replace(createPageURL(prevPage));
     updatePage(prevPage);
+    let { pageData } = buildPagination(data, itemToShowCount.value);
+    setFilterData(totalPages, pageData, prevPage);
   }, 300);
 
   let nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
