@@ -29,7 +29,7 @@
    /* Nav right */
    /* version 1 */
    .nav-right {
-      @apply col-start-4 col-end-5 gap-[1.5rem] flex items-center justify-end
+      @apply col-start-4 col-end-6 gap-[1.5rem] flex items-center justify-end
    }
 
 /* version 2 */

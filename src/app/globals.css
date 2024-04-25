@@ -51,7 +51,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 54.75%;
 }
 
 html,
@@ -189,6 +189,10 @@ svg path {
   height: 100%;
   grid-column: 1/-1;
   grid-row: 2 / -1;
+}
+
+@media screen {
+  
 }
 
 @media (prefers-color-scheme: dark) {

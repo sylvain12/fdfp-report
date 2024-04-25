@@ -1,6 +1,6 @@
 @layer components {
     .report-nav {
-        @apply col-start-1 col-end-5 pr-[20px]
+        @apply col-start-1 col-end-5 pr-[10rem]
     }
 
     .report-nav-menu {
@@ -64,6 +64,6 @@
     }
 
     .report-details-container {
-        @apply w-full h-full col-start-1 col-end-5 py-[2rem] px-[10rem] pt-[5rem]
+        @apply w-full h-full col-start-1 col-end-5 px-[10rem] py-[5rem]
     }
 }

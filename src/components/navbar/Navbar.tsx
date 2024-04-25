@@ -12,7 +12,7 @@ const Navbar = () => {
       <NavLogo />
       <NavLinks />
       <NavRight />
-      <NavSearch />
+      {/* <NavSearch /> */}
     </>
   );
 };

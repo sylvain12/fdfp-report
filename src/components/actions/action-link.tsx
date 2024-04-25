@@ -6,8 +6,8 @@ import { clsx } from "clsx";
 import { useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
 import { filterFormValue } from "../reports/details/report-table-filters";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import ReportDataDocument from "../reports/documents/report-data-document";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
+// import ReportDataDocument from "../reports/documents/report-data-document";
 
 export default function ActionLink() {
   const { data } = useGetData();
@@ -22,6 +22,9 @@ export default function ActionLink() {
   const excelFilename = `${
     filterFormValue.value.table?.replaceAll(" ", "_") || "fdfp-export"
   }_${formattedDate}.xlsx`;
+  const csvFilename = `${
+    filterFormValue.value.table?.replaceAll(" ", "_") || "fdfp-export"
+  }_${formattedDate}.csv`;
 
   const pdfFilename = `${
     filterFormValue.value.table?.replaceAll(" ", "_") || "fdfp-export"
@@ -34,6 +37,26 @@ export default function ActionLink() {
 
     XLSX.utils.book_append_sheet(wb, ws, fileSheetName);
     XLSX.writeFile(wb, excelFilename);
+  };
+
+  const handleExportToCSV = () => {
+    const header = Object.keys(data[0]);
+    console.log(header);
+    const headerString = header.join(",");
+    const replacer = (key: string, value: any) => value ?? "";
+    const rowItems = data.map((row: any) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(",")
+    );
+    const csv = [headerString, ...rowItems].join("\r\n");
+    const csvContent = `data:text/csv;charset=utf-8,${csv}`;
+    const encodedURI = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedURI);
+    link.setAttribute("download", csvFilename);
+    document.body.appendChild(link);
+    link.click();
   };
 
   return (
@@ -55,17 +78,27 @@ export default function ActionLink() {
             Exporter PDF
           </PDFDownloadLink> */}
           <button
+            onClick={handleExportToCSV}
+            className={clsx("btn btn-icon btn-danger-transparent uppercase", {
+              "pointer-events-none opacity-35": data === null,
+            })}
+          >
+            <Icon icon="iwwa:file-csv" width={"24px"} className="w-12" />
+            Exporter en CSV
+          </button>
+
+          <button
             onClick={handleExportToExcel}
             className={clsx("btn btn-icon btn-success-transparent uppercase", {
               "pointer-events-none opacity-35": data === null,
             })}
           >
             <Icon
-              icon="vscode-icons:file-type-excel"
+              icon="vscode-icons:file-type-excel2"
               width={"24px"}
               className="w-12"
             />
-            Exporter excel
+            Exporter en excel
           </button>
         </div>
       )}
