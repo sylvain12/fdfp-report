@@ -64,6 +64,6 @@
     }
 
     .report-details-container {
-        @apply w-full h-full col-start-1 col-end-5 px-[10rem] py-[5rem]
+        @apply w-full h-full col-start-1 col-end-5 px-[10rem] py-[3rem]
     }
 }

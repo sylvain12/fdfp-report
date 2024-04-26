@@ -51,7 +51,7 @@
 }
 
 html {
-  font-size: 54.75%;
+  font-size: 53.25%;
 }
 
 html,
@@ -189,6 +189,28 @@ svg path {
   height: 100%;
   grid-column: 1/-1;
   grid-row: 2 / -1;
+}
+
+.scrollable-table {
+  height: 670px;
+  max-height: 670px;
+  width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-color: var(--fdfp-main-color) var(--fdfp-text-color);
+}
+
+.scrollable-table > table {
+  border-collapse: collapse;
+}
+
+.scrollable-table > table th {
+  position: sticky;
+  top: 0;
+}
+
+.scrollable-table>table tr {
+  scroll-snap-align: start;
 }
 
 @media screen {
