@@ -26,6 +26,9 @@ module.exports = {
           light: 'var(--fdfp-light-color)'
         }
       },
+      screens: {
+        tablet: '820px',
+      },
       fontFamily: {
         manrope: ["Manrope", ...fontFamily.sans],
         monospace: ['Major Mono Display', ...fontFamily.mono],
