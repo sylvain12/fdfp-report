@@ -6,8 +6,6 @@ import { clsx } from "clsx";
 import { useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
 import { filterFormValue } from "../reports/details/report-table-filters";
-// import { PDFDownloadLink } from "@react-pdf/renderer";
-// import ReportDataDocument from "../reports/documents/report-data-document";
 
 export default function ActionLink() {
   const { data } = useGetData();
@@ -63,20 +61,6 @@ export default function ActionLink() {
     <>
       {reportName !== null && (
         <div className="flex items-center justify-end h-full gap-5">
-          {/* <PDFDownloadLink
-            className={clsx("btn btn-icon btn-danger-transparent uppercase", {
-              "pointer-events-none opacity-35": data === null,
-            })}
-            document={<ReportDataDocument />}
-            fileName={pdfFilename}
-          >
-            <Icon
-              icon="vscode-icons:file-type-pdf2"
-              width={"24px"}
-              className="w-12"
-            />
-            Exporter PDF
-          </PDFDownloadLink> */}
           <button
             onClick={handleExportToCSV}
             className={clsx("btn btn-icon btn-danger-transparent uppercase", {
