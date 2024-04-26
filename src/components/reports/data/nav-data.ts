@@ -103,7 +103,7 @@ const applicationsAndApprovalsNavs: TLink[] = [
   {
     name: "Projets initiés",
     href: `/reports/applications-and-approvals/details/?${stringify({
-      name: "Projets Projets initiés",
+      name: "Projets initiés",
     })}`,
     active: true,
     icon: InboxStackIcon,
