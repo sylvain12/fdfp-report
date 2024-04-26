@@ -34,6 +34,7 @@ export default function ReportTableData({ columns }: TTReportTableData) {
     } else if (totalPagination > 1) {
       // injectCurrentPage();
     } else {
+      console.log(itemToShowCount.value);
       let { totalPages, pageData } = buildPagination(
         data,
         itemToShowCount.value
@@ -46,15 +47,27 @@ export default function ReportTableData({ columns }: TTReportTableData) {
   }, [data, itemToShowCount]);
 
   return (
-    <div className="relative overflow-x-auto ">
+    <div
+      className={clsx("overflow-x-auto scrollable-table", {
+        "": filterData.length !== 0,
+      })}
+    >
       <table className="w-full text-right rtl:text-right">
         <thead className="text-[1.2rem] bg-gray-100 border-b border-fdfp-light">
           <tr>
-            <th key={columns[0]} scope="col" className="px-6 py-6 text-left">
+            <th
+              key={columns[0]}
+              scope="col"
+              className="px-6 py-6 text-left bg-gray-100"
+            >
               {columns[0]}
             </th>
             {columns.slice(1).map((column) => (
-              <th key={column} scope="col" className="px-6 py-6 text-center">
+              <th
+                key={column}
+                scope="col"
+                className="px-6 py-6 text-center bg-gray-100"
+              >
                 {column}
               </th>
             ))}
