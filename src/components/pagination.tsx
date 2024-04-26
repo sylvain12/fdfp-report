@@ -4,7 +4,12 @@ import { usePaginationStore } from "@/store/pagination.store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MouseEvent } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+} from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useFilterData, useGetData } from "@/store/table-data.store";
 import { buildPagination } from "@/lib/utils";
@@ -48,6 +53,20 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     setFilterData(totalPages, pageData, prevPage);
   }, 300);
 
+  const handleFirstPage = useDebouncedCallback((event: MouseEvent) => {
+    replace(createPageURL(1));
+    updatePage(1);
+    let { pageData } = buildPagination(data, itemToShowCount.value);
+    setFilterData(totalPages, pageData, 1);
+  }, 300);
+
+  const handleLastPage = useDebouncedCallback((event: MouseEvent) => {
+    replace(createPageURL(totalPages));
+    updatePage(totalPages);
+    let { pageData } = buildPagination(data, itemToShowCount.value);
+    setFilterData(totalPages, pageData, totalPages);
+  }, 300);
+
   let nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
   let prevPage = currentPage - 1 < 1 ? currentPage : currentPage - 1;
 
@@ -58,6 +77,23 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
       </div>
       <nav>
         <ul className="inline-flex -space-x-px text-base h-[35px]">
+          <li>
+            <a
+              onClick={(event) => handleFirstPage(event)}
+              data-page={prevPage}
+              aria-disabled={currentPage <= totalPages}
+              href="#"
+              className={clsx(
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                {
+                  "pointer-events-none cursor-default opacity-45":
+                    currentPage <= 1 || totalPages < 3,
+                }
+              )}
+            >
+              <ChevronDoubleLeftIcon className="w-12 text-fdfp-second" />
+            </a>
+          </li>
           <li>
             <a
               onClick={(event) => handlePrevPage(event)}
@@ -104,6 +140,23 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               )}
             >
               <ChevronRightIcon className="w-12 text-fdfp-second" />
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={(event) => handleLastPage(event)}
+              data-page={nextPage}
+              aria-disabled={currentPage >= totalPages}
+              href="#"
+              className={clsx(
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                {
+                  "pointer-events-none cursor-default opacity-45":
+                    currentPage >= totalPages || totalPages < 3,
+                }
+              )}
+            >
+              <ChevronDoubleRightIcon className="w-12 text-fdfp-second" />
             </a>
           </li>
         </ul>
