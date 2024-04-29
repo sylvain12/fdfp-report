@@ -1,3 +1,4 @@
+@import "./utils.css";
 @import "./navbar/navbar.module.css";
 @import './ui.css';
 @import './breadcrumb/breadcrumb.module.css';

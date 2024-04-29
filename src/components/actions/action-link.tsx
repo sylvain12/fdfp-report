@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 import { useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
 import { filterFormValue } from "../reports/details/report-table-filters";
+import { useRef } from "react";
 
 export default function ActionLink() {
   const { data } = useGetData();
@@ -57,33 +58,104 @@ export default function ActionLink() {
     link.click();
   };
 
+  const exportRef = useRef<HTMLDivElement>(null);
+
+  const handleDisplayExport = () => {
+    exportRef.current?.classList.toggle("hidden");
+    exportRef.current?.classList.add("block");
+  };
+
+  window.onclick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (
+      (!target.matches("#export-menu-button") ||
+        !target.matches(".export-menu-button-left") ||
+        !target.matches(".export-menu-button-right")) &&
+      !exportRef.current?.classList.contains("hidden")
+    ) {
+      exportRef.current?.classList.add("hidden");
+    }
+  };
+
   return (
     <>
       {reportName !== null && (
         <div className="flex items-center justify-end h-full gap-5">
-          <button
-            onClick={handleExportToCSV}
-            className={clsx("btn btn-icon btn-danger-transparent uppercase", {
-              "pointer-events-none opacity-35": data === null,
-            })}
-          >
-            <Icon icon="iwwa:file-csv" width={"24px"} className="w-12" />
-            Exporter en CSV
-          </button>
+          <div className="relative inline-block text-left">
+            <div>
+              <button
+                type="button"
+                onClick={handleDisplayExport}
+                className={clsx(
+                  "btn btn-icon btn-main-transparent uppercase h-full",
+                  {
+                    "pointer-events-none opacity-35": data === null,
+                  }
+                )}
+                id="export-menu-button"
+                aria-expanded="true"
+                aria-haspopup="true"
+              >
+                <Icon
+                  className="export-menu-button-icon-left"
+                  icon="iconoir:database-export"
+                  width="22px"
+                />
+                Export en
+                <Icon
+                  className="export-menu-button-icon-right"
+                  icon="line-md:chevron-small-down"
+                  width="18px"
+                />
+              </button>
+            </div>
 
-          <button
-            onClick={handleExportToExcel}
-            className={clsx("btn btn-icon btn-success-transparent uppercase", {
-              "pointer-events-none opacity-35": data === null,
-            })}
-          >
-            <Icon
-              icon="vscode-icons:file-type-excel2"
-              width={"24px"}
-              className="w-12"
-            />
-            Exporter en excel
-          </button>
+            <div
+              ref={exportRef}
+              className="absolute right-0 z-10 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabIndex={-1}
+            >
+              <div className="py-1" role="none">
+                <button
+                  onClick={handleExportToExcel}
+                  className={clsx(
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700",
+                    { "pointer-events-none opacity-35": data === null }
+                  )}
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="menu-item-1"
+                >
+                  <Icon
+                    icon="vscode-icons:file-type-excel2"
+                    width={"22px"}
+                    className="w-12"
+                  />
+                  EXCEL
+                </button>
+                <button
+                  onClick={handleExportToCSV}
+                  className={clsx(
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600",
+                    { "pointer-events-none opacity-35": data === null }
+                  )}
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="menu-item-2"
+                >
+                  <Icon
+                    icon="iwwa:file-csv"
+                    width={"32px"}
+                    className="w-12 text-red-600"
+                  />
+                  CSV
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </>
