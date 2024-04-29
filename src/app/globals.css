@@ -197,7 +197,8 @@ svg path {
   width: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
-  scrollbar-color: var(--fdfp-main-color) var(--fdfp-text-color);
+  scrollbar-color: var(--fdfp-text-color) var(--white-color);
+  scrollbar-width: thin;
 }
 
 .scrollable-table > table {
