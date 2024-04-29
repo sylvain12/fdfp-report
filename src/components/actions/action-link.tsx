@@ -119,7 +119,6 @@ export default function ActionLink() {
             </div>
 
             <div
-              onMouseLeave={handleHideDropdownMenu}
               ref={exportRef}
               className="absolute right-0 z-10 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
               role="menu"
