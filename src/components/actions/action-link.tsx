@@ -65,17 +65,25 @@ export default function ActionLink() {
     exportRef.current?.classList.add("block");
   };
 
-  window.onclick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    if (
-      (!target.matches("#export-menu-button") ||
-        !target.matches(".export-menu-button-left") ||
-        !target.matches(".export-menu-button-right")) &&
-      !exportRef.current?.classList.contains("hidden")
-    ) {
+  const handleHideDropdownMenu = () => {
+    if (!exportRef.current?.classList.contains("hidden")) {
       exportRef.current?.classList.add("hidden");
     }
   };
+
+  if (typeof window !== "undefined") {
+    window.onclick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        !target.matches("#export-menu-button") &&
+        !target.matches(".export-menu-button-icon-left") &&
+        !target.matches(".export-menu-button-icon-right") &&
+        !exportRef.current?.classList.contains("hidden")
+      ) {
+        exportRef.current?.classList.add("hidden");
+      }
+    };
+  }
 
   return (
     <>
@@ -111,6 +119,7 @@ export default function ActionLink() {
             </div>
 
             <div
+              onMouseLeave={handleHideDropdownMenu}
               ref={exportRef}
               className="absolute right-0 z-10 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
               role="menu"
@@ -118,11 +127,11 @@ export default function ActionLink() {
               aria-labelledby="menu-button"
               tabIndex={-1}
             >
-              <div className="py-1" role="none">
+              <div className="" role="none">
                 <button
                   onClick={handleExportToExcel}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700 hover:bg-gray-100",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
@@ -139,7 +148,7 @@ export default function ActionLink() {
                 <button
                   onClick={handleExportToCSV}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-gray-100",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
