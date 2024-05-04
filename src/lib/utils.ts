@@ -1,4 +1,5 @@
 import { reportNavPathTitle } from "@/components/reports/data/nav-data";
+import { Err, Ok, Result } from "@sylvainka12/resultjs";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 // enum ECurrency {
@@ -115,6 +116,10 @@ export const injectCurrentPage = (
   }
 
   fn(`${pathname}?${params.toString()}`);
+};
+
+export const getReportEntityName = (value: string) => {
+  return value !== null ? value.replaceAll(/[' ', %]/g, "") : "0";
 };
 
 // export { getReportPathDetails, parseCookie, buildPagination };
