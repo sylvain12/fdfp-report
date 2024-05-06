@@ -2,7 +2,7 @@
 
 import { useFilterData, useGetData } from "@/store/table-data.store";
 import clsx from "clsx";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useRef } from "react";
 import {
   buildPagination,
   getReportEntityName,
@@ -12,10 +12,11 @@ import { itemToShowCount } from "./details/report-table-filters";
 import { usePaginationStore } from "@/store/pagination.store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { Icon } from "@iconify/react";
 
 export default function ReportSearch() {
   const { data } = useGetData();
-  const { filterData, setFilterData } = useFilterData();
+  const { setFilterData } = useFilterData();
   const { currentPage, updatePage } = usePaginationStore();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -57,18 +58,39 @@ export default function ReportSearch() {
     updateFilterData(filterData);
   };
 
+  const handleClearSearchText = useDebouncedCallback(() => {
+    if (searchRef.current?.value) {
+      searchRef.current.value = "";
+    }
+  }, 100);
+
+  const searchRef = useRef<HTMLInputElement>(null);
+
   return (
-    <div>
+    <div className="relative">
       <input
+        ref={searchRef}
         onInput={(e) => handleSearchByEntity(e)}
         name="entity"
         className={clsx(
-          "w-[375px] border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
-          {}
+          "w-[425px] border border-fdfp-text text-[1.5rem] px-4 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-normal",
+          {
+            "opacity-25 pointer-events-none": data === null,
+          }
         )}
         type="text"
         placeholder="Recherche par l'entitie"
       />
+      {/* <Icon
+        onClick={handleClearSearchText}
+        className={clsx(
+          "absolute right-6 top-[50%] -translate-y-1/2 cursor-pointer",
+          {
+            hidden: searchRef.current?.value === "",
+          }
+        )}
+        icon="uil:times"
+      /> */}
     </div>
   );
 }
