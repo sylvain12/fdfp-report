@@ -6,11 +6,12 @@ import {
   IReportRefundsAndSettlementsTotal,
   TableNumber,
 } from "../../navbar/report.model";
-import RefundsAndSettlementsTable from "./refunds-and-settlements-table";
 import { useEffect } from "react";
 import { parseCookie } from "@/lib/utils";
 import { TABLETOSHOW } from "@/middleware";
-import ApplicationAndApprovalsTable from "./applications-and-approvals-table";
+import ApprovedTrainingAndStudyProjectsTable from './approved-training-and-study-projects';
+import LiquidationOfTrainingPlansTable from './liquidation-of-training-plans';
+import TrainingPlansAndActionsTable from './training-plans-and-actions';
 
 export default function ReportTableDetails() {
   const { showedTable, setTable } = useTable();
@@ -22,18 +23,14 @@ export default function ReportTableDetails() {
 
   return (
     <div className="">
-      {/* RefundsAndASettlements table part 3 */}
-      {/* <div>{tables.length}</div> */}
-      {/* <div className="font-manrope">{summary.year}</div> */}
-      {showedTable === TableNumber.ApplicationsAndApprovals ? (
-        <ApplicationAndApprovalsTable />
-      ) : (
-        ""
+      {showedTable === TableNumber.ApprovedTrainingAndStudyProjects && (
+        <ApprovedTrainingAndStudyProjectsTable />
       )}
-      {showedTable === TableNumber.RefundsAndASettlements ? (
-        <RefundsAndSettlementsTable />
-      ) : (
-        ""
+      {showedTable === TableNumber.LiquidationOfTrainingPlans && (
+        <LiquidationOfTrainingPlansTable />
+      )}
+      {showedTable === TableNumber.TrainingPlansAndActions && (
+        <TrainingPlansAndActionsTable />
       )}
     </div>
   );

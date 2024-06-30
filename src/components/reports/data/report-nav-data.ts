@@ -58,7 +58,7 @@ const trainingPlansAndActionsNavs: TLink[] = [
     },
     {
         name: "Actions de formations agrées",
-        href: `/reports/training-plans-and-actions/details?name=${stringify({
+        href: `/reports/training-plans-and-actions/details?${stringify({
             name: "Actions de formations agrées"
             })}`,
         active: true,
@@ -130,9 +130,21 @@ const approvedTrainingAndStudyProjectsNavs: TLink[] = [
     },
 ]
 
+interface IReportNavPathTitle {
+    [key: string]: string;
+}
+
+const reportNavPathTitle: IReportNavPathTitle = {
+    "training-plans-and-actions": "Plans et actions de formations",
+    "liquidation-of-training-plans": "Liquidation des plans de formation",
+    "approved-training-and-study-projects": "Projets de formation et d'étude agrées",
+};
+
+
 export {
     reportNavs,
     trainingPlansAndActionsNavs,
     liquidationOfTrainingPlansNavs,
     approvedTrainingAndStudyProjectsNavs,
+    reportNavPathTitle
 };

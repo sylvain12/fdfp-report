@@ -1,4 +1,4 @@
-import { reportNavPathTitle } from "@/components/reports/data/nav-data";
+import { reportNavPathTitle } from "@/components/reports/data/report-nav-data";
 import { Err, Ok, Result } from "@sylvainka12/resultjs";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
