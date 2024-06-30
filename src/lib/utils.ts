@@ -69,9 +69,9 @@ export const flattenArray = (arr: any[]): any[] => {
 };
 
 export const currencyFormatter = (amount: number | string) => {
-  amount = amount.toString();
+  const amountStr = amount.toString();
 
-  const amountPart = amount.split(".");
+  const amountPart = amountStr.split(".");
   const [amountValue, amountRemain] = amountPart;
   const amountValueArr = amountValue
     .split("")
@@ -80,7 +80,7 @@ export const currencyFormatter = (amount: number | string) => {
 
   const amountResult = [];
   while (amountValueArr.length > 0) {
-    amountResult.push(amountValueArr.splice(0, 3));
+    amountResult.push(amountValueArr.splice(0, 3).reverse());
   }
 
   const newAmount = amountResult
