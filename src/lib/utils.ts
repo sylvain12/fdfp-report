@@ -69,9 +69,9 @@ export const flattenArray = (arr: any[]): any[] => {
 };
 
 export const currencyFormatter = (amount: number | string) => {
-  const amountStr = amount.toString();
+  const amountStr = amount?.toString();
 
-  const amountPart = amountStr.split(".");
+  const amountPart = amountStr?.split(".");
   const [amountValue, amountRemain] = amountPart;
   const amountValueArr = amountValue
     .split("")

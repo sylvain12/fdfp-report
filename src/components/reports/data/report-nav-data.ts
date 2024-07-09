@@ -51,10 +51,12 @@ const trainingPlansAndActionsNavs: TLink[] = [
         name: "Plans de formations",
         href: `/reports/training-plans-and-actions/details?${stringify({
         name: "plan de formations",
+        table: "PL_FORM"
         })}`,
         active: true,
         icon: ListBulletIcon,
         query: ["plan de formations"],
+        key: "PL_FORM"
     },
     {
         name: "Actions de formations agrées",
@@ -64,6 +66,7 @@ const trainingPlansAndActionsNavs: TLink[] = [
         active: true,
         icon: CursorArrowRaysIcon,
         query: ["Actions de formations agrées"],
+        key: ""
     },
     {
         name: "Bénéficiaires des actions agrées",
@@ -73,6 +76,7 @@ const trainingPlansAndActionsNavs: TLink[] = [
         active: true,
         icon: ChartPieIcon,
         query: ["Bénéficiaires des actions agrées"],
+        key: ""
     },
 ];
 
@@ -82,29 +86,35 @@ const liquidationOfTrainingPlansNavs: TLink[] = [
     {
         name: "Actions demandés en remboursement",
         href: `/reports/liquidation-of-training-plans/details?${stringify({
-        name: "Actions demandés en remboursement",
+            name: "Actions demandés en remboursement",
+            table: "ACT_DMD_RMB"
         })}`,
         active: true,
         icon: BanknotesIcon,
         query: ["Actions demandés en remboursement"],
+        key: "ACT_DMD_RMB"
     },
     {
         name: "Actions liquidées",
         href: `/reports/liquidation-of-training-plans/details?${stringify({
-        name: "Actions liquidées",
+            name: "Actions liquidées",
+            table: "ACT_LIQ"
         })}`,
         active: true,
         icon: CursorArrowRaysIcon,
         query: ["Actions liquidées"],
+        key: "ACT_LIQ"
     },
     {
         name: "Plans liquidés",
         href: `/reports/liquidation-of-training-plans/details?${stringify({
-        name: "Plans liquidés",
+            name: "Plans liquidés",
+            table: "PL_LIQ"
         })}`,
         active: true,
         icon: ListBulletIcon,
         query: ["Plans liquidés"],
+        key: "PL_LIQ"
     },
 ];
 
@@ -113,20 +123,23 @@ const approvedTrainingAndStudyProjectsNavs: TLink[] = [
     {
         name: "Projets de formations agrées",
         href: `/reports/approved-training-and-study-projects/details?${stringify({
-        name: "Projets de formations agrées",
+            name: "Projets de formations agrées",
+            table: "ACT_FORM_AGR"
         })}`,
         active: true,
         icon: ChartBarIcon,
         query: ["Projets de formations agrées"],
+        key: "ACT_FORM_AGR"
     },
     {
         name: "Projets d'études agrées",
         href: `/reports/approved-training-and-study-projects/details?${stringify({
-        name: "Projets d'études agrées",
+            name: "Projets d'études agrées",
         })}`,
         active: true,
         icon: ChartBarIcon,
         query: ["Projets d'études agrées"],
+        key: ""
     },
 ]
 

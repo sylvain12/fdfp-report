@@ -20,7 +20,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const { replace } = useRouter();
   const { currentPage, updatePage } = usePaginationStore();
-  const { setFilterData } = useFilterData();
+  const { setFilterData, totalPagination } = useFilterData();
   const { data } = useGetData();
 
   // const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -71,9 +71,9 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   let prevPage = currentPage - 1 < 1 ? currentPage : currentPage - 1;
 
   return (
-    <div className="flex justify-center items-center gap-4">
+    <div className={clsx("flex justify-center items-center gap-4", {})}>
       <div className="font-bold text-[1.4rem] uppercase text-fdfp-second">
-        page {currentPage} / {totalPages}
+        page {data ? currentPage : "-"} / {data ? totalPages : "-"}
       </div>
       <nav>
         <ul className="inline-flex -space-x-px text-base h-[35px]">

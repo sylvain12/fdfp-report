@@ -38,8 +38,9 @@ export type TReportDetails = {
 
 export enum TableNumber {
   GlobalAnalyze = 1,
-  ApplicationsAndApprovals,
-  RefundsAndASettlements,
+  ApprovedTrainingAndStudyProjects,
+  LiquidationOfTrainingPlans,
+  TrainingPlansAndActions,
 }
 
 export interface IDataRefundsAndSettlements {

@@ -1,4 +1,5 @@
 import { itemToShowCount } from "@/components/reports/details/report-table-filters";
+import { API_STATISTICS_PATH, API_URL } from '@/lib/config';
 import axios from "axios";
 import { stringify } from "querystring";
 import { create } from "zustand";
@@ -23,21 +24,19 @@ type TableDataStore = {
   loading: boolean;
   success: boolean;
   error: boolean;
-  data: any;
+  data: {details: any[], totals: any, headers: any};
   errorData: any;
-  loadTable: (path: string, params: { year?: string; table: string }) => void;
+  loadTable: (params: { year: string; key: string, procname: string }) => void;
   resetTable: () => void;
 };
 
-const BASE_URL = process.env.SERVER_URL || "http://147.182.139.206:8016";
-
 export const useGetData = create<TableDataStore>((set, get) => ({
   ...initialState,
-  loadTable: async (path: string, params: { year?: string; table: string }) => {
+  loadTable: async (params: { year: string; key: string, procname: string }) => {
     set({ ...initialState, loading: true });
     try {
       const res = await axios.get(
-        `${BASE_URL}/${path}/?${stringify({ ...params })}`
+        `${API_URL}/${API_STATISTICS_PATH}/?${stringify({ ...params })}`
       );
       set({ ...initialState, success: true, data: res.data });
     } catch (err: any) {

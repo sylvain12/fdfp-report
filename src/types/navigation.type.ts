@@ -4,4 +4,5 @@ export type TLink = {
   active?: boolean;
   icon?: any;
   query?: string[];
+  key?: string;
 };

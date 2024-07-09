@@ -12,26 +12,48 @@ import { TABLETOSHOW } from "@/middleware";
 import ApprovedTrainingAndStudyProjectsTable from './approved-training-and-study-projects';
 import LiquidationOfTrainingPlansTable from './liquidation-of-training-plans';
 import TrainingPlansAndActionsTable from './training-plans-and-actions';
+import { TTableFilterStoreStore, useTableFilterStore } from '@/store/report.store';
+import { useSearchParams } from 'next/navigation';
+import ReportTablesFilters from './report-table-filters';
+import ReportTableData from './report-table-data';
+import { API_SUBGROUP_PATH, API_URL } from '@/lib/config';
+import { stringify } from 'querystring';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ReportTableDetails() {
-  const { showedTable, setTable } = useTable();
+  const { showedTable } = useTable();
+  const searchPath = useSearchParams();
+  const {tables, setTables} = useTableFilterStore()
+  const reportTableKey = searchPath.get('table');
   const { cookie } = typeof window === "object" ? document : { cookie: "" };
+  let columns: string[] = [];
+  const url = `${API_URL}/${API_SUBGROUP_PATH}/?${stringify({subgroup: reportTableKey})}`
+
+
+  const {data, isFetched, isSuccess} = useQuery<TTableFilterStoreStore[]>({
+    queryKey: [reportTableKey],
+    queryFn: () => fetch(url).then(res => res.json())
+  })
 
   useEffect(() => {
-    setTable(parseCookie(cookie)[TABLETOSHOW]);
-  }, [cookie, showedTable]);
+    // setTable(parseCookie(cookie)[TABLETOSHOW]);
+    console.log(data)
+    if (data) {setTables(data)}
+  }, [reportTableKey, data, setTables, showedTable]);
 
   return (
-    <div className="">
-      {showedTable === TableNumber.ApprovedTrainingAndStudyProjects && (
-        <ApprovedTrainingAndStudyProjectsTable />
+    <>
+      <ReportTablesFilters tables={tables} />
+      <ReportTableData columns={columns} />
+      {/* {showedTable === TableNumber.TrainingPlansAndActions && (
+        <TrainingPlansAndActionsTable />
       )}
       {showedTable === TableNumber.LiquidationOfTrainingPlans && (
         <LiquidationOfTrainingPlansTable />
       )}
-      {showedTable === TableNumber.TrainingPlansAndActions && (
-        <TrainingPlansAndActionsTable />
-      )}
-    </div>
+      {showedTable === TableNumber.ApprovedTrainingAndStudyProjects && (
+        <ApprovedTrainingAndStudyProjectsTable />
+      )} */}
+    </>
   );
 }

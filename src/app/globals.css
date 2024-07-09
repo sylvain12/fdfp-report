@@ -7,26 +7,27 @@
 
 @layer base {
   :root {
-      --fdfp-main-color: #0f6b9d;
-      --fdfp-main-color-light: rgb(97, 158, 192);
-      --fdfp-second-color: #f7a95f;
-      --fdfp-bg-color: #f5f5f6;
-      --fdfp-bg-color-second: #f0ede6;
-  
-      --white-color: rgb(255, 254, 254);
-      --fdfp-text-color: #7a7a7a;
-      /* --fdfp-text-color-second: #3f6377; */
-      --fdfp-text-color-second: #13628c;
-      --fdfp-light-color: #d4d6d6;
+    --fdfp-main-color: #0f6b9d;
+    --fdfp-main-color-light: rgb(97, 158, 192);
+    --fdfp-second-color: #f7a95f;
+    --fdfp-bg-color: #f5f5f6;
+    --fdfp-bg-color-second: #f0ede6;
+    --fdfp-bg-color-second: #f2f2f2;
 
-      --fw-100: 100;
-      --fw-200: 200;
-      --fw-300: 300;
-      --fw-400: 400;
-      --fw-500: 500;
-      --ff-second: "manrope";
-      --ff-serif: "Merry", serif;
-    }
+    --white-color: rgb(255, 254, 254);
+    --fdfp-text-color: #7a7a7a;
+    /* --fdfp-text-color-second: #3f6377; */
+    --fdfp-text-color-second: #13628c;
+    --fdfp-light-color: #d4d6d6;
+
+    --fw-100: 100;
+    --fw-200: 200;
+    --fw-300: 300;
+    --fw-400: 400;
+    --fw-500: 500;
+    --ff-second: "manrope";
+    --ff-serif: "Merry", serif;
+  }
 }
 
 /* @media (prefers-color-scheme: light) {
@@ -63,6 +64,7 @@ body {
 body {
   font-family: var(--font-manrope);
   background-color: var(--fdfp-bg-color-second);
+
   color: var(--fdfp-text-color-second);
   font-size: 1.6rem;
   font-weight: var(--fw-300);
@@ -82,9 +84,9 @@ svg path {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 8rem 1fr;
-  grid-template-areas: 
-  "navbar navbar"
-  "content content";
+  grid-template-areas:
+    "navbar navbar"
+    "content content";
   height: 100%;
   min-height: 100vh;
 }
@@ -115,7 +117,7 @@ svg path {
   border-bottom: 1px solid rgba(181, 181, 181, 0.34);
 }
 
-.main-navbar > * {
+.main-navbar>* {
   height: 100%;
   display: flex;
   align-items: center;
@@ -138,7 +140,7 @@ svg path {
 .report-container {
   display: grid;
   grid-template-columns: 70px 1fr 300px 70px;
-  grid-template-rows: 9rem 1fr;
+  grid-template-rows: 8rem 1fr;
   height: 100%;
 }
 
@@ -201,11 +203,11 @@ svg path {
   scrollbar-width: thin;
 }
 
-.scrollable-table > table {
+.scrollable-table>table {
   border-collapse: collapse;
 }
 
-.scrollable-table > table th {
+.scrollable-table>table th {
   position: sticky;
   top: 0;
 }
@@ -214,9 +216,7 @@ svg path {
   scroll-snap-align: start;
 }
 
-@media screen {
-  
-}
+@media screen {}
 
 @media (prefers-color-scheme: dark) {
   html {
