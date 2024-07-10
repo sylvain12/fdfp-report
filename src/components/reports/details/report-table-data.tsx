@@ -40,7 +40,6 @@ export default function ReportTableData() {
         itemToShowCount.value
       );
       setColumns(Object.values(data.headers))
-      console.log("slice => ", Object.values(columns).slice(1))
       setFilterData(totalPages, pageData, currentPage);
       if (totalPages > 1) {
         injectCurrentPage(searchParams, pathname, replace);

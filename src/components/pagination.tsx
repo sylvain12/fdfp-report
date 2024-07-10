@@ -41,7 +41,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     const nextPage = currentPage + 1;
     replace(createPageURL(nextPage));
     updatePage(nextPage);
-    let { pageData } = buildPagination(data, itemToShowCount.value);
+    let { pageData } = buildPagination(data.details, itemToShowCount.value);
     setFilterData(totalPages, pageData, nextPage);
   }, 300);
 
@@ -49,21 +49,21 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     const prevPage = currentPage - 1;
     replace(createPageURL(prevPage));
     updatePage(prevPage);
-    let { pageData } = buildPagination(data, itemToShowCount.value);
+    let { pageData } = buildPagination(data.details, itemToShowCount.value);
     setFilterData(totalPages, pageData, prevPage);
   }, 300);
 
   const handleFirstPage = useDebouncedCallback((event: MouseEvent) => {
     replace(createPageURL(1));
     updatePage(1);
-    let { pageData } = buildPagination(data, itemToShowCount.value);
+    let { pageData } = buildPagination(data.details, itemToShowCount.value);
     setFilterData(totalPages, pageData, 1);
   }, 300);
 
   const handleLastPage = useDebouncedCallback((event: MouseEvent) => {
     replace(createPageURL(totalPages));
     updatePage(totalPages);
-    let { pageData } = buildPagination(data, itemToShowCount.value);
+    let { pageData } = buildPagination(data.details, itemToShowCount.value);
     setFilterData(totalPages, pageData, totalPages);
   }, 300);
 

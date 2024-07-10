@@ -200,9 +200,9 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
             </select>
           </div>
         </form>
-        {/* {data !== null && totalPagination > 1 && ( */}
-        {/* <Pagination totalPages={totalPagination} /> */}
-        {/* )} */}
+        {data !== null && totalPagination > 1 && (
+        <Pagination totalPages={totalPagination} />
+        )}
         <Actions />
       </div>
     </div>
