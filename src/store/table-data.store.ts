@@ -81,3 +81,15 @@ export const useFilterData = create<TFilterDataStore>((set) => ({
     });
   },
 }));
+
+
+// table column store
+type TableColumnSTore = {
+  columns: object;
+  setColumns: (items: string[]) => void
+}
+
+export const useTableColumnStore = create<TableColumnSTore>((set) => ({
+  columns: [],
+  setColumns: (items: object) => set({columns: items})
+}))

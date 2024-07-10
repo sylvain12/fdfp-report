@@ -19,32 +19,37 @@ import ReportTableData from './report-table-data';
 import { API_SUBGROUP_PATH, API_URL } from '@/lib/config';
 import { stringify } from 'querystring';
 import { useQuery } from '@tanstack/react-query';
+import { useTableColumnStore } from '@/store/table-data.store';
 
 export default function ReportTableDetails() {
   const { showedTable } = useTable();
+  const {columns} = useTableColumnStore();
   const searchPath = useSearchParams();
   const {tables, setTables} = useTableFilterStore()
   const reportTableKey = searchPath.get('table');
   const { cookie } = typeof window === "object" ? document : { cookie: "" };
-  let columns: string[] = [];
+  // let columns: string[] = [];
   const url = `${API_URL}/${API_SUBGROUP_PATH}/?${stringify({subgroup: reportTableKey})}`
 
 
-  const {data, isFetched, isSuccess} = useQuery<TTableFilterStoreStore[]>({
+  const {data} = useQuery<TTableFilterStoreStore[]>({
     queryKey: [reportTableKey],
     queryFn: () => fetch(url).then(res => res.json())
   })
 
+// While this story is inspired by actual people and events, certain characters,
+// characterisations, incidents, locations and dialogue were fictionalized for
+//  purposes of dramatization.
+
   useEffect(() => {
     // setTable(parseCookie(cookie)[TABLETOSHOW]);
-    console.log(data)
     if (data) {setTables(data)}
   }, [reportTableKey, data, setTables, showedTable]);
 
   return (
     <>
       <ReportTablesFilters tables={tables} />
-      <ReportTableData columns={columns} />
+      <ReportTableData />
       {/* {showedTable === TableNumber.TrainingPlansAndActions && (
         <TrainingPlansAndActionsTable />
       )}

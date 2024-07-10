@@ -3,7 +3,7 @@
 import Pagination from "@/components/pagination";
 import { buildPagination, resetPageURL, injectCurrentPage } from "@/lib/utils";
 import { usePaginationStore } from "@/store/pagination.store";
-import { useFilterData, useGetData } from "@/store/table-data.store";
+import { useFilterData, useGetData, useTableColumnStore } from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
@@ -43,6 +43,7 @@ export const itemToShowCount = signal<number>(10);
 
 export default function ReportTablesFilters({ tables }: TReportTableFilter) {
   const { data, loadTable, loading } = useGetData();
+  const {setColumns} = useTableColumnStore();
   const { currentPage, updatePage } = usePaginationStore();
   const searchParams = useSearchParams();
   const pathname = usePathname();
