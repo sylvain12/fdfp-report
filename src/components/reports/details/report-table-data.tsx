@@ -36,7 +36,7 @@ export default function ReportTableData() {
         injectCurrentPage(searchParams, pathname, replace);
       }
     }
-  }, [data, itemToShowCount, setColumns]);
+  }, [data, setColumns]);
 
   return (
     <div

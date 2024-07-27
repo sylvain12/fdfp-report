@@ -42,11 +42,11 @@
    }
 
    .nav-right-menu {
-      @apply relative;
+      @apply flex h-full;
    }
 
    .nav-right-menu-item {
-      @apply p-[2rem] border-l-fdfp-bg border-l
+      @apply p-[2rem] border-l-fdfp-bg border-l flex items-center justify-center cursor-pointer
    }
 
    .nav-right-menu-item-span {

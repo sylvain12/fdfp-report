@@ -1,7 +1,7 @@
 import React from "react";
 import { TBreadcrumb } from "./breadcrumb.model";
 import BreadcrumbItem from "./breadcrumb-item";
-import ReportSearch from "../reports/report-search";
+import ReportSearch from "../reports/ui/report-search";
 
 const Breadcrumb = ({ items }: TBreadcrumb) => {
   return (

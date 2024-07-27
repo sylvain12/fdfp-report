@@ -9,22 +9,22 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   if (
-    request.nextUrl.pathname.includes("refunds-and-settlements") ||
-    response.url.includes("refunds-and-settlements")
+    request.nextUrl.pathname.includes("training-plans-and-actions") ||
+    response.url.includes("training-plans-and-actions")
   ) {
     response.cookies.set(TABLETOSHOW, "3");
   }
 
   if (
-    request.nextUrl.pathname.includes("applications-and-approvals") ||
-    response.url.includes("applications-and-approvals")
+    request.nextUrl.pathname.includes("approved-training-and-study-projects") ||
+    response.url.includes("approved-training-and-study-projects")
   ) {
     response.cookies.set(TABLETOSHOW, "2");
   }
 
   if (
-    request.nextUrl.pathname.includes("global-analyze") ||
-    response.url.includes("global-analyze")
+    request.nextUrl.pathname.includes("liquidation-of-training-plans") ||
+    response.url.includes("liquidation-of-training-plans")
   ) {
     response.cookies.set(TABLETOSHOW, "1");
   }

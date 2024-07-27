@@ -31,7 +31,7 @@ export default function ActionLink() {
 
   const handleExportToExcel = () => {
     const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(data);
+    const ws = XLSX.utils.json_to_sheet(data.details);
     const fileSheetName = filterFormValue.value.year || "sheet1";
 
     XLSX.utils.book_append_sheet(wb, ws, fileSheetName);
@@ -39,11 +39,10 @@ export default function ActionLink() {
   };
 
   const handleExportToCSV = () => {
-    const header = Object.keys(data[0]);
-    console.log(header);
+    const header = Object.keys(data.details[0]);
     const headerString = header.join(",");
     const replacer = (key: string, value: any) => value ?? "";
-    const rowItems = data.map((row: any) =>
+    const rowItems = data.details.map((row: any) =>
       header
         .map((fieldName) => JSON.stringify(row[fieldName], replacer))
         .join(",")
