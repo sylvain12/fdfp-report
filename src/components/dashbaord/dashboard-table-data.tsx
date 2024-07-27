@@ -10,39 +10,40 @@ import useSWR from "swr";
 const fetcher = (resource: string) => fetch(resource).then((res) => res.json());
 
 export default function DashboardTableData() {
-  const { view } = useDashboardStore();
+  // const { view } = useDashboardStore();
 
-  let dataView: TPlan[] | TAction[];
-  if (view === EDashboardView.TRAINING_PLAN) {
-    const { data } = useSWR(`${baseURL}/global.analysis.table1/`, fetcher, {
-      suspense: true,
-    });
-    dataView = data;
-  } else {
-    const { data } = useSWR(
-      `${baseURL}/global.analysis.table2/?year=2020`,
-      fetcher,
-      {
-        suspense: true,
-      }
-    );
-    dataView = data;
-  }
+  // let dataView: TPlan[] | TAction[];
+  // if (view === EDashboardView.TRAINING_PLAN) {
+  //   const { data } = useSWR(`${baseURL}/global.analysis.table1/`, fetcher, {
+  //     suspense: true,
+  //   });
+  //   dataView = data;
+  // } else {
+  //   const { data } = useSWR(
+  //     `${baseURL}/global.analysis.table2/?year=2020`,
+  //     fetcher,
+  //     {
+  //       suspense: true,
+  //     }
+  //   );
+  //   dataView = data;
+  // }
 
-  const currentYear = 2021;
-  const plansData: TPlan[] = dataView
-    ? (dataView as TPlan[])
-        .filter((plan: TPlan) => Number(plan.annee) !== currentYear)
-        .sort((plan: TPlan) => -Number(plan.annee))
-    : [];
+  // const currentYear = 2021;
+  // const plansData: TPlan[] = dataView
+  //   ? (dataView as TPlan[])
+  //       .filter((plan: TPlan) => Number(plan.annee) !== currentYear)
+  //       .sort((plan: TPlan) => -Number(plan.annee))
+  //   : [];
 
-  const actionsData: TAction[] = dataView
-    ? (dataView as TAction[]).sort((action: TAction) => -Number(action.annee))
-    : [];
+  // const actionsData: TAction[] = dataView
+  //   ? (dataView as TAction[]).sort((action: TAction) => -Number(action.annee))
+  //   : [];
 
   return (
     <>
-      <div className="mt-[6rem] mb-[2rem]">
+      <h1>Dashboard</h1>
+      {/* <div className="mt-[6rem] mb-[2rem]">
         <h1 className="font-normal text-[2.2rem] text-fdfp-main">
           Historique des analyses
           <div className="h-1 w-[35px] bg-fdfp-second"></div>
@@ -187,7 +188,7 @@ export default function DashboardTableData() {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 }
