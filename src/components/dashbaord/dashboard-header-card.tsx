@@ -4,46 +4,45 @@ import { TAction, TPlan, baseURL } from "@/lib/data";
 import useSWR from "swr";
 import { currencyFormatter } from "@/lib/utils";
 import DashboardViewMenu from "./dashboard-view-menu";
-import { EDashboardView, useDashboardStore } from "@/store/dashboard.store";
-// import { useApplicationStore } from "@/store/application.store";
+import { EDashboardView, useDashboardStore } from "@/store/dashboard.store"; // import { useApplicationStore } from "@/store/application.store";
 
 const currentYear = 2021;
 
 const fetcher = (resource: string) => fetch(resource).then((res) => res.json());
 
 export default function DashboardHeaderCard() {
-  const { view } = useDashboardStore();
-  let dataView: any;
+  // const { view } = useDashboardStore();
+  // let dataView: any;
 
-  if (view === EDashboardView.TRAINING_PLAN) {
-    const { data } = useSWR(
-      `${baseURL}/global.analysis.current.year/`,
-      fetcher,
-      {
-        suspense: true,
-      }
-    );
-    dataView = data;
-  } else {
-    const { data } = useSWR(
-      `${baseURL}/global.analysis.table2?year=${currentYear}`,
-      fetcher,
-      {
-        suspense: true,
-      }
-    );
-    dataView = data[0];
-  }
+  // if (view === EDashboardView.TRAINING_PLAN) {
+  //   const { data } = useSWR(
+  //     `${baseURL}/global.analysis.current.year/`,
+  //     fetcher,
+  //     {
+  //       suspense: true,
+  //     }
+  //   );
+  //   dataView = data;
+  // } else {
+  //   const { data } = useSWR(
+  //     `${baseURL}/global.analysis.table2?year=${currentYear}`,
+  //     fetcher,
+  //     {
+  //       suspense: true,
+  //     }
+  //   );
+  //   dataView = data[0];
+  // }
 
-  const currentPlan: TPlan = EDashboardView.TRAINING_PLAN ? dataView : null;
-  const currentAction: TAction =
-    view === EDashboardView.TRAINING_ACTION ? dataView : null;
+  // const currentPlan: TPlan = EDashboardView.TRAINING_PLAN ? dataView : null;
+  // const currentAction: TAction =
+  //   view === EDashboardView.TRAINING_ACTION ? dataView : null;
 
   return (
     <>
-      {view === EDashboardView.TRAINING_PLAN ? (
+      {/* {view === EDashboardView.TRAINING_PLAN ? (
         <div className="flex items-center gap-[2rem]">
-          <div className="flex-1 flex items-center h-full">
+          <div className="flex-1 flex h-full items-start w-full">
             <div className="flex flex-col border-r border-fdfp-main-light flex-1 py-10">
               <p className="uppercase text-fdfp-main font-normal text-[1.5rem] mb-2">
                 Montant du 0.6 annuel
@@ -61,11 +60,11 @@ export default function DashboardHeaderCard() {
               </div>
             </div>
 
-            <div className="flex flex-col border-r border-fdfp-main-light flex-1 py-10 px-[5rem]">
-              <p className="uppercase text-fdfp-main font-normal text-[1.5rem] mb-2 pl-[5rem]">
+            <div className="flex flex-col border-r border-fdfp-main-light flex-1 py-10 px-[5rem] sm:px-[2rem] md:px-[2rem]">
+              <p className="uppercase text-fdfp-main font-normal text-[1.5rem] mb-2 pl-[5rem] sm:pl-[2rem] md:pl-[2rem]">
                 Montant demandé sur plan
               </p>
-              <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem]">
+              <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem] sm:pl-[2rem] md:pl-[2rem]">
                 <p className="text-[2.2rem] font-medium flex gap-2 items-center font-monospace">
                   {currencyFormatter(currentPlan.mt_demande)}
                   <span className="text-fdfp-second font-bold text-[1.1rem]">
@@ -78,11 +77,11 @@ export default function DashboardHeaderCard() {
               </div>
             </div>
 
-            <div className="flex flex-col border-r-none border-fdfp-main-light flex-1 py-10 px-[5rem]">
-              <p className="uppercase text-fdfp-main font-normal text-[1.5rem] mb-2 pl-[5rem]">
+            <div className="flex flex-col border-r-none border-fdfp-main-light flex-1 py-10 px-[5rem] sm:px-[2rem] md:px-[2rem]">
+              <p className="uppercase text-fdfp-main font-normal text-[1.5rem] mb-2 pl-[5rem] sm:pl-[2rem] md:pl-[2rem]">
                 Montant total agréé sur plan
               </p>
-              <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem] ">
+              <div className="py-6 flex flex-col border-b-none border-fdfp-light pl-[5rem] sm:pl-[2rem] md:pl-[2rem]">
                 <p className="text-[2.4rem] font-medium flex gap-2 items-center font-monospace">
                   {currencyFormatter(currentPlan.mt_agree)}
                   <span className="text-fdfp-second font-bold text-[1.1rem]">
@@ -201,7 +200,7 @@ export default function DashboardHeaderCard() {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 }
