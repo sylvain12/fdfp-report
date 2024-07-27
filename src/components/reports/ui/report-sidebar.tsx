@@ -3,8 +3,7 @@
 import { TLink } from "@/types/navigation.type";
 import Link from "next/link";
 import { clsx } from "clsx";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 type TReportSidebar = {
   navs: TLink[];

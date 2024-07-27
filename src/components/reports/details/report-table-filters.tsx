@@ -13,7 +13,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { signal } from "@preact/signals";
 import { itemToShowList, yearFilterList } from "@/lib/constant";
-import { useDebouncedCallback } from "use-debounce";
 import Actions from "@/components/actions/actions";
 import { TTableFilterStoreStore } from '@/store/report.store';
 import Image from 'next/image';
@@ -43,7 +42,6 @@ export const itemToShowCount = signal<number>(10);
 
 export default function ReportTablesFilters({ tables }: TReportTableFilter) {
   const { data, loadTable, loading } = useGetData();
-  const {setColumns} = useTableColumnStore();
   const { currentPage, updatePage } = usePaginationStore();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -163,7 +161,6 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
       </form>
 
         {loading && <div className='flex justify-center items-center ml-4'>
-            {/* <div className='mr-4'>Chargement</div> */}
             <Image 
               src="/assets/data-loader.gif"
               width={32}
@@ -187,9 +184,6 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
               id="itemsCount"
               className={clsx(
                 "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
-                {
-                  // "pointer-events-none opacity-25": totalPagination < 2,
-                }
               )}
             >
               {itemToShowList.map((item) => (

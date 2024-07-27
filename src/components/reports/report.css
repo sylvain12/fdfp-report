@@ -14,7 +14,6 @@
 
     .report-nav-menu-link.active {
         @apply  bg-fdfp-main text-white
-        /* relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-fdfp-main after:content-[''] after:h-full after:w-full text-white font-normal */
     }
 
     .report-nav-actions {
@@ -32,7 +31,6 @@
     .report-content-sidebar {
         @apply flex items-center h-full 
         col-start-1 col-end-6 row-start-1 row-end-2
-        /* bg-white px-[10rem] */
     }
 
     .report-content-sidebar-link {

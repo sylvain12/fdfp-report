@@ -3,11 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import Link from "next/link";
-import {
-  globalAnalyzeNavs,
-} from "./data/nav-data";
-import { reportNavs } from './data/report-nav-data'; 
-import Actions from "../actions/actions";
+import { reportNavs } from "../data/report-nav-data";
 
 export default function ReportNav() {
   const pathname = usePathname();
@@ -31,9 +27,6 @@ export default function ReportNav() {
           );
         })}
       </div>
-      {/* <div className="report-nav-actions">
-        <Actions />
-      </div> */}
     </div>
   );
 }

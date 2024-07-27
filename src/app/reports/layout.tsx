@@ -1,4 +1,4 @@
-import ReportNav from "@/components/reports/report-nav";
+import ReportNav from "@/components/reports/ui/report-nav";
 
 const ReportLayout = ({
   children,

@@ -7,12 +7,11 @@ import {
   buildPagination,
   getReportEntityName,
   injectCurrentPage,
-} from "../../lib/utils";
-import { itemToShowCount } from "./details/report-table-filters";
+} from "../../../lib/utils";
+import { itemToShowCount } from "../details/report-table-filters";
 import { usePaginationStore } from "@/store/pagination.store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { Icon } from "@iconify/react";
 
 export default function ReportSearch() {
   const { data } = useGetData();
@@ -31,7 +30,7 @@ export default function ReportSearch() {
         injectCurrentPage(searchParams, pathname, replace);
       } else {
         const { totalPages, pageData } = buildPagination(
-          data,
+          data.details,
           itemToShowCount.value
         );
         setFilterData(totalPages, pageData, currentPage);
@@ -46,7 +45,7 @@ export default function ReportSearch() {
     let filterData: any[] = [];
 
     if (target.value !== "") {
-      filterData = data.filter((item: any) => {
+      filterData = data.details.filter((item: any) => {
         for (const property in item) {
           const entity = getReportEntityName(item[property]);
           if (entity.toLowerCase().includes(target.value.toLowerCase())) {
@@ -81,16 +80,6 @@ export default function ReportSearch() {
         type="text"
         placeholder="Recherche par l'entitie"
       />
-      {/* <Icon
-        onClick={handleClearSearchText}
-        className={clsx(
-          "absolute right-6 top-[50%] -translate-y-1/2 cursor-pointer",
-          {
-            hidden: searchRef.current?.value === "",
-          }
-        )}
-        icon="uil:times"
-      /> */}
     </div>
   );
 }
