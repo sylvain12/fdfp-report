@@ -14,6 +14,10 @@ import { getReportPathDetails } from "@/lib/utils";
 import Loader from "@/components/animation/loader";
 import { ErrorBoundary } from "react-error-boundary";
 import Fallback from "@/components/errors/fallback";
+import ReportSearch from "@/components/reports/ui/report-search";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const defaultItem = [
   {
@@ -66,14 +70,20 @@ const ReportDetailsLayout = () => {
   }, []);
 
   return (
-    <div className="report-details-container">
-      <ErrorBoundary fallback={<Fallback />}>
-        <Suspense fallback={<Loader />}>
+    <QueryClientProvider client={queryClient}>
+      <div className="report-details-container">
+        {/* <ErrorBoundary fallback={<Fallback />}>
+          <Suspense fallback={<Loader />}> */}
+        <div className="flex justify-between items-center">
           <Breadcrumb {...breadcrumb} />
-          <ReportTableDetails />
-        </Suspense>
-      </ErrorBoundary>
-    </div>
+          <ReportSearch />
+        </div>
+
+        <ReportTableDetails />
+        {/* </Suspense>
+        </ErrorBoundary> */}
+      </div>
+    </QueryClientProvider>
   );
 };
 

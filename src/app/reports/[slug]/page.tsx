@@ -2,15 +2,13 @@
 
 import { TLink } from "@/types/navigation.type";
 import {
-  refundsAndSettlementsNavs,
-  applicationsAndApprovalsNavs,
-  globalAnalyzeNavs,
-} from "../../../components/reports/data/nav-data";
+  approvedTrainingAndStudyProjectsNavs,
+  liquidationOfTrainingPlansNavs,
+  trainingPlansAndActionsNavs,
+} from "../../../components/reports/data/report-nav-data";
 
 import { useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import NoReport from "../../../components/reports/no-report";
-import ReportList from "../../../components/reports/report-list";
+import ReportList from "../../../components/reports/ui/report-list";
 
 type TReport = {
   slug: string;
@@ -25,15 +23,15 @@ const ReportDetails = () => {
   let navs: TLink[] = [];
   const pathname = usePathname();
 
-  if (pathname.includes("global-analyze")) {
-    navs = [...globalAnalyzeNavs];
+  if (pathname.includes("training-plans-and-actions")) {
+    navs = [...trainingPlansAndActionsNavs];
   }
 
-  if (pathname.includes("applications-and-approvals")) {
-    navs = [...applicationsAndApprovalsNavs];
+  if (pathname.includes("liquidation-of-training-plans")) {
+    navs = [...liquidationOfTrainingPlansNavs];
   }
-  if (pathname.includes("refunds-and-settlements")) {
-    navs = [...refundsAndSettlementsNavs];
+  if (pathname.includes("approved-training-and-study-projects")) {
+    navs = [...approvedTrainingAndStudyProjectsNavs];
   }
 
   return (
