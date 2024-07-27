@@ -14,6 +14,8 @@
     "@hookform/resolvers": "^3.3.4",
     "@preact/signals": "^1.2.3",
     "@react-pdf/renderer": "^3.4.2",
+    "@sylvainka12/resultjs": "^0.0.7",
+    "@tanstack/react-query": "^5.50.1",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "next": "14.1.2",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
+    "@tanstack/eslint-plugin-query": "^5.50.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
