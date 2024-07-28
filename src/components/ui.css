@@ -1,6 +1,6 @@
 @layer components {
     .btn {
-        @apply text-[1.2rem] border font-bold px-[1.05em] py-[0.725em]
+        @apply text-[1.2rem] border font-bold px-[1.05em] py-[0.725em] h-[40px]
     }
 
     .btn:disabled {
@@ -27,12 +27,25 @@
         @apply text-red-500 bg-transparent border-red-500 hover:bg-red-500 hover:text-white
     }
 
-        .btn.btn-success {
-            @apply border-green-700 bg-green-700 text-fdfp-bg hover:bg-transparent hover:text-green-700
-        }
-    
-        .btn.btn-success-transparent {
-            @apply text-green-700 bg-transparent border-green-700 hover:bg-green-700 hover:text-white
-        }
+    .btn.btn-success {
+        @apply border-green-700 bg-green-700 text-fdfp-bg hover:bg-transparent hover:text-green-700
+    }
+
+    .btn.btn-success-transparent {
+        @apply text-green-700 bg-transparent border-green-700 hover:bg-green-700 hover:text-white
+    }
+
+    /* Form */
+    .input-select {
+        @apply h-[40px] text-[1.4rem] px-2 py-[0.725em] w-[100px] min-w-full bg-transparent border border-fdfp-text focus:outline-none hover:outline-none active:outline-none relative
+    }
+
+    select {
+        @apply rounded-none
+    }
+
+    .input-select option {
+        @apply bg-white
+    }
 
 }

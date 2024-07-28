@@ -72,7 +72,7 @@ export default function ReportSearch() {
         onInput={(e) => handleSearchByEntity(e)}
         name="entity"
         className={clsx(
-          "w-[425px] border border-fdfp-text text-[1.5rem] px-4 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-normal",
+          "w-[425px] h-[40px] border border-fdfp-text text-[1.5rem] px-4 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-normal",
           {
             "opacity-25 pointer-events-none": data === null,
           }

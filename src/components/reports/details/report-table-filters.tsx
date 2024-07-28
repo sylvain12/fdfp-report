@@ -3,7 +3,11 @@
 import Pagination from "@/components/pagination";
 import { buildPagination, resetPageURL, injectCurrentPage } from "@/lib/utils";
 import { usePaginationStore } from "@/store/pagination.store";
-import { useFilterData, useGetData, useTableColumnStore } from "@/store/table-data.store";
+import {
+  useFilterData,
+  useGetData,
+  useTableColumnStore,
+} from "@/store/table-data.store";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
@@ -14,8 +18,8 @@ import { z } from "zod";
 import { signal } from "@preact/signals";
 import { itemToShowList, yearFilterList } from "@/lib/constant";
 import Actions from "@/components/actions/actions";
-import { TTableFilterStoreStore } from '@/store/report.store';
-import Image from 'next/image';
+import { TTableFilterStoreStore } from "@/store/report.store";
+import Image from "next/image";
 
 type TReportTableFilter = {
   tables: TTableFilterStoreStore[];
@@ -72,9 +76,9 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
     resetPageURL(searchParams, pathname, replace);
     updatePage(1);
     if (formValue.key !== "" && formValue.year !== "") {
-      const [key, procname] = formValue.key.split('-')
-      const params = {...formValue, key, procname}
-      loadTable({...params});
+      const [key, procname] = formValue.key.split("-");
+      const params = { ...formValue, key, procname };
+      loadTable({ ...params });
       filterFormValue.value = {
         ...formValue,
         table:
@@ -117,9 +121,7 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
             {...register("year")}
             name="year"
             id="year"
-            className={clsx(
-              "w-[100px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
-            )}
+            className={clsx("input-select")}
           >
             <option defaultValue=""></option>
             {yearFilterList
@@ -139,15 +141,24 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
             {...register("key")}
             name="key"
             id="key"
-            className="w-[450px] min-w-full border border-fdfp-text text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
+            className="w-[450px] input-select"
             disabled={tables == undefined}
           >
             <option defaultValue=""></option>
-            {tables.sort((a, b) => a.entitylabel.toLowerCase().localeCompare(b.entitylabel.toLowerCase())).map((table) => (
-              <option key={table.entity} value={table.entity + "-" + table.procname}>
-                {table.entitylabel}
-              </option>
-            ))}
+            {tables
+              .sort((a, b) =>
+                a.entitylabel
+                  .toLowerCase()
+                  .localeCompare(b.entitylabel.toLowerCase())
+              )
+              .map((table) => (
+                <option
+                  key={table.entity}
+                  value={table.entity + "-" + table.procname}
+                >
+                  {table.entitylabel}
+                </option>
+              ))}
           </select>
         </div>
         <button
@@ -160,14 +171,16 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
         </button>
       </form>
 
-        {loading && <div className='flex justify-center items-center ml-4'>
-            <Image 
-              src="/assets/data-loader.gif"
-              width={32}
-              height={32}
-              alt='Aucune information chargee'
-            />
-          </div>}
+      {loading && (
+        <div className="flex justify-center items-center ml-4">
+          <Image
+            src="/assets/data-loader.gif"
+            width={32}
+            height={32}
+            alt="Aucune information chargee"
+          />
+        </div>
+      )}
 
       <div className="flex-1 mr-0 flex items-end justify-end gap-[2rem]">
         <form>
@@ -183,7 +196,7 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
               name="itemsCount"
               id="itemsCount"
               className={clsx(
-                "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent",
+                "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
               )}
             >
               {itemToShowList.map((item) => (
@@ -195,7 +208,7 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
           </div>
         </form>
         {data !== null && totalPagination > 1 && (
-        <Pagination totalPages={totalPagination} />
+          <Pagination totalPages={totalPagination} />
         )}
         <Actions />
       </div>
