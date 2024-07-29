@@ -165,9 +165,13 @@ svg path {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(3, 270px);
-  grid-template-rows: repeat(2, 150px);
-  place-content: center;
+  /* grid-template-rows: repeat(2, 150px); */
+  grid-auto-flow: row;
+  /* place-content: center; */
+  justify-content: center;
+  align-content: center;
   gap: 3rem;
+  padding: 5rem;
 }
 
 .report-card {
@@ -254,5 +258,21 @@ svg path {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (max-width: 1024px) {
+  .report-list-container {
+      grid-template-columns: repeat(2, 270px);
+  }
+}
+
+@media (max-width: 524px) {
+  .report-list-container {
+    grid-template-columns: 1fr;
+  }
+
+  .report-card {
+    width: 100%;
   }
 }
