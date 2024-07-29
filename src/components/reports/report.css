@@ -5,12 +5,12 @@
     }
 
     .report-nav-menu {
-        @apply col-start-1 flex items-center bg-red-50 col-end-3 lg:col-end-2
+        @apply col-start-1 flex items-center col-end-3 lg:col-end-2
     }
 
     .report-nav-menu-link {
         @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
-        border-r bg-green-50 flex-1
+        border-r flex-1 justify-center
     }
 
     .report-nav-menu-link.active {
