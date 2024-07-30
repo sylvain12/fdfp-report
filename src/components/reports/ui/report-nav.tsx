@@ -21,8 +21,8 @@ export default function ReportNav() {
                 active: pathname === nav.href || pathname.includes(nav.href),
               })}
             >
-              <ReportIcon className="w-12" />
-              {nav.name}
+              <ReportIcon className="w-16 sm:w-16" />
+              <p className="sm:block hidden">{nav.name}</p>
             </Link>
           );
         })}

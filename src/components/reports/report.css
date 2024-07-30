@@ -59,7 +59,7 @@
     }
 
     .report-card {
-        @apply bg-blue-50 bg-white
+        @apply bg-white
     }
 
     .report-details-container {

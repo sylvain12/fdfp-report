@@ -19,6 +19,14 @@
         @apply text-fdfp-textsecond bg-transparent border-fdfp-main hover:bg-fdfp-main hover:text-white
     }
 
+    .btn.btn-second {
+        @apply border-fdfp-second bg-fdfp-second text-fdfp-bg hover:bg-transparent hover:text-fdfp-textsecond
+    }
+
+    .btn.btn-second-transparent {
+        @apply text-fdfp-second bg-transparent border-fdfp-second hover:bg-fdfp-second hover:text-white
+    }
+
     .btn.btn-danger {
         @apply border-red-500 bg-red-500 text-fdfp-bg hover:bg-transparent hover:text-red-500
     }

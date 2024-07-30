@@ -33,16 +33,16 @@
    }
 
 /* version 2 */
-/* .nav-right {
-@apply gap-[1.5rem] flex items-center justify-end h-full bg-white
-} */
+   .nav-right {
+   @apply gap-[2rem] flex flex-1 items-center justify-end h-full pr-[3rem] border-l
+   }
 
    .nav-right-user {
-      @apply flex items-center text-right flex-1 text-right justify-end;
+      @apply flex items-center text-right flex-1 justify-end;
    }
 
    .nav-right-menu {
-      @apply flex h-full;
+      @apply flex items-center h-full;
    }
 
    .nav-right-menu-item {
