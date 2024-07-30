@@ -13,7 +13,7 @@
 
    /* Nav main menu */
    .nav-main-menu {
-      @apply col-start-3 col-end-4 flex items-center h-full;
+      @apply col-start-3 col-end-4 items-center h-full flex;
    }
 
    .nav-main-menu-link {
@@ -27,14 +27,8 @@
    }
 
    /* Nav right */
-   /* version 1 */
    .nav-right {
-      @apply col-start-4 col-end-6 gap-[1.5rem] flex items-center justify-end
-   }
-
-/* version 2 */
-   .nav-right {
-   @apply gap-[2rem] flex flex-1 items-center justify-end h-full pr-[3rem] border-l
+      @apply gap-[2rem] flex flex-1 items-center justify-end h-full pr-[3rem] border-l
    }
 
    .nav-right-user {

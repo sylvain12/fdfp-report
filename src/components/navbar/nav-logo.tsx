@@ -9,7 +9,7 @@ type TLogo = {
 export default function NavLogo() {
   return (
     // <div className="nav-logo px-6">
-    <div className=" ml-[1rem]">
+    <div className="nav-logo ml-[1rem]">
       <Link href={"/"}>
         <Image src="/fdfp-logo.png" alt="FDFP logo" width={400} height={400} />
       </Link>

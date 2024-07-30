@@ -253,17 +253,36 @@ svg path {
   top: 55%;
 }
 
-@media screen {}
+/* @media screen {}
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 @media (max-width: 1024px) {
   .report-list-container {
       grid-template-columns: repeat(2, 270px);
+  }
+
+  .main-navbar {
+    grid-template-columns: 70px 1fr 70px;
+  }
+
+  .nav-main-menu {
+    display: none;
+  } 
+  .nav-right {
+    display: none;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo img {
+    width: 100px;
   }
 }
 
