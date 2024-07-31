@@ -133,6 +133,11 @@ svg path {
 
 }
 
+.main-navbar .nav-mobile {
+  justify-content: start;
+
+}
+
 .main-content {
   grid-column: 1/ -1;
   grid-area: content;
@@ -279,6 +284,8 @@ svg path {
   .nav-logo {
     display: flex;
     align-items: center;
+    grid-column: 2 / 3;
+    grid-row: 1/-1;
   }
 
   .nav-logo img {

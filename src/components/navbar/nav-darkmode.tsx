@@ -9,7 +9,7 @@ export default function NavDarkMode() {
   return (
     <div
       onClick={toggleMode}
-      className="nav-darkmode border-r-fdfp-textsecond border-r bg-fdfp-second text-white cursor-pointer"
+      className="nav-darkmode border-r-fdfp-textsecond  bg-fdfp-second text-white cursor-pointer"
     >
       {isDark ? (
         <SunIcon className="w-12 font-bold" />

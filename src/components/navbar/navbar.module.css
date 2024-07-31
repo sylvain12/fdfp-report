@@ -3,7 +3,7 @@
 
    /* Nav logout button */
    .nav-darkmode {
-      @apply col-start-1 col-end-2;
+      @apply lg:col-start-1 lg:col-end-2 col-start-3 col-span-1;
    }
 
    /* Nav logo */
@@ -51,6 +51,27 @@
    .nav-search {
       @apply col-start-5 col-end-6 border-l border-l-fdfp-bg bg-fdfp-bg;
    }
+
+   /* Nav mobile */
+   .nav-mobile {
+      @apply fixed flex justify-start items-start flex-col px-[3rem] bg-white top-[8rem] left-0 w-[310px] h-[calc(100%_-_8rem)] z-20
+   }
+   
+   .nav-mobile-section {
+      @apply py-[3rem] w-full
+   }
+
+   .nav-mobile-section:not(:last-of-type) {
+      @apply border-b
+   }
+
+   /* .nav-mobile-section:first-of-type {
+      @apply pt-0
+   } */
+
+   .nav-mobile-link {
+      @apply flex items-center gap-8 text-[2rem] w-full px-[2.2rem] py-[1.1rem] hover:bg-fdfp-bgsecond transition
+   } 
 }
 
 
