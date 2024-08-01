@@ -29,3 +29,19 @@ export const useDarkModeStore = create<DarkModeStore>((set) => ({
     set((state) => ({ isDark: !state.isDark }));
   },
 }));
+
+type NavMobileStore = {
+  isVisible: boolean;
+  toogleVisibility: () => void;
+  resetVisibility: () => void;
+};
+
+export const useNavMobileStore = create<NavMobileStore>((set) => ({
+  isVisible: false,
+  toogleVisibility: () => {
+    set((state) => ({ isVisible: !state.isVisible }));
+  },
+  resetVisibility: () => {
+    set((state) => ({ isVisible: false }));
+  },
+}));
