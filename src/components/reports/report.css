@@ -65,4 +65,26 @@
     .report-details-container {
         @apply w-full h-full col-start-1 col-end-5 px-[10rem] py-[3rem]
     }
+
+    .report-details-totals {
+        @apply fixed right-0 left-0 top-[135px] w-full bg-white z-10 border-t py-[3em] px-[7em]
+    }
+
+    .report-details-totals-items {
+        @apply flex justify-center h-full flex-wrap gap-[3rem]
+    }
+
+    .report-details-totals-item {
+        @apply flex-1 flex flex-col justify-end text-[1.1em] px-[2rem] items-end border-r
+    }
+
+    /* .report-details-totals-item:not(:last-child) {
+        @apply border-r
+    } */
+    
+    .report-details-totals-item p {
+        @apply text-[1.31rem] text-right
+    }
+    .report-details-totals-item span {@apply text-[1.2em] text-fdfp-second font-semibold}
+    
 }

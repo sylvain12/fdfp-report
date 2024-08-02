@@ -12,6 +12,7 @@ import ReportTableData from "./report-table-data";
 import { API_SUBGROUP_PATH, API_URL } from "@/lib/config";
 import { stringify } from "querystring";
 import { useQuery } from "@tanstack/react-query";
+import ReportTableTotals from "./report-table-totals";
 
 export default function ReportTableDetails() {
   const { showedTable } = useTable();
@@ -37,6 +38,7 @@ export default function ReportTableDetails() {
     <>
       <ReportTablesFilters tables={tables} />
       <ReportTableData />
+      <ReportTableTotals />
     </>
   );
 }
