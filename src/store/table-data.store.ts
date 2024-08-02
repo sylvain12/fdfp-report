@@ -1,5 +1,5 @@
 import { itemToShowCount } from "@/components/reports/details/report-table-filters";
-import { API_STATISTICS_PATH, API_URL } from '@/lib/config';
+import { API_STATISTICS_PATH, API_URL } from "@/lib/config";
 import axios from "axios";
 import { stringify } from "querystring";
 import { create } from "zustand";
@@ -24,15 +24,23 @@ type TableDataStore = {
   loading: boolean;
   success: boolean;
   error: boolean;
-  data: {details: any[], totals: any, headers: any};
+  data: {
+    details: any[];
+    totals: { label: string; value: string }[];
+    headers: any;
+  };
   errorData: any;
-  loadTable: (params: { year: string; key: string, procname: string }) => void;
+  loadTable: (params: { year: string; key: string; procname: string }) => void;
   resetTable: () => void;
 };
 
 export const useGetData = create<TableDataStore>((set, get) => ({
   ...initialState,
-  loadTable: async (params: { year: string; key: string, procname: string }) => {
+  loadTable: async (params: {
+    year: string;
+    key: string;
+    procname: string;
+  }) => {
     set({ ...initialState, loading: true });
     try {
       const res = await axios.get(
@@ -82,14 +90,13 @@ export const useFilterData = create<TFilterDataStore>((set) => ({
   },
 }));
 
-
 // table column store
 type TableColumnSTore = {
   columns: object;
-  setColumns: (items: string[]) => void
-}
+  setColumns: (items: string[]) => void;
+};
 
 export const useTableColumnStore = create<TableColumnSTore>((set) => ({
   columns: [],
-  setColumns: (items: object) => set({columns: items})
-}))
+  setColumns: (items: object) => set({ columns: items }),
+}));
