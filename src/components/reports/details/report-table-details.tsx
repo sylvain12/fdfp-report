@@ -38,7 +38,6 @@ export default function ReportTableDetails() {
     <>
       <ReportTablesFilters tables={tables} />
       <ReportTableData />
-      <ReportTableTotals />
     </>
   );
 }

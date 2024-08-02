@@ -164,7 +164,7 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
         <button
           disabled={isDisabled() || loading}
           type="submit"
-          className="btn btn-icon btn-main-transparent btn-main uppercase"
+          className="btn btn-icon btn-main btn-main uppercase"
         >
           Envoyer
           <ArrowPathIcon className="w-8" />

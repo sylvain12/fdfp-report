@@ -14,8 +14,12 @@ import { getReportPathDetails } from "@/lib/utils";
 import Loader from "@/components/animation/loader";
 import { ErrorBoundary } from "react-error-boundary";
 import Fallback from "@/components/errors/fallback";
-import ReportSearch from "@/components/reports/ui/report-search";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Icon } from "@iconify/react";
+import { useReportTotalStore } from "@/store/report.store";
+import clsx from "clsx";
+import { useGetData } from "@/store/table-data.store";
+import ReportTableTotals from "@/components/reports/details/report-table-totals";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +37,10 @@ const ReportDetailsLayout = () => {
     separator: ">",
     items: defaultItem,
   });
+
+  const { data } = useGetData();
+
+  const { setVisibility, isVisible } = useReportTotalStore();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -74,9 +82,20 @@ const ReportDetailsLayout = () => {
       <div className="report-details-container">
         {/* <ErrorBoundary fallback={<Fallback />}>
           <Suspense fallback={<Loader />}> */}
+        <ReportTableTotals />
         <div className="flex justify-between items-center">
           <Breadcrumb {...breadcrumb} />
-          <ReportSearch />
+
+          <div
+            onClick={() => setVisibility(true)}
+            className={clsx(
+              "flex justify-center items-center uppercase gap-4 text-fdfp-second underline text-[1.25rem] font-medium cursor-pointer",
+              { "opacity-55 pointer-events-none": data === null || isVisible }
+            )}
+          >
+            <Icon icon="typcn:arrow-back-outline" width="26" />
+            Afficher les totaux
+          </div>
         </div>
 
         <ReportTableDetails />

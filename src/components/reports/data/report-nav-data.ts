@@ -84,12 +84,12 @@ const liquidationOfTrainingPlansNavs: TLink[] = [
     name: "Actions demandés en remboursement",
     href: `/reports/liquidation-of-training-plans/details?${stringify({
       name: "Actions demandés en remboursement",
-      table: "ACT_DMD_RMB",
+      table: "ACT_DMD_REM",
     })}`,
     active: true,
     icon: BanknotesIcon,
     query: ["Actions demandés en remboursement"],
-    key: "ACT_DMD_RMB",
+    key: "ACT_DMD_REM",
   },
   {
     name: "Actions liquidées",

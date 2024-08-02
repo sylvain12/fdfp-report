@@ -1,6 +1,6 @@
 @layer components {
     .report-nav {
-        @apply col-start-1 col-end-5 
+        @apply col-start-1 col-end-5 sticky top-0 
         /* pr-[10rem] */
     }
 
@@ -67,7 +67,7 @@
     }
 
     .report-details-totals {
-        @apply fixed right-0 left-0 top-[135px] w-full bg-white z-10 border-t py-[3em] px-[7em]
+        @apply sticky right-0 left-0 top-[66.5px] w-full bg-white z-10 border-t py-[3em] px-[7em] opacity-0 invisible transition-all mb-[1rem] hidden
     }
 
     .report-details-totals-items {

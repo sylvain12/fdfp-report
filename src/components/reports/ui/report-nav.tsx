@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { reportNavs } from "../data/report-nav-data";
+import ReportSearch from "./report-search";
 
 export default function ReportNav() {
   const pathname = usePathname();
@@ -27,6 +28,7 @@ export default function ReportNav() {
           );
         })}
       </div>
+      {/* <ReportSearch /> */}
     </div>
   );
 }
