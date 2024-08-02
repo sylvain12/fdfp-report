@@ -7,7 +7,12 @@ import {
 } from "@/store/table-data.store";
 import { useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { buildPagination, resetPageURL, injectCurrentPage } from "@/lib/utils";
+import {
+  buildPagination,
+  resetPageURL,
+  injectCurrentPage,
+  currencyFormatter,
+} from "@/lib/utils";
 import clsx from "clsx";
 import { itemToShowCount } from "./report-table-filters";
 import Image from "next/image";
@@ -90,7 +95,7 @@ export default function ReportTableData() {
                       .map((column: string) => (
                         <td key={column} className="px-6 py-5">
                           {/* {" "} */}
-                          {item[column]}
+                          {currencyFormatter(item[column], " ")}
                         </td>
                       ))}
                   </tr>

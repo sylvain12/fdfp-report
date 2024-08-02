@@ -68,7 +68,10 @@ export const flattenArray = (arr: any[]): any[] => {
   );
 };
 
-export const currencyFormatter = (amount: number | string) => {
+export const currencyFormatter = (
+  amount: number | string,
+  sep: string = ","
+) => {
   const amountStr = amount?.toString();
 
   const amountPart = amountStr?.split(".");
@@ -86,7 +89,7 @@ export const currencyFormatter = (amount: number | string) => {
   const newAmount = amountResult
     .reverse()
     .map((item) => item.join(""))
-    .join(",");
+    .join(sep);
 
   const newRemain = amountRemain || "00";
   return `${newAmount}.${newRemain}`;
