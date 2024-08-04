@@ -107,10 +107,10 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
   const isDisabled = () => watch("key") === "" || watch("year") === "";
 
   return (
-    <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 pb-10 border-b-none">
+    <div className="flex items-end justify-end gap-[1rem] bg-transparent mt-[3rem] px-0 pb-10 border-b-none flex-col lg:flex-row ">
       <form
         ref={formRef}
-        className="flex items-end text-[1.3rem] gap-4"
+        className="flex items-end text-[1.3rem] gap-4 flex-1"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
@@ -169,20 +169,20 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
           Envoyer
           <ArrowPathIcon className="w-8" />
         </button>
+
+        {loading && (
+          <div className="flex justify-center items-center ml-4">
+            <Image
+              src="/assets/data-loader.gif"
+              width={32}
+              height={32}
+              alt="Aucune information chargee"
+            />
+          </div>
+        )}
       </form>
 
-      {loading && (
-        <div className="flex justify-center items-center ml-4">
-          <Image
-            src="/assets/data-loader.gif"
-            width={32}
-            height={32}
-            alt="Aucune information chargee"
-          />
-        </div>
-      )}
-
-      <div className="flex-1 mr-0 flex items-end justify-end gap-[2rem]">
+      <div className="flex-1 mr-0 flex items-end justify-between gap-[2rem] w-full lg:justify-end">
         <form>
           <div className="flex items-center gap-4 text-fdfp-second mr-[1rem]">
             <label htmlFor="itemsCount" className="block font-medium">
@@ -210,7 +210,9 @@ export default function ReportTablesFilters({ tables }: TReportTableFilter) {
         {data !== null && totalPagination > 1 && (
           <Pagination totalPages={totalPagination} />
         )}
-        <Actions />
+        <div className="text-right">
+          <Actions />
+        </div>
       </div>
     </div>
   );
