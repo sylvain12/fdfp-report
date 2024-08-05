@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { clsx } from "clsx";
 import { useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
-import { filterFormValue } from "../reports/details/report-table-filters";
+import { filterFormValue } from "../reports/details/report-table-filters-form";
 import { useRef } from "react";
 
 export default function ActionLink() {
@@ -108,7 +108,7 @@ export default function ActionLink() {
                   icon="iconoir:database-export"
                   width="22px"
                 />
-                Export en
+                <span className="md:inline-block hidden">Export en</span>
                 <Icon
                   className="export-menu-button-icon-right"
                   icon="line-md:chevron-small-down"
@@ -129,7 +129,7 @@ export default function ActionLink() {
                 <button
                   onClick={handleExportToExcel}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700 hover:bg-gray-100",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700 hover:bg-gray-100 max-[1251px]:justify-center",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
@@ -141,12 +141,12 @@ export default function ActionLink() {
                     width={"22px"}
                     className="w-12"
                   />
-                  EXCEL
+                  <span className="md:inline-block hidden">EXCEL</span>
                 </button>
                 <button
                   onClick={handleExportToCSV}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-gray-100",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-gray-100 max-[1251px]:justify-center",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
@@ -158,7 +158,7 @@ export default function ActionLink() {
                     width={"32px"}
                     className="w-12 text-red-600"
                   />
-                  CSV
+                  <span className="md:inline-block hidden">CSV</span>
                 </button>
               </div>
             </div>

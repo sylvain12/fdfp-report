@@ -13,6 +13,7 @@ import { API_SUBGROUP_PATH, API_URL } from "@/lib/config";
 import { stringify } from "querystring";
 import { useQuery } from "@tanstack/react-query";
 
+
 export default function ReportTableDetails() {
   const { showedTable } = useTable();
   const searchPath = useSearchParams();

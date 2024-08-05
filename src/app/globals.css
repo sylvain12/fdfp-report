@@ -211,8 +211,8 @@ svg path {
 }
 
 .scrollable-table {
-  height: 480px;
-  max-height: 480px;
+  /* height: 580px; */
+  max-height: 550px;
   width: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -264,6 +264,9 @@ svg path {
   top: 55%;
 }
 
+
+/* ********* Breakpoint ******** */
+
 /* @media screen {}
 
 @media (prefers-color-scheme: dark) {
@@ -271,6 +274,19 @@ svg path {
     color-scheme: dark;
   }
 } */
+
+@media (max-width: 1366px) {
+  .report-details-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+@media (max-width: 1271px) {
+  /* .report-filter-container {
+    flex-direction: column;
+  } */
+}
 
 @media (max-width: 1024px) {
   .report-list-container {
