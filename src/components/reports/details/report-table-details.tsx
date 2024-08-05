@@ -12,12 +12,11 @@ import ReportTableData from "./report-table-data";
 import { API_SUBGROUP_PATH, API_URL } from "@/lib/config";
 import { stringify } from "querystring";
 import { useQuery } from "@tanstack/react-query";
-import ReportTableTotals from "./report-table-totals";
 
 export default function ReportTableDetails() {
   const { showedTable } = useTable();
   const searchPath = useSearchParams();
-  const { tables, setTables } = useTableFilterStore();
+  const { setTables } = useTableFilterStore();
   const reportTableKey = searchPath.get("table");
   const url = `${API_URL}/${API_SUBGROUP_PATH}/?${stringify({
     subgroup: reportTableKey,
@@ -36,7 +35,7 @@ export default function ReportTableDetails() {
 
   return (
     <>
-      <ReportTablesFilters tables={tables} />
+      <ReportTablesFilters />
       <ReportTableData />
     </>
   );

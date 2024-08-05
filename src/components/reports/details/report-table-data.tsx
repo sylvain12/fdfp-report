@@ -14,7 +14,7 @@ import {
   currencyFormatter,
 } from "@/lib/utils";
 import clsx from "clsx";
-import { itemToShowCount } from "./report-table-filters";
+import { itemToShowCount } from "./report-table-filters-actions";
 import Image from "next/image";
 
 export default function ReportTableData() {

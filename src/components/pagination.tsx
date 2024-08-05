@@ -13,7 +13,7 @@ import {
 import clsx from "clsx";
 import { useFilterData, useGetData } from "@/store/table-data.store";
 import { buildPagination } from "@/lib/utils";
-import { itemToShowCount } from "./reports/details/report-table-filters";
+import { itemToShowCount } from "@/components/reports/details/report-table-filters-actions";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const searchParams = useSearchParams();
@@ -26,7 +26,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   // const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
