@@ -108,7 +108,7 @@ export default function ActionLink() {
                   icon="iconoir:database-export"
                   width="22px"
                 />
-                <span className="md:inline-block hidden">Export en</span>
+                <span className="max-md:hidden inline-block">Export en</span>
                 <Icon
                   className="export-menu-button-icon-right"
                   icon="line-md:chevron-small-down"
@@ -141,7 +141,7 @@ export default function ActionLink() {
                     width={"22px"}
                     className="w-12"
                   />
-                  <span className="md:inline-block hidden">EXCEL</span>
+                  <span className="max-md:hidden inline-block">EXCEL</span>
                 </button>
                 <button
                   onClick={handleExportToCSV}
@@ -158,7 +158,7 @@ export default function ActionLink() {
                     width={"32px"}
                     className="w-12 text-red-600"
                   />
-                  <span className="md:inline-block hidden">CSV</span>
+                  <span className="max-md:hidden inline-block">CSV</span>
                 </button>
               </div>
             </div>
