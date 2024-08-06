@@ -282,12 +282,6 @@ svg path {
   }
 }
 
-@media (max-width: 1271px) {
-  /* .report-filter-container {
-    flex-direction: column;
-  } */
-}
-
 @media (max-width: 1024px) {
   .report-list-container {
       grid-template-columns: repeat(2, 270px);

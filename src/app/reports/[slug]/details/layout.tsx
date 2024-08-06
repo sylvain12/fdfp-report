@@ -83,7 +83,7 @@ const ReportDetailsLayout = () => {
         {/* <ErrorBoundary fallback={<Fallback />}>
           <Suspense fallback={<Loader />}> */}
         <ReportTableTotals />
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-md:flex-col max-md:items-end">
           <Breadcrumb {...breadcrumb} />
 
           <div
