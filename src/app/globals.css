@@ -323,4 +323,9 @@ svg path {
   .report-card {
     width: 100%;
   }
+
+  .report-details-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

@@ -7,18 +7,11 @@ import { z } from "zod";
 import { usePaginationStore } from "@/store/pagination.store";
 import { useGetData } from "@/store/table-data.store";
 import { signal } from "@preact/signals";
-import { itemToShowList, yearFilterList } from "@/lib/constant";
+import { yearFilterList } from "@/lib/constant";
 import Image from "next/image";
 import clsx from "clsx";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import {
-  TTableFilterStoreStore,
-  useTableFilterStore,
-} from "@/store/report.store";
-
-type TReportTableFilter = {
-  tables: TTableFilterStoreStore[];
-};
+import { useTableFilterStore } from "@/store/report.store";
 
 type Inputs = {
   year: string;
@@ -40,7 +33,7 @@ export const filterFormValue = signal<{ year: string; table: string }>({
 export default function ReportTableFiltersForm() {
   const { data, loadTable, loading } = useGetData();
   const searchParams = useSearchParams();
-  const { currentPage, updatePage } = usePaginationStore();
+  const { updatePage } = usePaginationStore();
   const pathname = usePathname();
   const { replace } = useRouter();
   const { tables, setTables } = useTableFilterStore();
@@ -87,10 +80,10 @@ export default function ReportTableFiltersForm() {
   return (
     <form
       ref={formRef}
-      className="flex items-end text-[1.3rem] gap-4 flex-1 w-full"
+      className="flex items-end text-[1.3rem] gap-4 flex-1 w-full max-md:flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="">
+      <div className="w-full">
         <label htmlFor="year" className="block font-medium">
           Années
         </label>
@@ -110,7 +103,7 @@ export default function ReportTableFiltersForm() {
             ))}
         </select>
       </div>
-      <div className="flex-[2]">
+      <div className="flex-[2] w-full">
         <label htmlFor="key" className="block font-medium">
           Tables
         </label>
@@ -118,7 +111,7 @@ export default function ReportTableFiltersForm() {
           {...register("key")}
           name="key"
           id="key"
-          className="w-[450px] input-select"
+          className="w-full input-select"
           disabled={tables == undefined}
         >
           <option defaultValue=""></option>
@@ -141,14 +134,14 @@ export default function ReportTableFiltersForm() {
       <button
         disabled={isDisabled() || loading}
         type="submit"
-        className="btn btn-icon btn-main btn-main uppercase"
+        className="btn btn-icon btn-main btn-main uppercase max-md:w-full max-md:flex max-md:justify-center max-md:mt-4"
       >
         Envoyer
         <ArrowPathIcon className="w-8" />
       </button>
 
       {loading && (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center max-md:order-1">
           <Image
             src="/assets/data-loader.gif"
             width={46}

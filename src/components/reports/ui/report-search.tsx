@@ -8,7 +8,7 @@ import {
   getReportEntityName,
   injectCurrentPage,
 } from "../../../lib/utils";
-import { itemToShowCount } from "../details/report-table-filters";
+import { itemToShowCount } from "../details/report-table-filters-actions";
 import { usePaginationStore } from "@/store/pagination.store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
@@ -66,13 +66,13 @@ export default function ReportSearch() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <input
         ref={searchRef}
         onInput={(e) => handleSearchByEntity(e)}
         name="entity"
         className={clsx(
-          "w-[425px] h-[40px] border border-fdfp-text text-[1.5rem] px-4 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-normal",
+          "w-full h-[40px] border border-fdfp-text text-[1.5rem] px-4 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-normal",
           {
             "opacity-25 pointer-events-none": data === null,
           }

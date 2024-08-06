@@ -63,11 +63,11 @@
     }
 
     .report-details-container {
-        @apply w-full h-full col-start-1 col-end-5 px-[10rem] py-[3rem]
+        @apply w-full h-full col-start-1 col-end-5 py-[3rem] px-[5rem] lg:px-[10rem] max-sm:px-[2rem]
     }
 
     .report-details-totals {
-        @apply sticky right-0 left-0 top-[66.5px] w-full bg-white z-10 border-t py-[3em] px-[7em] opacity-0 invisible transition-all mb-[1rem] hidden
+        @apply sticky right-0 left-0 top-[66.5px] w-full bg-white border-t py-[3em] px-[7em] opacity-0 invisible transition-all mb-[1rem] z-10 hidden
     }
 
     .report-details-totals-items {
@@ -75,7 +75,7 @@
     }
 
     .report-details-totals-item {
-        @apply flex-1 flex flex-col justify-end text-[1.1em] px-[2rem] items-end border-r
+        @apply flex-1 flex flex-col justify-end text-[1.1em] px-[2rem] items-end border-r text-right
     }
 
     /* .report-details-totals-item:not(:last-child) {
@@ -83,7 +83,7 @@
     } */
     
     .report-details-totals-item p {
-        @apply text-[1.31rem] text-right
+        @apply text-[1.31rem]
     }
     .report-details-totals-item span {@apply text-[1.2em] text-fdfp-second font-semibold}
     
