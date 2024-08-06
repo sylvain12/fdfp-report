@@ -83,7 +83,7 @@ export default function ReportTableFiltersForm() {
       className="flex items-end text-[1.3rem] gap-4 flex-1 w-full max-md:flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="w-full">
+      <div className="max-md:w-full">
         <label htmlFor="year" className="block font-medium">
           Années
         </label>
@@ -103,7 +103,7 @@ export default function ReportTableFiltersForm() {
             ))}
         </select>
       </div>
-      <div className="flex-[2] w-full">
+      <div className="flex-1 w-full">
         <label htmlFor="key" className="block font-medium">
           Tables
         </label>
