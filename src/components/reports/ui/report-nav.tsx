@@ -23,7 +23,7 @@ export default function ReportNav() {
               })}
             >
               <ReportIcon className="w-16 sm:w-16" />
-              <p className="sm:block hidden">{nav.name}</p>
+              <p className="max-md:hidden inline-block">{nav.name}</p>
             </Link>
           );
         })}
