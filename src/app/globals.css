@@ -328,4 +328,8 @@ svg path {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
+  .scrollable-table {
+    max-height: 400px;
+  }
 }
