@@ -84,7 +84,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={currentPage <= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-fdfp-bg-pagination hover:text-gray-700",
                 {
                   "pointer-events-none cursor-default opacity-45":
                     currentPage <= 1 || totalPages < 3,
@@ -101,7 +101,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={currentPage <= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-fdfp-bg-pagination hover:text-gray-700",
                 {
                   "pointer-events-none cursor-default opacity-45":
                     currentPage <= 1,
@@ -132,7 +132,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={currentPage >= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-fdfp-bg-pagination hover:text-gray-700",
                 {
                   "pointer-events-none cursor-default opacity-45":
                     currentPage >= totalPages,
@@ -149,7 +149,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               aria-disabled={currentPage >= totalPages}
               href="#"
               className={clsx(
-                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-gray-100 hover:text-gray-700",
+                "flex items-center justify-center px-4 py-[0.725em] bg-transparent border border-fdfp-second hover:bg-fdfp-bg-pagination hover:text-gray-700",
                 {
                   "pointer-events-none cursor-default opacity-45":
                     currentPage >= totalPages || totalPages < 3,
