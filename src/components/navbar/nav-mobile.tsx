@@ -17,14 +17,17 @@ export default function NavMobile() {
   const navs = [...mainNavs];
   const pathname = usePathname();
   const windowSize = useWindowSize();
-  const { isVisible, resetVisibility } = useNavMobileStore();
+  const { isVisible, resetVisibility, toogleVisibility } = useNavMobileStore();
   const windowElement = useWindowClick();
 
-  console.log(windowElement);
-
   useEffect(() => {
-    if (windowSize.width > 1024) resetVisibility();
-  }, [windowSize.width]);
+    if (
+      windowSize.width > 1024 ||
+      windowElement.el.includes("nav-mobile-link")
+    ) {
+      resetVisibility();
+    }
+  }, [windowSize.width, windowElement]);
 
   return (
     <div
