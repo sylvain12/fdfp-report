@@ -54,12 +54,12 @@ export default function ReportTableData() {
         {(data === null && loading) ||
           (data && (
             <table className="w-full text-right rtl:text-right">
-              <thead className="text-[1.2rem] bg-gray-100 border-b border-t border-fdfp-light">
+              <thead className="text-[1.2rem] border-b border-t border-fdfp-light">
                 <tr>
                   <th
                     key={Object.values(columns)[0]}
                     scope="col"
-                    className="px-6 py-6 text-left bg-gray-100"
+                    className="px-6 py-6 text-left bg-fdfp-bg-thead"
                   >
                     {Object.values(columns)[0]}
                   </th>
@@ -69,7 +69,7 @@ export default function ReportTableData() {
                       <th
                         key={column.trim()}
                         scope="col"
-                        className="px-6 py-6 text-center bg-gray-100"
+                        className="px-6 py-6 text-center bg-fdfp-bg-thead"
                       >
                         {column.trim()}
                       </th>
@@ -82,7 +82,7 @@ export default function ReportTableData() {
                   filterData.map((item: any, index: number) => (
                     <tr
                       key={index}
-                      className="bg-white border-b text-[1.4rem] font-normal text-center"
+                      className="bg-fdfp-bg-white border-b border-fdfp-light text-[1.4rem] font-normal text-center"
                     >
                       <td
                         key={item[Object.keys(item)[0].trim()]}
@@ -109,7 +109,7 @@ export default function ReportTableData() {
         {data === null && (
           <div
             className={clsx(
-              "bg-white border-fdfp-main-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
+              "bg-fdfp-bg-white border-fdfp-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
             )}
           >
             <div className="text-center flex justify-center items-center flex-col max-w-[650px] mx-auto">
