@@ -119,7 +119,7 @@ export default function ActionLink() {
 
             <div
               ref={exportRef}
-              className="absolute right-0 z-10 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
+              className="absolute right-0 z-10 mt-2 origin-top-right bg-fdfp-bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -129,7 +129,7 @@ export default function ActionLink() {
                 <button
                   onClick={handleExportToExcel}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b text-green-700 hover:bg-gray-100 max-[1251px]:justify-center",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b border-fdfp-light text-green-700 hover:bg-fdfp-bg-thead max-[1251px]:justify-center",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
@@ -146,7 +146,7 @@ export default function ActionLink() {
                 <button
                   onClick={handleExportToCSV}
                   className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-gray-100 max-[1251px]:justify-center",
+                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-fdfp-bg-thead max-[1251px]:justify-center",
                     { "pointer-events-none opacity-35": data === null }
                   )}
                   role="menuitem"
