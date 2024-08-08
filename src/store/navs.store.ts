@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { TLink } from "@/types/navigation.type";
+import { DateTime } from "luxon";
 
 export enum IDarkMode {
   LIGHT = 1,
@@ -24,7 +25,8 @@ export const useNavStore = create<NavStore>((set) => ({
 }));
 
 export const useDarkModeStore = create<DarkModeStore>((set) => ({
-  isDark: false,
+  isDark:
+    DateTime.local().hour >= 18 || DateTime.local().hour <= 4 ? true : false,
   toggleMode: () => {
     set((state) => ({ isDark: !state.isDark }));
   },

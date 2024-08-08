@@ -9,7 +9,6 @@ export default function NavDarkMode() {
 
   useEffect(() => {
     localStorage.setItem("theme", isDark ? "dark" : "light");
-    // const selectedTheme = localStorage.getItem("theme");
 
     if (
       localStorage.theme === "dark" ||
