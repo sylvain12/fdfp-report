@@ -1,6 +1,10 @@
 
 @layer components {
 
+   .main-navbar {
+      @apply bg-fdfp-bg dark:bg-fdfp-bg-white
+   }
+
    /* Nav logout button */
    .nav-darkmode {
       @apply lg:col-start-1 lg:col-end-2 col-start-3 col-span-1;
@@ -28,7 +32,7 @@
 
    /* Nav right */
    .nav-right {
-      @apply gap-[2rem] flex flex-1 items-center justify-end h-full pr-[3rem] border-l
+      @apply gap-[2rem] flex flex-1 items-center justify-end h-full pr-[3rem] border-l border-fdfp-light
    }
 
    .nav-right-user {

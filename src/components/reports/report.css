@@ -10,7 +10,7 @@
 
     .report-nav-menu-link {
         @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
-        border-r flex-1 justify-center
+        flex-1 justify-center border-r
     }
 
     .report-nav-menu-link.active {
@@ -59,7 +59,7 @@
     }
 
     .report-card {
-        @apply bg-white
+        @apply bg-fdfp-bg-card
     }
 
     .report-details-container {
