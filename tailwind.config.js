@@ -25,6 +25,7 @@ module.exports = {
           "bg-white": "var(--fdfp-bg-white)",
           "bg-card": "var(--fdfp-bg-card)",
           "bg-thead": "var(--fdfp-bg-thead)",
+          "bg-pagination": "var(--fdfp-bg-pagination)",
           bgsecond: "var(--fdfp-bg-color-second)",
           text: "var(--fdfb-text-color)",
           textsecond: "var(--fdfb-text-second-color)",
