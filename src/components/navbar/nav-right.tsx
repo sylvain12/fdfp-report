@@ -3,13 +3,19 @@ import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
+import { DateTime } from "luxon";
 // import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export default function NavRight() {
   return (
     <div className="nav-right">
       <div className="nav-right-user">
-        <p className="text-[1.3rem] uppercase">Bonjour, FDFP</p>
+        <p className="text-[1.3rem] uppercase">
+          {DateTime.now().hour >= 0 && DateTime.now().hour < 12
+            ? "Bonjour"
+            : "Bonsoir"}
+          , FDFP
+        </p>
       </div>
 
       <div className="nav-right-menu">
