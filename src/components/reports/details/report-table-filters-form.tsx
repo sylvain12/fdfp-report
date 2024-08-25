@@ -123,7 +123,7 @@ export default function ReportTableFiltersForm() {
             )
             .map((table) => (
               <option
-                key={table.entity}
+                key={`${table.entity}-${table.procname}`}
                 value={table.entity + "-" + table.procname}
               >
                 {table.entitylabel}

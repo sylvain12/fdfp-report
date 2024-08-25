@@ -1,4 +1,3 @@
-import { itemToShowCount } from "@/components/reports/details/report-table-filters";
 import { API_STATISTICS_PATH, API_URL } from "@/lib/config";
 import axios from "axios";
 import { stringify } from "querystring";

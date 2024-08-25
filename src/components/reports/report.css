@@ -10,7 +10,7 @@
 
     .report-nav-menu-link {
         @apply font-normal text-[1.4rem] h-full flex items-center gap-[1rem] relative px-[2rem]
-        flex-1 justify-center border-r border-fdfp-light
+        flex-1 justify-center border-r border-fdfp-light hover:bg-fdfp-light transition
     }
 
     .report-nav-menu-link.active {
@@ -75,7 +75,7 @@
     }
 
     .report-details-totals-item {
-        @apply flex-1 flex flex-col justify-end text-[1.1em] px-[2rem] items-end border-r text-right
+        @apply flex-1 flex flex-col justify-end text-[1.1em] px-[2rem] items-end border-r border-fdfp-light text-right
     }
 
     /* .report-details-totals-item:not(:last-child) {

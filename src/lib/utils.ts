@@ -70,7 +70,8 @@ export const flattenArray = (arr: any[]): any[] => {
 
 export const currencyFormatter = (
   amount: number | string,
-  sep: string = ","
+  sep: string = ",",
+  showRemain: boolean = false
 ) => {
   const amountStr = amount?.toString();
 
@@ -92,7 +93,7 @@ export const currencyFormatter = (
     .join(sep);
 
   const newRemain = amountRemain || "00";
-  return `${newAmount}.${newRemain}`;
+  return showRemain ? `${newAmount}.${newRemain}` : `${newAmount}`;
 };
 
 // URL utils
