@@ -73,6 +73,7 @@ export const currencyFormatter = (
   sep: string = ",",
   showRemain: boolean = false
 ) => {
+  if (amount === null) return "-";
   const amountStr = amount?.toString();
 
   const amountPart = amountStr?.split(".");
@@ -98,7 +99,7 @@ export const currencyFormatter = (
 
 // URL utils
 export const resetPageURL = (
-  searchParams: ReadonlyURLSearchParams,
+  searchParams: ReadonlyURLSearchParams | any,
   pathname: string,
   fn: CallableFunction
 ) => {
@@ -110,7 +111,7 @@ export const resetPageURL = (
 };
 
 export const injectCurrentPage = (
-  searchParams: ReadonlyURLSearchParams,
+  searchParams: ReadonlyURLSearchParams | any,
   pathname: string,
   fn: CallableFunction
 ) => {
