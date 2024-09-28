@@ -1,4 +1,5 @@
 import { Inter, Manrope, Sora, Major_Mono_Display } from "next/font/google";
+import localFont from 'next/font/local';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,4 +24,31 @@ const mono = Major_Mono_Display({
   subsets: ["latin"],
 });
 
-export { inter, manrope, sora, mono };
+const clashDisplay = localFont({
+  src: [
+    {
+      path: "./fonts/display/ClashDisplay-Light.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/display/ClashDisplay-Regular.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/display/ClashDisplay-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/display/ClashDisplay-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-clash-display",
+});
+
+
+export { inter, manrope, sora, mono, clashDisplay };
