@@ -50,5 +50,31 @@ const clashDisplay = localFont({
   variable: "--font-clash-display",
 });
 
+const spaceGrotesk = localFont({
+  src: [
+    {
+      path: "./fonts/space/SpaceGrotesk-Light.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/space/SpaceGrotesk-Regular.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/space/SpaceGrotesk-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/space/SpaceGrotesk-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-space-grotesk",
+});
 
-export { inter, manrope, sora, mono, clashDisplay };
+
+export { inter, manrope, sora, mono, clashDisplay, spaceGrotesk };

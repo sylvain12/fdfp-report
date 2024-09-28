@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
 // import { SWRProvider } from "./swr-provider";
-import { sora, inter, clashDisplay } from "@/fonts";
+import { sora, inter, clashDisplay, spaceGrotesk } from "@/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -97,7 +97,7 @@ export default function RootLayout({
       />
       <meta name="theme-color" content="#ffffff" />
 
-      <body className={clashDisplay.variable}>
+      <body className={`${clashDisplay.variable} ${spaceGrotesk.variable}`}>
         <div className="main-container">
           <div className="main-navbar">
             <Navbar />
