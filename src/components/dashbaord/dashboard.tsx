@@ -1,14 +1,18 @@
-import React from "react";
-import DashboardHeaderCard from "./dashboard-header-card";
 import DashboardTableData from "./dashboard-table-data";
 import DashboardHeader from "./dashboard-header";
+import DashboardPart1 from './dashboard-part-1';
+import DashboardPart2 from './dashboard-part-2';
+import React from 'react';
 
 export default function Dashboard() {
   return (
     <>
       <DashboardHeader />
-      <DashboardHeaderCard />
-      <DashboardTableData />
+      <DashboardPart1 />
+      <DashboardPart2 />
+
+      {/* <DashboardHeaderCard />
+      <DashboardTableData /> */}
     </>
   );
 }
