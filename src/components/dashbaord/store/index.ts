@@ -17,13 +17,20 @@ export const useDashboardSelectedYear = create<State & Action>((set) => ({
 
 type AgreedProductState = {
   approvedProducts: DasbboardAgreedProductsDataType[];
+  isDataLoading: boolean,
 }
 
 type AgreedProductAction = {
   setAgreedProducts: (products: DasbboardAgreedProductsDataType[]) => void;
+  setLoading: (loading: boolean) => void
 }
 
-export const useDashboardAgreedProductsStore = create<AgreedProductState & AgreedProductAction>((set) => ({
+export const useDashboardAgreedProductsStore = create<
+  AgreedProductState & AgreedProductAction
+>((set) => ({
   approvedProducts: [],
-  setAgreedProducts: (products: DasbboardAgreedProductsDataType[]) => set(() => ({approvedProducts: products}))
-}))
+  isDataLoading: false,
+  setAgreedProducts: (products: DasbboardAgreedProductsDataType[]) =>
+    set(() => ({ approvedProducts: products })),
+  setLoading: (loading: boolean) => set(() => ({ isDataLoading: loading })),
+}));

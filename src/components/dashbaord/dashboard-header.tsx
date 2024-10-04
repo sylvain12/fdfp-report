@@ -43,6 +43,7 @@ export default function DashboardHeader() {
  const setAgreedProducts = useDashboardAgreedProductsStore(
    (state) => state.setAgreedProducts
  );
+ const setLoading = useDashboardAgreedProductsStore(state => state.setLoading)
  const debouncedYear = useDebounce(year, 0)
 
 
@@ -51,11 +52,12 @@ const { isLoading, data } = useServerActionQuery(
   { input: { year: year }, queryKey: [debouncedYear] }
 );
 
-console.log(isLoading);
 
 const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
   onSuccess: (data) => {
     setAgreedProducts(data)
+  },
+  onMutate(variables) {
   },
 });
 
@@ -65,10 +67,12 @@ const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
   }
 
   useEffect(() => {
+    setLoading(isLoading)
     if (data) {
       setAgreedProducts(data);
     }
-  }, [data]);
+console.log(isLoading)
+  }, [data, isLoading]);
 
   return (
     <div className="flex gap-10 items-center font-clash-display">
@@ -96,63 +100,6 @@ const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
           </SelectGroup>
         </SelectContent>
       </Select>
-
-      {/* <Select>
-        <FormControl>
-        <SelectTrigger>
-          <SelectValue placeholder="Selctioner la data" />
-        </SelectTrigger>
-        </FormControl>
-        <SelectContent>
-          {yearFilterList.map((year) => (
-            <SelectItem
-              defaultValue={"2021"}
-              key={year}
-              value={year.toString()}
-              onChange={form.handleSubmit(onSubmit)}
-            >
-              {year}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select> */}
-      {/* <Form {...form}>
-        <form
-          className="space-y-6 w-[180px]"
-        >
-          <FormField
-            control={form.control}
-            name="year"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Annee</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selctioner la data" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {yearFilterList.map((year) => (
-                      <SelectItem
-                        defaultValue={"2021"}
-                        key={year}
-                        value={year.toString()}
-                        onChange={form.handleSubmit(onSubmit)}
-                      >
-                        {year}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-        </form>
-      </Form> */}
     </div>
   );
 }
