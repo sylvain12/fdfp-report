@@ -121,23 +121,23 @@ const approvedTrainingAndStudyProjectsNavs: TLink[] = [
     name: "Projets de formations agrées",
     href: `/reports/approved-training-and-study-projects/details?${stringify({
       name: "Projets de formations agrées",
-      table: "",
+      table: "PROJ",
     })}`,
-    active: false,
+    active: true,
     icon: ChartBarIcon,
     query: ["Projets de formations agrées"],
-    key: "",
+    key: "PROJ",
   },
   {
     name: "Projets d'études agrées",
     href: `/reports/approved-training-and-study-projects/details?${stringify({
       name: "Projets d'études agrées",
-      table: "",
+      table: "PROJ_ETUDE",
     })}`,
-    active: false,
+    active: true,
     icon: ChartBarIcon,
     query: ["Projets d'études agrées"],
-    key: "",
+    key: "PROJ_ETUDE",
   },
 ];
 

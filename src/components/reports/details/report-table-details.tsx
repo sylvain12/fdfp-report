@@ -12,6 +12,7 @@ import ReportTableData from "./report-table-data";
 import { API_SUBGROUP_PATH, API_URL } from "@/lib/config";
 import { stringify } from "querystring";
 import { useQuery } from "@tanstack/react-query";
+import React from 'react';
 
 
 export default function ReportTableDetails() {
