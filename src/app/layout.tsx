@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/Navbar";
 // import { Sidebar } from "@/components/sidebar/Sidebar";
 // import { SWRProvider } from "./swr-provider";
 import { sora, inter, clashDisplay, spaceGrotesk } from "@/fonts";
+import ReactQueryProvider from '@/providers/react-query'
 
 export const metadata: Metadata = {
   title: {
@@ -97,12 +98,16 @@ export default function RootLayout({
       />
       <meta name="theme-color" content="#ffffff" />
 
-      <body className={`${clashDisplay.variable} ${spaceGrotesk.variable}`}>
+      <body
+        className={`${clashDisplay.variable} ${spaceGrotesk.variable} ${inter.variable}`}
+      >
         <div className="main-container">
           <div className="main-navbar">
             <Navbar />
           </div>
-          <div className="main-content">{children}</div>
+          <div className="main-content">
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </div>
         </div>
       </body>
     </html>
