@@ -54,7 +54,7 @@ export default function ReportTableData() {
         {(data === null && loading) ||
           (data && (
             <table className="w-full text-right rtl:text-right">
-              <thead className="text-[1.2rem] border-b border-t border-fdfp-light">
+              <thead className="text-[1.2rem] border-b border-t border-fdfp-light bg-fdfp-bg-thead">
                 <tr>
                   <th
                     key={Object.values(columns)[0]}
@@ -106,10 +106,10 @@ export default function ReportTableData() {
             </table>
           ))}
 
-        {data === null && (
+        {data === null && !loading && (
           <div
             className={clsx(
-              "bg-fdfp-bg-white border-fdfp-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
+              "bg-fdfp-bg-card border-y border-fdfp-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
             )}
           >
             <div className="text-center flex justify-center items-center flex-col max-w-[650px] mx-auto">
