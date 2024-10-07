@@ -11,3 +11,16 @@ export const DasbboardAgreedProductsDataSchema = z.object({
   total: z.number(),
   amount: z.number()
 })
+
+
+export type DashbordDataType = {
+label: string;
+value: number;
+extention: string;
+}
+
+export const DashboardDataSchema = z.object({
+  label: z.string(),
+  value: z.number(),
+  extention: z.string(),
+});
