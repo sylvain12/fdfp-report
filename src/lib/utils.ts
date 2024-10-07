@@ -1,6 +1,13 @@
 import { reportNavPathTitle } from "@/components/reports/data/report-nav-data";
 import { Err, Ok, Result } from "@sylvainka12/resultjs";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 
 // enum ECurrency {
 //   DOLLAR = 1,
@@ -71,7 +78,8 @@ export const flattenArray = (arr: any[]): any[] => {
 export const currencyFormatter = (
   amount: number | string,
   sep: string = ",",
-  showRemain: boolean = false
+  showRemain: boolean = false,
+  ext: string = ""
 ) => {
   if (amount === null) return "-";
   const amountStr = amount?.toString();
@@ -94,7 +102,7 @@ export const currencyFormatter = (
     .join(sep);
 
   const newRemain = amountRemain || "00";
-  return showRemain ? `${newAmount}.${newRemain}` : `${newAmount}`;
+  return showRemain ? `${newAmount}.${newRemain} ${ext}` : `${newAmount} ${ext}`;
 };
 
 // URL utils
