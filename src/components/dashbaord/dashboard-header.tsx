@@ -1,7 +1,6 @@
 "use client"
 
 import { yearFilterList } from '@/lib/constant';
-import DashboardViewMenu from "./dashboard-view-menu";
 import {
   Select,
   SelectContent,
@@ -10,27 +9,16 @@ import {
   SelectGroup,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { string, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { useDashboardAgreedProductsStore, useDashboardSelectedYear } from './store';
-import { API_DASHBOARD_AGREED_PRODUCT_PATH, API_URL } from '@/lib/config';
-import { stringify } from 'querystring';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { DasbboardAgreedProductsDataType } from './model';
-import { FormEvent, useEffect } from 'react';
+
+import { useDashboardAgreedProductsStore, useDashboardSelectedYear, useDashboardTrainngPlanStore } from './store';
+import { useEffect } from 'react';
 import { SelectLabel } from '@radix-ui/react-select';
 import {useServerActionQuery, useServerActionMutation} from '@/lib/hooks/server-action-hooks'
-import { DashBoardAgreedProductsAction } from "./actions";
+import {
+  DashBoardAgreedProductsAction,
+  DashboardTrainingPlanAction,
+  DashboardDataAction,
+} from "./actions";
 import { useDebounce } from 'use-debounce';
 
 
@@ -43,39 +31,55 @@ export default function DashboardHeader() {
  const setAgreedProducts = useDashboardAgreedProductsStore(
    (state) => state.setAgreedProducts
  );
- const setLoading = useDashboardAgreedProductsStore(state => state.setLoading)
- const debouncedYear = useDebounce(year, 0)
+ const setAgreedProductsLoading = useDashboardAgreedProductsStore(state => state.setLoading)
+ const debouncedYear = useDebounce(year, 300)
 
+// const setTrainingPlan = useDashboardTrainngPlanStore((state) => state.setTrainingPlan);
+// const setTrainingPlanLoading = useDashboardTrainngPlanStore((state) => state.setLoading);
 
-const { isLoading, data } = useServerActionQuery(
+// Agreed Products Query
+const {isLoading: isAgreedProductsLoading, data: agreedProductsData} = useServerActionQuery(
   DashBoardAgreedProductsAction,
-  { input: { year: year }, queryKey: [debouncedYear] }
+  { input: { year: year }, queryKey: [debouncedYear]}
 );
-
 
 const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
   onSuccess: (data) => {
-    setAgreedProducts(data)
+    setAgreedProducts(data);
+    setAgreedProductsLoading(false);
   },
-  onMutate(variables) {
-  },
+  onMutate: (variables) => {
+  }
 });
 
-  const handleSubmit = (value: string) => {
-    setDashboardYear(value)
-    mutation.mutate({year: value})
-  }
+// Training Plan Qurey
+// const {isLoading: isTrainingPlanDataLoading, data: trainingPlanData } = useServerActionQuery(DashboardTrainingPlanAction,
+// {input: {year: year}, queryKey: [debouncedYear]}
+// )
 
-  useEffect(() => {
-    setLoading(isLoading)
-    if (data) {
-      setAgreedProducts(data);
-    }
-console.log(isLoading)
-  }, [data, isLoading]);
+// const trainingPlanMutain = useServerActionMutation(DashboardTrainingPlanAction, {
+//   onSuccess: (data) => {
+//     setTrainingPlan(data);
+//   }
+// })
+
+// Year change handler
+const handleSubmit = (value: string) => {
+  setDashboardYear(value)
+  mutation.mutate({year: value})  
+  // trainingPlanMutain.mutate({year: value})
+}
+
+useEffect(() => {
+  setAgreedProductsLoading(isAgreedProductsLoading);
+  // setTrainingPlanLoading(isTrainingPlanDataLoading);
+
+  if (agreedProductsData) setAgreedProducts(agreedProductsData);
+  // if (trainingPlanData) setTrainingPlan(trainingPlanData);
+}, [isAgreedProductsLoading, agreedProductsData]);
 
   return (
-    <div className="flex gap-10 items-center font-clash-display">
+    <div className="flex gap-10 justify-between items-center">
       <div className="mb-6 tablet:mb-0">
         <h1 className="font-normal text-[3.5rem] text-fdfp-main font-clash-display">
           Tableau de bord

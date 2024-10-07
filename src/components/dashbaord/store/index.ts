@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { DasbboardAgreedProductsDataType } from '../model';
+import { DasbboardAgreedProductsDataType, DashbordDataType } from '../model';
 
 type State = {
   year: string;
@@ -34,3 +34,24 @@ export const useDashboardAgreedProductsStore = create<
     set(() => ({ approvedProducts: products })),
   setLoading: (loading: boolean) => set(() => ({ isDataLoading: loading })),
 }));
+
+
+type DashboardDataState = {
+  dashboardData: DashbordDataType[];
+  isLoading: boolean;
+};
+
+type TrainingPlanAction = {
+  setTrainingPlan: (products: DashbordDataType[]) => void;
+  setLoading: (loading: boolean) => void;
+};
+
+export const useDashboardTrainngPlanStore = create<DashboardDataState & TrainingPlanAction>(
+  (set) => ({
+    dashboardData: [],
+    isLoading: false,
+    setTrainingPlan: (products: DashbordDataType[]) =>
+      set(() => ({ dashboardData: products })),
+    setLoading: (loading: boolean) => set(() => ({ isLoading: loading })),
+  })
+);

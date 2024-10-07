@@ -3,8 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -14,54 +12,51 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {approvedProducts, trainingPlan, trainingProject, trainingActionLiquied } from './data'
+import {trainingPlan, trainingProject, trainingActionLiquied } from './data'
 import { currencyFormatter } from '@/lib/utils';
-import DashboardMap from "./ui/dashboard-map";
-import { useQuery } from '@tanstack/react-query';
-import { DasbboardAgreedProductsDataType } from './model';
-import { useEffect, useState } from 'react';
-import { useDashboardAgreedProductsStore, useDashboardSelectedYear } from './store';
-import { API_URL, API_DASHBOARD_AGREED_PRODUCT_PATH } from "@/lib/config";
-import { stringify } from 'querystring';
-import { SkeletonCard } from './dashboard-loader';
+import { useDashboardAgreedProductsStore, useDashboardTrainngPlanStore } from './store';
+import { DashboardArcordionLoader, SkeletonCard } from './dashboard-loader';
+import React from 'react';
 
 
 export default function DashboardPart1() {
 
+  // Agreed Products
   const approvedProducts = useDashboardAgreedProductsStore(state => state.approvedProducts)
   const isApprovedProductsLoading = useDashboardAgreedProductsStore(state => state.isDataLoading)
 
+  // Training Plan 
+  // const trainingPlan = useDashboardTrainngPlanStore(state => state.dashboardData)
+  const isTrainingPlanDataLoading = useDashboardTrainngPlanStore(state => state.isLoading)
+
   return (
-    <div className="my-[4rem]">
+    <div className="order-2 flex-grow basis-[650px]">
       {isApprovedProductsLoading ? (
         <SkeletonCard />
       ) : (
-        <div className="my-[2rem]">
-          <h2 className="text-[2rem] font-thin mb-[1rem] font-clash-display">
+        <>
+          <h2 className="text-[2rem] font-semibold mb-[1rem] font-clash-display">
             PRODUITS DU FDFP
           </h2>
-          <p className="font-clash-display text-[1.6rem] mb-4">
+          <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
             Récapitulatif des produits agréés par le FDFP
           </p>
-          <div className="flex items-center gap-[4rem]">
+          <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full">
             {approvedProducts.map((product) => (
-              <Card key={product.label} className="flex-grow">
+              <Card key={product.label} className="flex-grow col-span-1">
                 <CardHeader className="border-b">
-                  <CardTitle className="font-clash-display font-light">
-                    {product.label}
-                  </CardTitle>
+                  <CardTitle className="font-light">{product.label}</CardTitle>
                 </CardHeader>
-                <CardContent className="flex py-4 gap-3 font-clash-display">
+                <CardContent className="flex py-4 gap-3">
                   <div className="flex-grow">
                     <p className="font-light text-[1.3rem]">Financement</p>
-                    <span className="text-[2rem] text-fdfp-second font-medium">
+                    <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
                       {currencyFormatter(product.amount)}
                     </span>
                   </div>
                   <div className="pr-[2rem] flex-grow">
                     <p className="font-light text-[1.3rem]">Effectif</p>
-                    <span className="text-[2rem] text-fdfp-second font-medium">
+                    <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
                       {currencyFormatter(product.total)}
                     </span>
                   </div>
@@ -69,23 +64,32 @@ export default function DashboardPart1() {
               </Card>
             ))}
           </div>
-        </div>
+        </>
       )}
 
       <div className="my-[4rem] flex">
-        <div className="flex w-full gap-[2rem]">
-          <div className="flex-grow">
-            <Accordion type="single" collapsible className="font-clash-display">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Plan de formation</AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex gap-[2rem] flex-wrap items center">
+        <div className="flex-grow">
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="item-1"
+            className="w-full"
+          >
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="font-clash-display font-medium">
+                Plan de formation
+              </AccordionTrigger>
+              <AccordionContent>
+                {isTrainingPlanDataLoading ? (
+                  <DashboardArcordionLoader />
+                ) : (
+                  <div className="flex gap-[2rem] flex-wrap items-center">
                     {trainingPlan.map((training) => (
                       <div
                         key={training.label}
                         className="flex flex-col basis-[230px]"
                       >
-                        <span className="text-[1.8rem] text-fdfp-second">
+                        <span className="text-[1.8rem] text-fdfp-second font-clash-display">
                           {currencyFormatter(
                             training.value,
                             ",",
@@ -97,64 +101,60 @@ export default function DashboardPart1() {
                       </div>
                     ))}
                   </div>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>
-                  IProjets de formation agréés
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex gap-[2rem] flex-wrap items center">
-                    {trainingProject.map((training) => (
-                      <div
-                        key={training.label}
-                        className="flex flex-col basis-[230px]"
-                      >
-                        <span className="text-[1.8rem] text-fdfp-second">
-                          {currencyFormatter(
-                            training.value,
-                            ",",
-                            false,
-                            training.extention
-                          )}
-                        </span>
-                        <span className="text-[1.2rem]">{training.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>
-                  Actions de formation liquidées
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex gap-[2rem] flex-wrap items center">
-                    {trainingActionLiquied.map((training) => (
-                      <div
-                        key={training.label}
-                        className="flex flex-col basis-[230px]"
-                      >
-                        <span className="text-[1.8rem] text-fdfp-second">
-                          {currencyFormatter(
-                            training.value,
-                            ",",
-                            false,
-                            training.extention
-                          )}
-                        </span>
-                        <span className="text-[1.2rem]">{training.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-          {/* <div>
-      <h2 className="text-[2rem] font-thin mb-[1rem] font-clash-display">ENTREPRISES PARTENAIRES</h2>
-            <DashboardMap />
-          </div>       */}
+                )}
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="font-clash-display font-medium">
+                Projets de formation agréés
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex gap-[2rem] flex-wrap items center">
+                  {trainingProject.map((training) => (
+                    <div
+                      key={training.label}
+                      className="flex flex-col basis-[230px]"
+                    >
+                      <span className="text-[1.8rem] text-fdfp-second font-clash-display">
+                        {currencyFormatter(
+                          training.value,
+                          ",",
+                          false,
+                          training.extention
+                        )}
+                      </span>
+                      <span className="text-[1.2rem]">{training.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger className="font-clash-display font-medium">
+                Actions de formation liquidées
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex gap-[2rem] flex-wrap items center">
+                  {trainingActionLiquied.map((training) => (
+                    <div
+                      key={training.label}
+                      className="flex flex-col basis-[230px]"
+                    >
+                      <span className="text-[1.8rem] text-fdfp-second font-clash-display">
+                        {currencyFormatter(
+                          training.value,
+                          ",",
+                          false,
+                          training.extention
+                        )}
+                      </span>
+                      <span className="text-[1.2rem]">{training.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
