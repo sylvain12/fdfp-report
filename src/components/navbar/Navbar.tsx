@@ -5,6 +5,7 @@ import NavRight from "./nav-right";
 import NavSearch from "./nav-search";
 import NavHumberger from "./nav-humberger";
 import NavMobile from "./nav-mobile";
+import React from 'react';
 // import "./navbar.module.css";
 
 const Navbar = () => {

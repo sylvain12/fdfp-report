@@ -22,6 +22,7 @@ export default function NavRight() {
         <button
           type="button"
           className="btn btn-icon btn-second-transparent btn-second uppercase"
+          disabled={true}
         >
           Administration
           <AdjustmentsHorizontalIcon className="w-8" />

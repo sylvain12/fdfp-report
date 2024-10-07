@@ -58,7 +58,7 @@
 
    /* Nav mobile */
    .nav-mobile {
-      @apply fixed flex justify-start items-start flex-col px-[3rem] bg-white top-[8rem] left-0 w-[310px] h-[calc(100%_-_8rem)] z-20
+      @apply fixed flex justify-start items-start flex-col px-[3rem] border-r border-fdfp-light bg-fdfp-bg-card top-[8rem] left-0 w-[310px] h-[calc(100%_-_8rem)] z-20
    }
    
    .nav-mobile-section {
@@ -74,7 +74,7 @@
    } */
 
    .nav-mobile-link {
-      @apply flex items-center gap-8 text-[2rem] w-full px-[2.2rem] py-[1.1rem] hover:bg-fdfp-bgsecond transition
+      @apply flex items-center gap-8 text-[2rem] w-full px-[2.2rem] py-[1.1rem] hover:bg-fdfp-bg-thead transition
    } 
 }
 
