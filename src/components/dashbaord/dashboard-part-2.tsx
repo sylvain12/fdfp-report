@@ -6,15 +6,15 @@ import DashboardMap from './ui/dashboard-map'
 
 export default function DashboardPart2() {
   return (
-    <div className="order-1 flex-grow flex flex-col">
-      <div className="mb-10">
-        <h2 className="text-[2rem] mb-[1.3rem] font-clash-display order-1 font-semibold text-center">
+    <div className="flex-grow flex flex-col gap-[2rem]">
+      <div className="mb-10 max-md:order-2 text-center">
+        <h2 className="text-[2rem] mb-[1rem] font-clash-display order-1 font-semibold text-center">
           ENTREPRISES PARTENAIRES
         </h2>
-        <DashboardMap />
+          <DashboardMap />
       </div>
 
-      <div className="">
+      <div className="max-md:order-1">
         <h2 className="text-[2rem] w-full font-semibold mb-[1.3rem] font-clash-display text-center leading-[20px]">
           OPERATEURS DE FORMATION HABILITES
         </h2>

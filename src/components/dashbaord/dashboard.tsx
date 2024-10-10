@@ -1,6 +1,7 @@
 import DashboardHeader from "./dashboard-header";
 import DashboardPart1 from './dashboard-part-1';
 import DashboardPart2 from './dashboard-part-2';
+import DashboardPart3 from './dashboard-part-3'
 import React from 'react';
 
 export default function Dashboard() {
@@ -11,6 +12,7 @@ export default function Dashboard() {
       <div className="dashboard__maintainer">
         <DashboardPart1 />
         <DashboardPart2 />
+        {/* <DashboardPart3 /> */}
       </div>
     </>
   );

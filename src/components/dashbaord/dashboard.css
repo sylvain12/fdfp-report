@@ -1,14 +1,17 @@
 
 
 .dashboard__maintainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
   margin-top: 2rem;
+  gap: 2rem;
 }
 
 
 /* breackpoint */
-@media (max-width: 1125px) {
+@media (max-width: 1225px) {
 .dashboard__maintainer {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }

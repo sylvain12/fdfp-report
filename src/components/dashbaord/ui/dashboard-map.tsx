@@ -1,13 +1,16 @@
+"use client";
+
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 import { useRef, useEffect } from "react";
 import { Topology } from "topojson-specification";
 import { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 
+
 export default function DashboardMap() {
   const map = useRef<SVGSVGElement | null>(null);
-  const width = 700;
-  const height = 400;
+  let width = 350;
+  let height = 350;
 
   const addRegionName = () => null;
   const getRegionName = (features: Feature[]): string[] => {
@@ -22,6 +25,7 @@ export default function DashboardMap() {
   //   .range(d3.schemeBlues[9]);
 
   useEffect(() => {
+
     const svg = d3
       .select(map.current)
       .attr("width", width)
@@ -37,7 +41,7 @@ export default function DashboardMap() {
         const projection = d3
           .geoMercator()
           .center([-5.5471, 7.5399])
-          .scale(3500)
+          .scale(3000)
           .translate([width / 2, height / 2]);
 
         const path: any = d3.geoPath().projection(projection);
@@ -82,7 +86,9 @@ export default function DashboardMap() {
       .catch((error) =>
         console.log("Error loading or parsing TopoJSON data: ", error)
       );
+
+    return () => {};
   }, []);
 
-  return <svg ref={map}></svg>;
+  return <svg style={{margin: 'auto'}} ref={map}></svg>
 }

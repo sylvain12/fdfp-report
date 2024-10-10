@@ -64,7 +64,7 @@ const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
 // })
 
 // Year change handler
-const handleSubmit = (value: string) => {
+const handleSubmit = (value: string): void => {
   setDashboardYear(value)
   mutation.mutate({year: value})  
   // trainingPlanMutain.mutate({year: value})
