@@ -79,7 +79,7 @@ useEffect(() => {
 }, [isAgreedProductsLoading, agreedProductsData]);
 
   return (
-    <div className="flex justify-between items-center max-md:flex-col max-md:items-center">
+    <div className="flex justify-between items-center max-md:flex-col max-md:items-start">
       <div className="mb-6 tablet:mb-0">
         <h1 className="font-normal text-[3.5rem] text-fdfp-main font-clash-display">
           Tableau de bord
