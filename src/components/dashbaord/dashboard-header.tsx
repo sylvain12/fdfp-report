@@ -79,14 +79,14 @@ useEffect(() => {
 }, [isAgreedProductsLoading, agreedProductsData]);
 
   return (
-    <div className="flex gap-10 justify-between items-center">
+    <div className="flex justify-between items-center max-md:flex-col max-md:items-center">
       <div className="mb-6 tablet:mb-0">
         <h1 className="font-normal text-[3.5rem] text-fdfp-main font-clash-display">
           Tableau de bord
         </h1>
       </div>
       <Select onValueChange={(e) => handleSubmit(e)} defaultValue={year}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px] max-md:w-full">
           <SelectValue defaultValue={year} placeholder="Selctioner la data" />
         </SelectTrigger>
         <SelectContent>
