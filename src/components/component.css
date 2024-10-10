@@ -3,4 +3,5 @@
 @import './ui.css';
 @import './breadcrumb/breadcrumb.module.css';
 @import './animation/animations.css';
-@import './reports/report.css'
+@import './reports/report.css';
+@import './dashbaord/dashboard.css';

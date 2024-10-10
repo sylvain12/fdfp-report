@@ -8,7 +8,7 @@ export default function Dashboard() {
     <>
       <DashboardHeader />
 
-      <div className='flex mt-8'>
+      <div className="dashboard__maintainer">
         <DashboardPart1 />
         <DashboardPart2 />
       </div>

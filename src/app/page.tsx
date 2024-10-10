@@ -21,7 +21,7 @@ const SuspenseDashboardComponent = dynamic(
 
 export default function Home() {
   return (
-    <div className="px-[20rem] py-[3rem]">
+    <div className="pt-8 px-[5rem] lg:px-[10rem]">
       {/* <Dashboard /> */}
       <ErrorBoundary fallback={<Fallback />}>
         <Suspense fallback={<Loader />}>

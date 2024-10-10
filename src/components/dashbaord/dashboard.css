@@ -1,0 +1,13 @@
+
+
+.dashboard__maintainer {
+  display: flex;
+}
+
+
+/* breackpoint */
+@media (max-width: 1125px) {
+.dashboard__maintainer {
+    flex-direction: column;
+  }
+}

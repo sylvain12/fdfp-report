@@ -6,18 +6,18 @@ import DashboardMap from './ui/dashboard-map'
 
 export default function DashboardPart2() {
   return (
-    <div className="order-1 flex-grow">
+    <div className="order-1 flex-grow flex flex-col">
       <div className="mb-10">
-        <h2 className="text-[2rem] mb-[1rem] font-clash-display order-1 font-semibold">
+        <h2 className="text-[2rem] mb-[1.3rem] font-clash-display order-1 font-semibold text-center">
           ENTREPRISES PARTENAIRES
         </h2>
         <DashboardMap />
       </div>
-      <h2 className="text-[2rem] font-semibold mb-[1rem] font-clash-display">
-        OPERATEURS DE FORMATION HABILITES
-      </h2>
 
       <div className="">
+        <h2 className="text-[2rem] w-full font-semibold mb-[1.3rem] font-clash-display text-center leading-[20px]">
+          OPERATEURS DE FORMATION HABILITES
+        </h2>
         {/* col 1 */}
         {/* <div className="flex flex-grow mb-4 gap-4">
           {sectionData.map((item) => (
@@ -30,9 +30,9 @@ export default function DashboardPart2() {
           ))}
         </div> */}
 
-        <div className="flex">
+        <div className="flex max-md:flex-col max-md:items-center">
           {/* col 2 */}
-          <div className="flex-grow">
+          <div className="flex-grow flex flex-col items-center">
             <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
               Selon la catégorie de formation
             </p>
@@ -48,8 +48,10 @@ export default function DashboardPart2() {
           </div>
 
           {/* col 3 */}
-          <div className="flex-grow">
-            <p className="ext-[1.6rem] mb-4 font-clash-display font-medium">Selon le domaine de formation</p>
+          <div className="flex-grow flex flex-col items-center">
+            <p className="ext-[1.6rem] mb-4 font-clash-display font-medium">
+              Selon le domaine de formation
+            </p>
             <PieChart width={250} height={250}>
               <Pie
                 data={operatorsByTrainingCategory}

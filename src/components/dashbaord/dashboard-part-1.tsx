@@ -30,7 +30,7 @@ export default function DashboardPart1() {
   const isTrainingPlanDataLoading = useDashboardTrainngPlanStore(state => state.isLoading)
 
   return (
-    <div className="order-2 flex-grow basis-[650px]">
+    <div className="order-1 flex-grow flex flex-col w-full">
       {isApprovedProductsLoading ? (
         <SkeletonCard />
       ) : (
@@ -41,7 +41,7 @@ export default function DashboardPart1() {
           <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
             Récapitulatif des produits agréés par le FDFP
           </p>
-          <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full">
+          <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full max-md:grid-cols-1 max-[1300px]:grid-cols-1">
             {approvedProducts.map((product) => (
               <Card key={product.label} className="flex-grow col-span-1">
                 <CardHeader className="border-b">
