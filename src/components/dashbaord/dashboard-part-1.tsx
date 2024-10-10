@@ -74,13 +74,13 @@ export default function DashboardPart1() {
           <div className="flex max-md:hidden">
             <Tabs defaultValue="plan" className="w-full">
               <TabsList>
-                <TabsTrigger value="plan" variant="underline">
+                <TabsTrigger value="plan">
                   Plan de formation
                 </TabsTrigger>
-                <TabsTrigger value="projects" variant="underline">
+                <TabsTrigger value="projects">
                   Projets de formation agréés
                 </TabsTrigger>
-                <TabsTrigger value="actions" variant="underline">
+                <TabsTrigger value="actions">
                   Actions de formation liquidées
                 </TabsTrigger>
               </TabsList>
