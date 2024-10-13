@@ -12,9 +12,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {trainingProject, trainingActionLiquied } from './data'
+import {trainingActionLiquied } from './data'
 import { currencyFormatter } from '@/lib/utils';
-import { useDashboardAgreedProductsStore, useDashboardTrainngPlanStore } from './store';
+import { useDashboardAgreedProductsStore, useDashboardTrainngPlanStore, useDashboardTrainngProjectStore } from './store';
 import { DashboardArcordionLoader, SkeletonCard } from './dashboard-loader';
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,14 +22,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 export default function DashboardPart1() {
-
   // Agreed Products
-  const approvedProducts = useDashboardAgreedProductsStore(state => state.approvedProducts)
-  const isApprovedProductsLoading = useDashboardAgreedProductsStore(state => state.isDataLoading)
+  const approvedProducts = useDashboardAgreedProductsStore(
+    (state) => state.approvedProducts
+  );
+  const isApprovedProductsLoading = useDashboardAgreedProductsStore(
+    (state) => state.isDataLoading
+  );
 
-  // Training Plan 
-  const trainingPlan = useDashboardTrainngPlanStore(state => state.dashboardData)
-  const isTrainingPlanDataLoading = useDashboardTrainngPlanStore(state => state.isLoading)
+  // Training Plan
+  const trainingPlan = useDashboardTrainngPlanStore(
+    (state) => state.dashboardData
+  );
+  const isTrainingPlanDataLoading = useDashboardTrainngPlanStore(
+    (state) => state.isLoading
+  );
+
+  // Training Project
+  const trainingProject = useDashboardTrainngProjectStore(
+    (state) => state.dashboardData
+  );
+  const isTrainingProjectDataLoading = useDashboardTrainngProjectStore(
+    (state) => state.isLoading
+  );
 
   return (
     <div className="flex-grow flex flex-col w-full">
@@ -74,9 +89,7 @@ export default function DashboardPart1() {
           <div className="flex max-md:hidden">
             <Tabs defaultValue="plan" className="w-full">
               <TabsList>
-                <TabsTrigger value="plan">
-                  Plan de formation
-                </TabsTrigger>
+                <TabsTrigger value="plan">Plan de formation</TabsTrigger>
                 <TabsTrigger value="projects">
                   Projets de formation agréés
                 </TabsTrigger>
@@ -86,42 +99,50 @@ export default function DashboardPart1() {
               </TabsList>
               <TabsContent value="plan">
                 <div className="flex gap-[2rem] flex-wrap items-center">
-                  {isTrainingPlanDataLoading ? <DashboardArcordionLoader /> : trainingPlan.map((training) => (
-                    <div
-                      key={training.label}
-                      className="flex flex-col basis-[230px]"
-                    >
-                      <span className="text-[1.8rem] text-fdfp-second font-clash-display">
-                        {currencyFormatter(
-                          training.value,
-                          ",",
-                          false,
-                          training.extention
-                        )}
-                      </span>
-                      <span className="text-[1.2rem]">{training.label}</span>
-                    </div>
-                  ))}
+                  {isTrainingPlanDataLoading ? (
+                    <DashboardArcordionLoader />
+                  ) : (
+                    trainingPlan.map((training) => (
+                      <div
+                        key={training.label}
+                        className="flex flex-col basis-[230px]"
+                      >
+                        <span className="text-[1.8rem] text-fdfp-second font-clash-display">
+                          {currencyFormatter(
+                            training.value,
+                            ",",
+                            false,
+                            training.extention
+                          )}
+                        </span>
+                        <span className="text-[1.2rem]">{training.label}</span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </TabsContent>
               <TabsContent value="projects">
                 <div className="flex gap-[2rem] flex-wrap items center">
-                  {trainingProject.map((training) => (
-                    <div
-                      key={training.label}
-                      className="flex flex-col basis-[230px]"
-                    >
-                      <span className="text-[1.8rem] text-fdfp-second font-clash-display">
-                        {currencyFormatter(
-                          training.value,
-                          ",",
-                          false,
-                          training.extention
-                        )}
-                      </span>
-                      <span className="text-[1.2rem]">{training.label}</span>
-                    </div>
-                  ))}
+                  {isTrainingProjectDataLoading ? (
+                    <DashboardArcordionLoader />
+                  ) : (
+                    trainingProject.map((training) => (
+                      <div
+                        key={training.label}
+                        className="flex flex-col basis-[230px]"
+                      >
+                        <span className="text-[1.8rem] text-fdfp-second font-clash-display">
+                          {currencyFormatter(
+                            training.value,
+                            ",",
+                            false,
+                            training.extention
+                          )}
+                        </span>
+                        <span className="text-[1.2rem]">{training.label}</span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </TabsContent>
               <TabsContent value="actions">

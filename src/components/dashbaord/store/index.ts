@@ -41,8 +41,9 @@ type DashboardDataState = {
   isLoading: boolean;
 };
 
+// Training plan store
 type TrainingPlanAction = {
-  setTrainingPlan: (products: DashbordDataType[]) => void;
+  setTrainingPlan: (data: DashbordDataType[]) => void;
   setLoading: (loading: boolean) => void;
 };
 
@@ -50,8 +51,24 @@ export const useDashboardTrainngPlanStore = create<DashboardDataState & Training
   (set) => ({
     dashboardData: [],
     isLoading: false,
-    setTrainingPlan: (products: DashbordDataType[]) =>
-      set(() => ({ dashboardData: products })),
+    setTrainingPlan: (data: DashbordDataType[]) =>
+      set(() => ({ dashboardData: data })),
     setLoading: (loading: boolean) => set(() => ({ isLoading: loading })),
   })
 );
+
+// Training project
+type TrainingProjectAction = {
+  setTrainingProject: (data: DashbordDataType[]) => void;
+  setLoading: (loading: boolean) => void;
+};
+
+export const useDashboardTrainngProjectStore = create<
+  DashboardDataState & TrainingProjectAction
+>((set) => ({
+  dashboardData: [],
+  isLoading: false,
+  setTrainingProject: (data: DashbordDataType[]) =>
+    set(() => ({ dashboardData: data })),
+  setLoading: (loading: boolean) => set(() => ({ isLoading: loading })),
+}));

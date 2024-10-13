@@ -10,14 +10,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useDashboardAgreedProductsStore, useDashboardSelectedYear, useDashboardTrainngPlanStore } from './store';
+import { useDashboardAgreedProductsStore, useDashboardSelectedYear, useDashboardTrainngPlanStore, useDashboardTrainngProjectStore } from './store';
 import { useEffect } from 'react';
 import { SelectLabel } from '@radix-ui/react-select';
 import {useServerActionQuery, useServerActionMutation} from '@/lib/hooks/server-action-hooks'
 import {
   DashBoardAgreedProductsAction,
   DashboardTrainingPlanAction,
-  DashboardDataAction,
+  DashboardTrainingProjectAction
 } from "./actions";
 import { useDebounce } from 'use-debounce';
 
@@ -28,14 +28,27 @@ export default function DashboardHeader() {
     (state) => state.setDashboardYear
   );
   const year = useDashboardSelectedYear(state => state.year)
+ const debouncedYear = useDebounce(year, 200);
+
+// -------------------- Store Variables ----------------------------
+
  const setAgreedProducts = useDashboardAgreedProductsStore(
    (state) => state.setAgreedProducts
  );
  const setAgreedProductsLoading = useDashboardAgreedProductsStore(state => state.setLoading)
- const debouncedYear = useDebounce(year, 200)
+
 
 const setTrainingPlan = useDashboardTrainngPlanStore((state) => state.setTrainingPlan);
 const setTrainingPlanLoading = useDashboardTrainngPlanStore((state) => state.setLoading);
+
+const setTrainingProject = useDashboardTrainngProjectStore(
+  (state) => state.setTrainingProject
+);
+const setTrainingProjectLoading = useDashboardTrainngProjectStore(
+  (state) => state.setLoading
+);
+
+// --------------------- API Query -----------------------------
 
 // Agreed Products Query
 const {isLoading: isAgreedProductsLoading, data: agreedProductsData, error} = useServerActionQuery(
@@ -52,7 +65,7 @@ const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
   }
 });
 
-// Training Plan Qurey
+// Training Plan Query
 const {isLoading: isTrainingPlanDataLoading, data: trainingPlanData } = useServerActionQuery(DashboardTrainingPlanAction,
 {input: {year: year}, queryKey: ['trainingPlan', debouncedYear]}
 )
@@ -62,6 +75,23 @@ const trainingPlanMutain = useServerActionMutation(DashboardTrainingPlanAction, 
     setTrainingPlan(data);
   }
 })
+
+// Training Project Query
+const { isLoading: isTrainingProjectDataLoading, data: trainingProjectData } =
+  useServerActionQuery(DashboardTrainingProjectAction, {
+    input: { year: year },
+    queryKey: ["trainingProject", debouncedYear],
+});
+
+const trainingProjectMutation = useServerActionMutation(
+  DashboardTrainingProjectAction,
+  {
+    onSuccess: (data) => {
+      setTrainingProject(data);
+    },
+  }
+);
+
 
 // Year change handler
 const handleSubmit = (value: string): void => {
@@ -73,15 +103,13 @@ const handleSubmit = (value: string): void => {
 useEffect(() => {
   setAgreedProductsLoading(isAgreedProductsLoading);
   setTrainingPlanLoading(isTrainingPlanDataLoading);
-  console.log("training plan ", trainingPlanData);
-  console.log("agreedProductsData", agreedProductsData)
+  setTrainingProjectLoading(isTrainingPlanDataLoading);
 
   if (agreedProductsData) setAgreedProducts(agreedProductsData);
   if (trainingPlanData) setTrainingPlan(trainingPlanData);
-}, [
-  agreedProductsData,
-  trainingPlanData,
-]);
+  if (trainingProjectData) setTrainingProject(trainingProjectData);
+
+}, [agreedProductsData, trainingPlanData, trainingProjectData]);
 
   return (
     <div className="flex justify-between items-center max-md:flex-col max-md:items-start">
