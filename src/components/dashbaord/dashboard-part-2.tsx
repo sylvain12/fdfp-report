@@ -48,11 +48,11 @@ const CustomTooltip = (props: any) => {
 
 
   if (active && payload && payload.length) {
-    console.log(payload[0].payload.fill)
+
     return (
       <div
-        style={{ borderTopColor: payload[0].payload.fill, borderWidth: '2px', border: '2px 0 0 0' }}
-        className={`bg-white p-4`}
+        style={{ borderTopColor: payload[0].payload.fill, borderWidth: '2px', }}
+        className={`bg-background p-4 text-foreground`}
       >
         <p className="flex flex-col border-b pb-2">
           <span>Libelle:</span>
