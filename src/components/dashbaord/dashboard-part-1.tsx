@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {trainingPlan, trainingProject, trainingActionLiquied } from './data'
+import {trainingProject, trainingActionLiquied } from './data'
 import { currencyFormatter } from '@/lib/utils';
 import { useDashboardAgreedProductsStore, useDashboardTrainngPlanStore } from './store';
 import { DashboardArcordionLoader, SkeletonCard } from './dashboard-loader';
@@ -28,7 +28,7 @@ export default function DashboardPart1() {
   const isApprovedProductsLoading = useDashboardAgreedProductsStore(state => state.isDataLoading)
 
   // Training Plan 
-  // const trainingPlan = useDashboardTrainngPlanStore(state => state.dashboardData)
+  const trainingPlan = useDashboardTrainngPlanStore(state => state.dashboardData)
   const isTrainingPlanDataLoading = useDashboardTrainngPlanStore(state => state.isLoading)
 
   return (
@@ -43,9 +43,9 @@ export default function DashboardPart1() {
           <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
             Récapitulatif des produits agréés par le FDFP
           </p>
-          <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full max-md:grid-cols-1 max-[1300px]:grid-cols-1">
+          <div className="grid grid-cols-2 gap-[2rem] w-full max-md:grid-cols-1">
             {approvedProducts.map((product) => (
-              <Card key={product.label} className="flex-grow col-span-1">
+              <Card key={product.label} className="col-span-1">
                 <CardHeader className="border-b">
                   <CardTitle className="font-light">{product.label}</CardTitle>
                 </CardHeader>
@@ -86,7 +86,7 @@ export default function DashboardPart1() {
               </TabsList>
               <TabsContent value="plan">
                 <div className="flex gap-[2rem] flex-wrap items-center">
-                  {trainingPlan.map((training) => (
+                  {isTrainingPlanDataLoading ? <DashboardArcordionLoader /> : trainingPlan.map((training) => (
                     <div
                       key={training.label}
                       className="flex flex-col basis-[230px]"

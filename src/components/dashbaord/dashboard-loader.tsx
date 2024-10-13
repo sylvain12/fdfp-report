@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function SkeletonCard() {
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full">
+    <div className="grid grid-cols-2 grid-rows-2 gap-[2rem] w-full max-md:grid-cols-1">
       {Array.from({ length: 4 }).map((_, index: number) => (
         <Skeleton
           key={index}

@@ -32,15 +32,15 @@ export default function DashboardHeader() {
    (state) => state.setAgreedProducts
  );
  const setAgreedProductsLoading = useDashboardAgreedProductsStore(state => state.setLoading)
- const debouncedYear = useDebounce(year, 300)
+ const debouncedYear = useDebounce(year, 200)
 
-// const setTrainingPlan = useDashboardTrainngPlanStore((state) => state.setTrainingPlan);
-// const setTrainingPlanLoading = useDashboardTrainngPlanStore((state) => state.setLoading);
+const setTrainingPlan = useDashboardTrainngPlanStore((state) => state.setTrainingPlan);
+const setTrainingPlanLoading = useDashboardTrainngPlanStore((state) => state.setLoading);
 
 // Agreed Products Query
-const {isLoading: isAgreedProductsLoading, data: agreedProductsData} = useServerActionQuery(
+const {isLoading: isAgreedProductsLoading, data: agreedProductsData, error} = useServerActionQuery(
   DashBoardAgreedProductsAction,
-  { input: { year: year }, queryKey: [debouncedYear]}
+  { input: { year: year }, queryKey: ['agreedProducts', debouncedYear]}
 );
 
 const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
@@ -53,30 +53,35 @@ const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
 });
 
 // Training Plan Qurey
-// const {isLoading: isTrainingPlanDataLoading, data: trainingPlanData } = useServerActionQuery(DashboardTrainingPlanAction,
-// {input: {year: year}, queryKey: [debouncedYear]}
-// )
+const {isLoading: isTrainingPlanDataLoading, data: trainingPlanData } = useServerActionQuery(DashboardTrainingPlanAction,
+{input: {year: year}, queryKey: ['trainingPlan', debouncedYear]}
+)
 
-// const trainingPlanMutain = useServerActionMutation(DashboardTrainingPlanAction, {
-//   onSuccess: (data) => {
-//     setTrainingPlan(data);
-//   }
-// })
+const trainingPlanMutain = useServerActionMutation(DashboardTrainingPlanAction, {
+  onSuccess: (data) => {
+    setTrainingPlan(data);
+  }
+})
 
 // Year change handler
 const handleSubmit = (value: string): void => {
   setDashboardYear(value)
   mutation.mutate({year: value})  
-  // trainingPlanMutain.mutate({year: value})
+  trainingPlanMutain.mutate({year: value})
 }
 
 useEffect(() => {
   setAgreedProductsLoading(isAgreedProductsLoading);
-  // setTrainingPlanLoading(isTrainingPlanDataLoading);
+  setTrainingPlanLoading(isTrainingPlanDataLoading);
+  console.log("training plan ", trainingPlanData);
+  console.log("agreedProductsData", agreedProductsData)
 
   if (agreedProductsData) setAgreedProducts(agreedProductsData);
-  // if (trainingPlanData) setTrainingPlan(trainingPlanData);
-}, [isAgreedProductsLoading, agreedProductsData]);
+  if (trainingPlanData) setTrainingPlan(trainingPlanData);
+}, [
+  agreedProductsData,
+  trainingPlanData,
+]);
 
   return (
     <div className="flex justify-between items-center max-md:flex-col max-md:items-start">

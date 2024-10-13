@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import z, { unknown } from "zod";
 
-export const baseURL = "http://147.182.139.206:8016";
+export const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 const instance = axios.create({
   baseURL: baseURL,

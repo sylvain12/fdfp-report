@@ -12,7 +12,7 @@ interface TState {
   errorData: any;
 }
 
-const BASE_URL = process.env.SERVER_URL || "http://147.182.139.206:8016";
+const BASE_URL = process.env.SERVER_URLs;
 
 export const useApplicationStore = () => {
   const initialState: TState = {

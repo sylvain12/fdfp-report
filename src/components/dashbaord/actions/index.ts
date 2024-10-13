@@ -23,6 +23,7 @@ export const DashBoardAgreedProductsAction = createServerAction()
           year: input.year,
         })}`
       )
+  console.log(agreedProductsURL)
   return res.json()
   });
 
