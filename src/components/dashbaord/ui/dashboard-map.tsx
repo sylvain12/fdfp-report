@@ -5,17 +5,26 @@ import * as topojson from "topojson-client";
 import { useRef, useEffect } from "react";
 import { Topology } from "topojson-specification";
 import { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
+import { useWindowSize } from '@uidotdev/usehooks';
+import { BusinessPartnerType } from '../model';
+import { useDashbaordBusinessPartnerStore } from '../store';
 
 
 export default function DashboardMap() {
+  const businessPartner = useDashbaordBusinessPartnerStore(state => state.businessPartner);
+  const isLoading = useDashbaordBusinessPartnerStore(state => state.isLoading);
+
   const map = useRef<SVGSVGElement | null>(null);
-  let width = 350;
-  let height = 350;
+  let width = 600;
+  let height = 550;
+  let scale = 4500;
 
   const addRegionName = () => null;
   const getRegionName = (features: Feature[]): string[] => {
     return features.map((f) => f.properties!["name"]);
   };
+
+  const size = useWindowSize();
 
   const x = d3.scaleLinear().domain([1, 10]).rangeRound([600, 860]);
 
@@ -24,12 +33,21 @@ export default function DashboardMap() {
   //   .domain(d3.range(2, 10))
   //   .range(d3.schemeBlues[9]);
 
-  useEffect(() => {
+  const clearMap = (): void => {
+    d3.selectAll("svg > *").remove();
+    if (size.width && size.width <= 1484) width = 500;
+    if (size.width && size.width <= 650) scale = 3500;
+  };
 
+  // clearMap()
+
+  useEffect(() => {
+    console.log(businessPartner);
     const svg = d3
       .select(map.current)
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .attr("margin", "auto");
 
     // const url = "ci.json";
 
@@ -41,7 +59,7 @@ export default function DashboardMap() {
         const projection = d3
           .geoMercator()
           .center([-5.5471, 7.5399])
-          .scale(3000)
+          .scale(scale)
           .translate([width / 2, height / 2]);
 
         const path: any = d3.geoPath().projection(projection);
@@ -59,9 +77,16 @@ export default function DashboardMap() {
           .domain(regions)
           .range(d3.schemeBlues[9]);
 
-        console.log(color("N'zi-Comoé"));
+        // Tooltip
+        const tooltip = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
 
-        console.log("Features => ", features);
+        // console.log(color("N'zi-Comoé"));
+
+        // console.log("Features => ", features);
 
         // Build map path
         svg
@@ -75,20 +100,34 @@ export default function DashboardMap() {
             return color(d.properties!["name"]);
           })
           .attr("d", path)
-          .style("stroke-width", 0.3)
-          .append("text")
-          .text((d: any) => d.properties!["name"])
-          .attr("color", "red");
+          .on("mouseover", (e: MouseEvent, d: any) => {
+            console.log("event => ", e);
+            console.log(d['properties']['name'])
+            const [x, y] = d3.pointer(e);
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip
+              .html("Hello")
+              .style("left", x + "px")
+              .style("top", y + "px");
+          })
+          .on("mouseout", (d: any) => {
+            tooltip.transition().duration(500).style("opacity", 0);
+          })
+          .exit()
+          // .style("stroke-width", 0.3)
+          // .append("text")
+          // .text((d: any) => d.properties!["name"])
+          // .attr("color", "red")
+          // .exit()
 
-        // Add Region name to map
-        // svg.
       })
       .catch((error) =>
         console.log("Error loading or parsing TopoJSON data: ", error)
       );
 
-    return () => {};
-  }, []);
+    return () => {
+    };
+  }, [size.width]);
 
-  return <svg style={{margin: 'auto'}} ref={map}></svg>
+  return <svg style={{ margin: "auto", width: "auto" }} ref={map}></svg>
 }
