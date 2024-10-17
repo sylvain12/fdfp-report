@@ -16,6 +16,8 @@ import {
   ClipboardDocumentListIcon,
   RectangleStackIcon,
   ChartBarIcon,
+PresentationChartBarIcon,
+DocumentTextIcon
 } from "@heroicons/react/24/outline";
 import { stringify } from "querystring";
 
@@ -124,7 +126,7 @@ const approvedTrainingAndStudyProjectsNavs: TLink[] = [
       table: "PROJ",
     })}`,
     active: true,
-    icon: ChartBarIcon,
+    icon: DocumentTextIcon,
     query: ["Projets de formations agrées"],
     key: "PROJ",
   },
@@ -135,7 +137,7 @@ const approvedTrainingAndStudyProjectsNavs: TLink[] = [
       table: "PROJ_ETUDE",
     })}`,
     active: true,
-    icon: ChartBarIcon,
+    icon: PresentationChartBarIcon,
     query: ["Projets d'études agrées"],
     key: "PROJ_ETUDE",
   },
