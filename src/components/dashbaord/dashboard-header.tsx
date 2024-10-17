@@ -10,106 +10,193 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useDashboardAgreedProductsStore, useDashboardSelectedYear, useDashboardTrainngPlanStore, useDashboardTrainngProjectStore } from './store';
+import { useDashboardAgreedProductsStore, useDashboardSelectedYear, useDashboardTrainngPlanStore, useDashboardTrainngProjectStore, useDashboardTrainingActiontStore, useDashbaordBusinessPartnerStore } from './store';
 import { useEffect } from 'react';
 import { SelectLabel } from '@radix-ui/react-select';
 import {useServerActionQuery, useServerActionMutation} from '@/lib/hooks/server-action-hooks'
 import {
   DashBoardAgreedProductsAction,
   DashboardTrainingPlanAction,
-  DashboardTrainingProjectAction
+  DashboardTrainingProjectAction,
+  DashboardTrainingLiquidedAction,
+  DashbaordBusinessPartnerAction,
+  // DashboardTrainingDataAction
+loadTrainingAction
 } from "./actions";
 import { useDebounce } from 'use-debounce';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 
 export default function DashboardHeader() {
-
   const setDashboardYear = useDashboardSelectedYear(
     (state) => state.setDashboardYear
   );
-  const year = useDashboardSelectedYear(state => state.year)
- const debouncedYear = useDebounce(year, 200);
+  const year = useDashboardSelectedYear((state) => state.year);
+  const debouncedYear = useDebounce(year, 0);
 
-// -------------------- Store Variables ----------------------------
+  // -------------------- Store Variables ----------------------------
 
- const setAgreedProducts = useDashboardAgreedProductsStore(
-   (state) => state.setAgreedProducts
- );
- const setAgreedProductsLoading = useDashboardAgreedProductsStore(state => state.setLoading)
+  // Agreed Products
+  const setAgreedProducts = useDashboardAgreedProductsStore(
+    (state) => state.setAgreedProducts
+  );
+  const setAgreedProductsLoading = useDashboardAgreedProductsStore(
+    (state) => state.setLoading
+  );
 
+  // Training Plan
+  const setTrainingPlan = useDashboardTrainngPlanStore(
+    (state) => state.setTrainingPlan
+  );
+  const setTrainingPlanLoading = useDashboardTrainngPlanStore(
+    (state) => state.setLoading
+  );
 
-const setTrainingPlan = useDashboardTrainngPlanStore((state) => state.setTrainingPlan);
-const setTrainingPlanLoading = useDashboardTrainngPlanStore((state) => state.setLoading);
+  // Training Project
+  const setTrainingProject = useDashboardTrainngProjectStore(
+    (state) => state.setTrainingProject
+  );
+  const setTrainingProjectLoading = useDashboardTrainngProjectStore(
+    (state) => state.setLoading
+  );
 
-const setTrainingProject = useDashboardTrainngProjectStore(
-  (state) => state.setTrainingProject
-);
-const setTrainingProjectLoading = useDashboardTrainngProjectStore(
-  (state) => state.setLoading
-);
+  // Training Action
+  const setTrainingAction = useDashboardTrainingActiontStore(
+    (state) => state.setTrainingAction
+  );
+  const setTrainingActionLoading = useDashboardTrainingActiontStore(
+    (state) => state.setLoading
+  );
 
-// --------------------- API Query -----------------------------
+  // Business Partner
+  const setBusinessPartner = useDashbaordBusinessPartnerStore(
+    (state) => state.setBusinessPartner
+  );
+  const setBusinessPartnerLoading = useDashbaordBusinessPartnerStore(
+    (state) => state.setLoading
+  );
 
-// Agreed Products Query
-const {isLoading: isAgreedProductsLoading, data: agreedProductsData, error} = useServerActionQuery(
-  DashBoardAgreedProductsAction,
-  { input: { year: year }, queryKey: ['agreedProducts', debouncedYear]}
-);
+  // --------------------- API Query -----------------------------
 
-const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
-  onSuccess: (data) => {
-    setAgreedProducts(data);
-    setAgreedProductsLoading(false);
-  },
-  onMutate: (variables) => {
-  }
-});
+  // Agreed Products Query
+  const { isLoading: isAgreedProductsLoading, data: agreedProductsData } =
+    useServerActionQuery(DashBoardAgreedProductsAction, {
+      input: { year: year },
+      queryKey: ["agreedProducts", debouncedYear],
+      // enabled: !!debouncedYear,
+    });
 
-// Training Plan Query
-const {isLoading: isTrainingPlanDataLoading, data: trainingPlanData } = useServerActionQuery(DashboardTrainingPlanAction,
-{input: {year: year}, queryKey: ['trainingPlan', debouncedYear]}
-)
-
-const trainingPlanMutain = useServerActionMutation(DashboardTrainingPlanAction, {
-  onSuccess: (data) => {
-    setTrainingPlan(data);
-  }
-})
-
-// Training Project Query
-const { isLoading: isTrainingProjectDataLoading, data: trainingProjectData } =
-  useServerActionQuery(DashboardTrainingProjectAction, {
-    input: { year: year },
-    queryKey: ["trainingProject", debouncedYear],
-});
-
-const trainingProjectMutation = useServerActionMutation(
-  DashboardTrainingProjectAction,
-  {
+  const mutation = useServerActionMutation(DashBoardAgreedProductsAction, {
     onSuccess: (data) => {
-      setTrainingProject(data);
+      setAgreedProducts(data);
     },
-  }
-);
+  });
 
+  // Training Action Liquided Query
+  const {
+    isLoading: isTrainingActionLiquidedLoading,
+    data: trainingActionLiquidedData,
+  } = useQuery({
+    queryKey: ["trainingActionLiquided", year],
+    queryFn: async () => await loadTrainingAction(year).then(r => r.promise),
+  });
 
-// Year change handler
-const handleSubmit = (value: string): void => {
-  setDashboardYear(value)
-  mutation.mutate({year: value})  
-  trainingPlanMutain.mutate({year: value})
-}
+  const trainingActionLiquidedMutation = useMutation(
+    {
+      mutationFn: async (year: string) => await loadTrainingAction(year).then(r => r.promise),
+      onSuccess: (data) => {
+        setTrainingAction(data);
+      }
+    }
+  );
 
-useEffect(() => {
-  setAgreedProductsLoading(isAgreedProductsLoading);
-  setTrainingPlanLoading(isTrainingPlanDataLoading);
-  setTrainingProjectLoading(isTrainingPlanDataLoading);
+  // Training Plan Quey
+  const { isLoading: isTrainingPlanLoading, data: trainingPlanData } =
+    useServerActionQuery(DashboardTrainingPlanAction, {
+      input: { year: year },
+      queryKey: ["trainingPlan", debouncedYear],
+      enabled: !!debouncedYear,
+    });
 
-  if (agreedProductsData) setAgreedProducts(agreedProductsData);
-  if (trainingPlanData) setTrainingPlan(trainingPlanData);
-  if (trainingProjectData) setTrainingProject(trainingProjectData);
+  const trainingPlanMutation = useServerActionMutation(
+    DashboardTrainingPlanAction,
+    {
+      onSuccess: (data) => {
+        setTrainingPlan(data);
+      },
+    }
+  );
 
-}, [agreedProductsData, trainingPlanData, trainingProjectData]);
+  // Training Project Query
+  const { isLoading: isTrainingProjectLoading, data: trainingProjectData } =
+    useServerActionQuery(DashboardTrainingProjectAction, {
+      input: { year: year },
+      queryKey: ["trainingProject", debouncedYear],
+      enabled: !!debouncedYear,
+    });
+
+  const trainingProjectMutation = useServerActionMutation(
+    DashboardTrainingPlanAction,
+    {
+      onSuccess: (data) => {
+        setTrainingPlan(data);
+      },
+    }
+  );
+
+  // Business Partner Query
+  const { isLoading: isBusinessPartnerDataLoading, data: businessPartnerData } =
+    useServerActionQuery(DashbaordBusinessPartnerAction, {
+      input: { year: year },
+      queryKey: ["busnessPartner", debouncedYear],
+      enabled: !!debouncedYear,
+    });
+
+  const businessPartnerMutation = useServerActionMutation(
+    DashbaordBusinessPartnerAction,
+    {
+      onSuccess: (data) => {
+        setBusinessPartner(data.details);
+      },
+    }
+  );
+
+  // Year change handler
+  const handleSubmit = (value: string): void => {
+    setDashboardYear(value);
+    mutation.mutate({ year: value });
+    trainingPlanMutation.mutate({ year: value });
+    trainingProjectMutation.mutate({ year: value });
+    trainingActionLiquidedMutation.mutate(value)
+    businessPartnerMutation.mutate({ year: value });
+  };
+
+  useEffect(() => {
+    setAgreedProductsLoading(isAgreedProductsLoading);
+    setTrainingPlanLoading(isTrainingPlanLoading);
+    setTrainingProjectLoading(isTrainingProjectLoading);
+    setTrainingActionLoading(isTrainingActionLiquidedLoading);
+    setBusinessPartnerLoading(isBusinessPartnerDataLoading);
+
+    if (agreedProductsData) setAgreedProducts(agreedProductsData);
+    if (trainingPlanData) setTrainingPlan(trainingPlanData);
+    if (trainingProjectData) setTrainingProject(trainingProjectData);
+    if (trainingActionLiquidedData)
+      setTrainingAction(trainingActionLiquidedData);
+    if (businessPartnerData) setBusinessPartner(businessPartnerData.details);
+  }, [
+    agreedProductsData,
+    trainingPlanData,
+    trainingProjectData,
+    trainingActionLiquidedData,
+    setBusinessPartner,
+    businessPartnerData,
+    isAgreedProductsLoading,
+    isTrainingPlanLoading,
+    isTrainingProjectLoading,
+    isTrainingActionLiquidedLoading,
+    isBusinessPartnerDataLoading,
+  ]);
 
   return (
     <div className="flex justify-between items-center max-md:flex-col max-md:items-start">

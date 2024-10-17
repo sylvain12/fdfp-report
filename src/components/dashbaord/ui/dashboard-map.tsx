@@ -42,7 +42,7 @@ export default function DashboardMap() {
   // clearMap()
 
   useEffect(() => {
-    console.log(businessPartner);
+
     const svg = d3
       .select(map.current)
       .attr("width", width)

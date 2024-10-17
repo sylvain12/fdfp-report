@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { DasbboardAgreedProductsDataType, DashbordDataType } from '../model';
+import { DasbboardAgreedProductsDataType, DashbordDataType, BusinessPartnerType } from '../model';
 
 type State = {
   year: string;
@@ -72,3 +72,38 @@ export const useDashboardTrainngProjectStore = create<
     set(() => ({ dashboardData: data })),
   setLoading: (loading: boolean) => set(() => ({ isLoading: loading })),
 }));
+
+// Training Action Liquided
+type TrainingActionLiquidedAction = {
+  setTrainingAction: (data: DashbordDataType[]) => void;
+  setLoading: (loading: boolean) => void;
+};
+
+export const useDashboardTrainingActiontStore = create<
+  DashboardDataState & TrainingActionLiquidedAction
+>((set) => ({
+  dashboardData: [],
+  isLoading: false,
+  setTrainingAction: (data: DashbordDataType[]) =>
+    set(() => ({ dashboardData: data })),
+  setLoading: (loading: boolean) => set(() => ({ isLoading: loading })),
+}));
+
+
+// Busniess Partner
+type BusinessPartnerState = {
+  businessPartner: BusinessPartnerType[];
+  isLoading: boolean;
+};
+
+type BusinessPartnerAction = {
+  setBusinessPartner: (data: BusinessPartnerType[]) => void,
+  setLoading: (loading: boolean) => void;
+}
+
+export const useDashbaordBusinessPartnerStore = create<BusinessPartnerState & BusinessPartnerAction>((set) => ({
+  isLoading: false,
+  businessPartner: [],
+  setLoading: (loading:  boolean) => set(() => ({isLoading: loading})),
+  setBusinessPartner: (data: BusinessPartnerType[]) => set(() => ({businessPartner: data}))
+}))

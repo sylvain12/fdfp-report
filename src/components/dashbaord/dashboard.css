@@ -1,4 +1,4 @@
-
+@import './ui/dasboard-map.css';
 
 .dashboard__maintainer {
   display: grid;
@@ -6,6 +6,7 @@
   grid-auto-flow: row;
   margin-top: 2rem;
   gap: 2rem;
+  width: 100%;
 }
 
 

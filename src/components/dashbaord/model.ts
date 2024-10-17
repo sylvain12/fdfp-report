@@ -24,3 +24,13 @@ export const DashboardDataSchema = z.object({
   value: z.number(),
   extention: z.string(),
 });
+
+export type BusinessPartnerType = {
+  region: string;
+  total_count: number;
+}
+
+export const DashboardBusinessPartnerDataSchema = z.object({
+  region: z.string(),
+  total_count: z.number()
+})
