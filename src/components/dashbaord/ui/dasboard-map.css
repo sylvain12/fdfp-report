@@ -2,5 +2,29 @@
 .tooltip {
   @apply bg-background text-foreground p-5
 }
+
+.district__text {
+@apply font-space-grotesk font-semibold
 }
 
+}
+
+.tooltip {
+  position: absolute;
+  background-color: var(--background);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: var(--foreground);
+  pointer-events: none;
+  visibility: hidden;
+  padding: 0;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+  font-family: var(--font-clash-display);
+  text-align: left;
+}
+
+/* Tooltip visible state */
+.tooltip.visible {
+  visibility: visible;
+  opacity: 1;
+}

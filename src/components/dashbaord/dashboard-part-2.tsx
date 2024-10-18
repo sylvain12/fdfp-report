@@ -90,10 +90,15 @@ const { payload } = props;
   return (
     <div className="flex-grow flex flex-col gap-[2rem] max-[1225px]:mt-[4rem]">
       <div className="max-md:order-2 text-center">
-        <h2 className="text-[2rem] mb-[2rem] font-clash-display order-1 font-semibold text-center">
+        <h2 className="text-[2rem] mb-[2rem] font-clash-display order-1 font-semibold text-center leading-[20px] flex flex-col">
           ENTREPRISES PARTENAIRES
+          <span className="text-[1.4rem] font-medium text-fdfp-second">
+            (Survole pour voir les details)
+          </span>
         </h2>
-        {isLoading ? <DashboardMapLoader /> : <DashboardMap />}
+        <div className="tooltip" id="tooltip"></div>
+        {/* {isLoading ? <DashboardMapLoader /> : <DashboardMap />} */}
+        <DashboardMap />
       </div>
 
       {/* <div className="max-md:order-1">
