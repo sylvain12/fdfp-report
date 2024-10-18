@@ -61,14 +61,18 @@ export default function DashboardMap() {
       <span class='bg-foreground flex items-center justify-center h-10 w-10 text-background p-1 rounded-full font-semibold'>3</span>
       </div>
 
-      <div class='grid grid-cols-1 grid-flow-row gap-4 mt-4'>
+      <div class='grid grid-cols-1 grid-flow-row gap-2 mt-4'>
         <div class='flex items-center justify-between rounded-sm bg-foreground text-background p-3'>
-          <span class='uppercase text-thin'>Gontougo</span>
-          <span class='text-right text-bold'>${currencyFormatter(289)}</span>
+          <p class='uppercase text-thin'>Gontougo</p>
+          <p class='text-right text-bold text-fdfp-second'>${currencyFormatter(
+            289
+          )}</p>
         </div>
           <div class='flex items-center justify-between rounded-sm bg-foreground text-background p-3'>
-          <span class='uppercase text-thin'>Boukani</span>
-          <span class='text-right text-bold'>${currencyFormatter(1234)}</span>
+          <p class='uppercase text-thin'>Boukani</p>
+          <p class='text-right text-bold text-fdfp-second'>${currencyFormatter(
+            1234
+          )}</p>
         </div>
       </div>
     `);
