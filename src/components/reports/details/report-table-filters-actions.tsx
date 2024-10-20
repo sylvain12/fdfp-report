@@ -14,7 +14,7 @@ import { signal } from "@preact/signals";
 export const itemToShowCount = signal<number>(10);
 
 export default function ReportTableFiltersActions() {
-  const { data } = useGetData();
+  const data = useGetData(state => state.data);
   const { setFilterData, totalPagination } = useFilterData();
   const { currentPage, updatePage } = usePaginationStore();
   const searchParams = useSearchParams();

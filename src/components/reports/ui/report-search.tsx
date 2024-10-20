@@ -42,19 +42,20 @@ export default function ReportSearch() {
 
   const handleSearchByEntity = (e: FormEvent) => {
     const target = e.target as HTMLInputElement;
-    let filterData: any[] = [];
+    const prev = data.details
 
     if (target.value !== "") {
-      filterData = data.details.filter((item: any) => {
-        for (const property in item) {
-          const entity = getReportEntityName(item[property]);
-          if (entity.toLowerCase().includes(target.value.toLowerCase())) {
-            return item;
-          }
+      const res = data.details.filter((item: any) => {
+        const entity = getReportEntityName(item['entity_name']);
+        if (entity.toLowerCase().includes(target.value.toLowerCase())) {
+          return item;
         }
       });
+      updateFilterData(res);
+    }else {
+      updateFilterData(prev);
     }
-    updateFilterData(filterData);
+
   };
 
   const handleClearSearchText = useDebouncedCallback(() => {
@@ -78,7 +79,7 @@ export default function ReportSearch() {
           }
         )}
         type="text"
-        placeholder="Recherche par l'entitie"
+        placeholder="Recherche par l’entité"
       />
     </div>
   );

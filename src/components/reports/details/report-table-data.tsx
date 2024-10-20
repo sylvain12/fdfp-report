@@ -17,6 +17,7 @@ import clsx from "clsx";
 import { itemToShowCount } from "./report-table-filters-actions";
 import Image from "next/image";
 import ReportTableFiltersActions from "./report-table-filters-actions";
+import { ReportTableLoader } from './report-loader';
 
 export default function ReportTableData() {
   const { data, loading } = useGetData();
@@ -109,32 +110,32 @@ export default function ReportTableData() {
         {data === null && !loading && (
           <div
             className={clsx(
-              "bg-fdfp-bg-card border-y border-fdfp-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
+              "bg-transparent border-fdfp-light text-[1.5rem] font-medium py-[5rem] text-center w-full relative"
             )}
           >
-            <div className="text-center flex justify-center items-center flex-col max-w-[650px] mx-auto">
+            <div className="text-center flex justify-center items-center flex-col max-w-[650px] mx-auto font-clash-display">
               <Image
                 src="/assets/no-data.svg"
-                width={450}
-                height={450}
+                width={320}
+                height={320}
                 alt="Aucune information chargee"
                 className="mb-[2rem]"
               />
-              <p className="text-[1.65rem] mb-6 font-semibold">
+              <p className="text-[2.5rem] mb-2 font-medium text-center">
                 Aucune information
               </p>
-              <span className="font-thin">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure
-                dolores quod facere quis eos nobis labore hic distinctio esse
-                voluptas odio harum, doloremque pariatur eligendi reiciendis.
+              <span className="font-thin text-[1.8rem]">
+                Aucune donnée disponible pour le moment.
               </span>
             </div>
           </div>
         )}
       </div>
-      <div className="mt-[3rem]">
-        <ReportTableFiltersActions />
-      </div>{" "}
+      {loading && <ReportTableLoader />}
+
+      {/* <div className="mt-[3rem]">
+        {data !== null && <ReportTableFiltersActions />}
+      </div> */}
     </>
   );
 }

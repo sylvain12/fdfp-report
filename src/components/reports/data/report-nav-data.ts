@@ -57,7 +57,7 @@ const trainingPlansAndActionsNavs: TLink[] = [
     key: "PL_FORM",
   },
   {
-    name: "Actions de formations agrées",
+    name: "Actions de formation agréées",
     href: `/reports/training-plans-and-actions/details?${stringify({
       name: "Actions de formations agrées",
       table: "ACT_FORM_AGR",
