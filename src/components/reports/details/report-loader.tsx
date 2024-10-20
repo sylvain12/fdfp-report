@@ -7,16 +7,16 @@ export const ReportTableLoader = () => {
       <table className="w-full text-right rtl:text-right">
         <thead className="text-[1.2rem] border-b border-t border-fdfp-light bg-fdfp-bg-thead">
           <tr>
-            <th className="px-6 py-6 text-left bg-fdfp-bg-thead">
+            <th className="px-6 py-6 text-left bg-background">
               <Skeleton className="w-[150px] h-[20px] rounded-full max-md:w-full" />
             </th>
-            <th className="px-6 py-6 text-center bg-fdfp-bg-thead visible max-md:hidden">
+            <th className="px-6 py-6 text-center bg-background visible max-md:hidden">
               <Skeleton className="w-[150px] h-[20px] rounded-full" />
             </th>
-            <th className="px-6 py-6 text-center bg-fdfp-bg-thead visible max-md:hidden">
+            <th className="px-6 py-6 text-center bg-background visible max-md:hidden">
               <Skeleton className="w-[150px] h-[20px] rounded-full" />
             </th>
-            <th className="px-6 py-6 text-center bg-fdfp-bg-thead visible max-md:hidden">
+            <th className="px-6 py-6 text-center bg-background visible max-md:hidden">
               <Skeleton className="w-[150px] h-[20px] rounded-full" />
             </th>
           </tr>

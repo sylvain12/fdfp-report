@@ -60,7 +60,7 @@ export default function ReportTableData() {
                   <th
                     key={Object.values(columns)[0]}
                     scope="col"
-                    className="px-6 py-6 text-left bg-fdfp-bg-thead"
+                    className="px-6 py-6 text-left bg-background"
                   >
                     {Object.values(columns)[0]}
                   </th>
@@ -70,7 +70,7 @@ export default function ReportTableData() {
                       <th
                         key={column.trim()}
                         scope="col"
-                        className="px-6 py-6 text-center bg-fdfp-bg-thead"
+                        className="px-6 py-6 text-center bg-background"
                       >
                         {column.trim()}
                       </th>
