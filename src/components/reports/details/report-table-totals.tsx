@@ -31,7 +31,7 @@ export default function ReportTableTotals() {
     >
       <div className="absolute top-1/2 -translate-y-1/2 left-8 text-left">
         <p className="text-[1.3rem]">Annee</p>
-        <span className="text-fdfp-second text-[1.9em]">{year}</span>
+        <span className="text-fdfp-second text-[1.9em] font-space-grotesk">{year}</span>
       </div>
       {isVisible && (
         <div className="report-details-totals-items">
@@ -39,7 +39,7 @@ export default function ReportTableTotals() {
             totalsData.map((total) => (
               <div key={total.label} className="report-details-totals-item">
                 <p>{total?.label!}</p>
-                <span>{currencyFormatter(total.value, " ")}</span>
+                <span className='font-space-grotesk'>{currencyFormatter(total.value, " ")}</span>
               </div>
             ))}
         </div>
@@ -47,7 +47,7 @@ export default function ReportTableTotals() {
 
       <div
         onClick={() => setVisibility(false)}
-        className="absolute top-[1.5rem] right-[3rem] cursor-pointer"
+        className="absolute top-[1.5rem] right-[1.5rem] cursor-pointer"
       >
         <Icon icon="clarity:times-line" width="42" />
       </div>

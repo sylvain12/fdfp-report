@@ -96,7 +96,10 @@ export default function ReportTableData() {
                       {Object.keys(item)
                         .slice(1)
                         .map((column: string) => (
-                          <td key={column} className="px-6 py-5">
+                          <td
+                            key={column}
+                            className="px-6 py-5 font-space-grotesk"
+                          >
                             {/* {" "} */}
                             {currencyFormatter(item[column], " ")}
                           </td>

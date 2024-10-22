@@ -67,7 +67,7 @@
     }
 
     .report-details-totals {
-        @apply sticky right-0 left-0 top-[66.5px] w-full bg-fdfp-bg-card py-[3em] px-[7em] opacity-0 invisible transition-all mb-[1rem] z-10 hidden border-t border-fdfp-light
+        @apply sticky right-0 left-0 top-[66.5px] w-full bg-background py-[3em] px-[7em] opacity-0 invisible transition-all mb-[1rem] z-10 hidden
     }
 
     .report-details-totals-items {

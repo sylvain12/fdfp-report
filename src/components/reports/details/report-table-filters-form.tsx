@@ -1,3 +1,5 @@
+"use client"
+
 import { resetPageURL } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
@@ -12,6 +14,19 @@ import Image from "next/image";
 import clsx from "clsx";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { useTableFilterStore } from "@/store/report.store";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Form, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+
 
 type Inputs = {
   year: string;
@@ -38,23 +53,22 @@ export default function ReportTableFiltersForm() {
   const { replace } = useRouter();
   const { tables, setTables } = useTableFilterStore();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isDirty },
-  } = useForm<Inputs>({ resolver: zodResolver(schema) });
+  const form = useForm<Inputs>({ resolver: zodResolver(schema),
+defaultValues: {year: '', key: ''} });
 
   const formRef = useRef<HTMLFormElement>(null);
-  const tableSelectInput =
-    formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
-  const yearSelectedInput =
-    formRef.current !== null ? (formRef.current![0] as HTMLSelectElement) : "";
+  // const tableSelectInput =
+  //   formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
+  // const yearSelectedInput =
+  //   formRef.current !== null ? (formRef.current![0] as HTMLSelectElement) : "";
+
+  const tableSelectInput = form.watch('key')
+  const yearSelectedInput = form.watch('year')
   filterFormValue.value = {
-    year: yearSelectedInput !== "" ? yearSelectedInput.value : "",
+    year: yearSelectedInput !== "" ? yearSelectedInput : "",
     table:
       tableSelectInput !== ""
-        ? tableSelectInput.options[tableSelectInput.selectedIndex].text
+        ? tableSelectInput
         : "fdfp-export",
   };
 
@@ -69,87 +83,104 @@ export default function ReportTableFiltersForm() {
         ...formValue,
         table:
           tableSelectInput !== ""
-            ? tableSelectInput.options[tableSelectInput.selectedIndex].text
+            ? tableSelectInput
             : "fdfp-export",
       };
     }
   };
 
-  const isDisabled = () => watch("key") === "" || watch("year") === "";
+  const isDisabled = () => form.watch("key") === "" || form.watch("year") === "";
 
   return (
-    <form
-      ref={formRef}
-      className="flex items-end text-[1.3rem] gap-4 flex-1 w-full max-md:flex-col"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="max-md:w-full">
-        <label htmlFor="year" className="block font-medium">
-          Années
-        </label>
-        <select
-          {...register("year")}
-          name="year"
-          id="year"
-          className={clsx("input-select")}
-        >
-          <option defaultValue=""></option>
-          {yearFilterList
-            .sort((a, b) => b - a)
-            .map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-        </select>
-      </div>
-      <div className="flex-1 w-full">
-        <label htmlFor="key" className="block font-medium">
-          Tables
-        </label>
-        <select
-          {...register("key")}
-          name="key"
-          id="key"
-          className="w-full input-select"
-          disabled={tables == undefined}
-        >
-          <option defaultValue=""></option>
-          {tables
-            .sort((a, b) =>
-              a.entitylabel
-                .toLowerCase()
-                .localeCompare(b.entitylabel.toLowerCase())
-            )
-            .map((table) => (
-              <option
-                key={`${table.entity}-${table.procname}`}
-                value={table.entity + "-" + table.procname}
-              >
-                {table.entitylabel}
-              </option>
-            ))}
-        </select>
-      </div>
-      <button
-        disabled={isDisabled() || loading}
-        type="submit"
-        className="btn btn-icon btn-main btn-main uppercase max-md:w-full max-md:flex max-md:justify-center max-md:mt-4"
+    <Form {...form}>
+      <form
+        ref={formRef}
+        className="flex items-end text-[1.3rem] gap-4 flex-1 w-full max-md:flex-col"
+        onSubmit={form.handleSubmit(onSubmit)}
       >
-        Envoyer
-        <ArrowPathIcon className="w-8" />
-      </button>
+        <FormField
+          control={form.control}
+          name="year"
+          render={({ field }) => (
+            <FormItem className="max-md:w-full">
+              <FormLabel>Années</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className={clsx("h-[38px] w-[70px] font-space-grotesk")}>
+                  <SelectValue placeholder="---" />
+                </SelectTrigger>
+                <SelectContent>
+                  {yearFilterList
+                    .sort((a, b) => b - a)
+                    .map((year) => (
+                      <SelectItem
+                        className={clsx("font-space-grotesk")}
+                        key={year}
+                        value={`${year}`}
+                      >
+                        {year}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
 
-      {loading && (
-        <div className="flex justify-center items-center max-md:order-1">
+        <FormField
+          control={form.control}
+          name="key"
+          render={({ field }) => (
+            <FormItem className="flex-1 w-full">
+              <FormLabel>Tables</FormLabel>
+              <Select
+                disabled={tables == undefined}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <SelectTrigger name="key" className="h-[38px] w-full input-select">
+                  <SelectValue placeholder="---" />
+                </SelectTrigger>
+                <SelectContent>
+                  {tables
+                    .sort((a, b) =>
+                      a.entitylabel
+                        .toLowerCase()
+                        .localeCompare(b.entitylabel.toLowerCase())
+                    )
+                    .map((table) => (
+                      <SelectItem
+                        key={`${table.entity}-${table.procname}`}
+                        value={table.entity + "-" + table.procname}
+                      >
+                        {table.entitylabel}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+
+        <button
+          disabled={isDisabled() || loading}
+          type="submit"
+          className="btn btn-icon btn-main btn-main uppercase max-md:w-full max-md:flex max-md:justify-center max-md:mt-4"
+        >
+          Envoyer
+          {/* <ArrowPathIcon className="w-8" /> */}
+        </button>
+
+        {/* {loading && (
+        <div className="flex justify-center items-center max-md:order-1 max-md:hidden">
           <Image
             src="/assets/data-loader.gif"
-            width={46}
-            height={46}
+            width={30}
+            height={30}
             alt="Aucune information chargee"
           />
         </div>
-      )}
-    </form>
+      )} */}
+      </form>
+    </Form>
   );
 }

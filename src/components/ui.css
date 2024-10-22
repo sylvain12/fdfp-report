@@ -1,6 +1,6 @@
 @layer components {
     .btn {
-        @apply text-[1.2rem] border font-bold px-[1.05em] py-[0.725em] h-[40px]
+        @apply text-[1.2rem] border font-bold px-[1.05em] py-[0.725em] h-[38px]
     }
 
     .btn:disabled {

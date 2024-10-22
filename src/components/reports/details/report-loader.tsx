@@ -22,7 +22,7 @@ export const ReportTableLoader = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 4 }).map((_, index: number) => (
+          {Array.from({ length: 3 }).map((_, index: number) => (
             <tr
               key={index + 1}
               className="bg-fdfp-bg-white border-b border-fdfp-light text-[1.4rem] font-normal text-center"

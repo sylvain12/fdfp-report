@@ -10,6 +10,14 @@ import { usePaginationStore } from "@/store/pagination.store";
 import clsx from "clsx";
 import { ChangeEvent } from "react";
 import { signal } from "@preact/signals";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 
 export const itemToShowCount = signal<number>(10);
 
@@ -43,23 +51,29 @@ export default function ReportTableFiltersActions() {
           <label htmlFor="itemsCount" className="block font-medium">
             Affiché
           </label>
-          <select
-            defaultValue={itemToShowCount.value}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) =>
-              handleItemCountChange(Number(event.target.value))
+          <Select
+            defaultValue={itemToShowCount.value.toString()}
+            onValueChange={(value: string) =>
+              handleItemCountChange(Number(value))
             }
-            name="itemsCount"
-            id="itemsCount"
-            className={clsx(
-              "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent"
-            )}
           >
-            {itemToShowList.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger
+              name="itemsCount"
+              id='itemsCount'
+              className={clsx(
+                "border border-fdfp-second text-[1.4rem] px-2 py-[0.725em] focus:outline-none hover:outline-none active:outline-none bg-transparent font-space-grotesk w-[35px]"
+              )}
+            >
+              <SelectValue placeholder="---" />
+            </SelectTrigger>
+            <SelectContent>
+              {itemToShowList.map((item) => (
+                <SelectItem key={item} value={`${item}`}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </form>
       {data !== null && totalPagination > 1 && (

@@ -7,6 +7,15 @@ import { useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
 import { filterFormValue } from "../reports/details/report-table-filters-form";
 import { useRef } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 
 export default function ActionLink() {
   const { data } = useGetData();
@@ -87,82 +96,42 @@ export default function ActionLink() {
   return (
     <>
       {reportName !== null && (
-        <div className="flex items-center justify-end h-full gap-5">
-          <div className="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                onClick={handleDisplayExport}
-                className={clsx(
-                  "btn btn-icon btn-main-transparent uppercase h-full",
+        <div className="relative flex items-center justify-end h-full gap-5">
+  <DropdownMenu>
+    <DropdownMenuTrigger  className={clsx(
+                  "btn btn-icon btn-main-transparent uppercase h-full w-[140px] max-md:w-[70px]",
                   {
                     "pointer-events-none opacity-35": data === null,
                   }
-                )}
-                id="export-menu-button"
-                aria-expanded="true"
-                aria-haspopup="true"
-              >
-                <Icon
-                  className="export-menu-button-icon-left"
+                )}>
+ <Icon
+                  className="export-menu-button-icon-left size-10"
                   icon="iconoir:database-export"
-                  width="22px"
                 />
-                <span className="max-md:hidden inline-block">Export en</span>
-                <Icon
+                <span className="max-md:hidden inline-block">Exporter</span>
+    <Icon
                   className="export-menu-button-icon-right"
                   icon="line-md:chevron-small-down"
                   width="18px"
-                />
-              </button>
-            </div>
-
-            <div
-              ref={exportRef}
-              className="absolute right-0 z-10 mt-2 origin-top-right bg-fdfp-bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none w-full hidden"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabIndex={-1}
-            >
-              <div className="" role="none">
-                <button
-                  onClick={handleExportToExcel}
-                  className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 border-b border-fdfp-light text-green-700 hover:bg-fdfp-bg-thead max-[1251px]:justify-center",
-                    { "pointer-events-none opacity-35": data === null }
-                  )}
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="menu-item-1"
-                >
-                  <Icon
+                /></DropdownMenuTrigger>
+    <DropdownMenuContent className='w-[140px] max-md:w-[50px]'>
+        <DropdownMenuItem className='text-green-700 cursor-pointer flex items-center gap-4' onClick={handleExportToCSV}>
+<Icon
                     icon="vscode-icons:file-type-excel2"
-                    width={"22px"}
-                    className="w-12"
+                    width={"32px"}
+                    className="w-[50px]"
                   />
-                  <span className="max-md:hidden inline-block">EXCEL</span>
-                </button>
-                <button
-                  onClick={handleExportToCSV}
-                  className={clsx(
-                    "px-4 py-2 text-[1.8rem] w-full font-normal flex items-center gap-4 text-red-600 hover:bg-fdfp-bg-thead max-[1251px]:justify-center",
-                    { "pointer-events-none opacity-35": data === null }
-                  )}
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="menu-item-2"
-                >
-                  <Icon
+                  <span className="max-md:hidden inline-block">EXCEL</span></DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className='text-red-600 cursor-pointer flex items-center gap-4' onClick={handleExportToCSV}><Icon
                     icon="iwwa:file-csv"
                     width={"32px"}
-                    className="w-12 text-red-600"
+                    className="text-red-600"
                   />
-                  <span className="max-md:hidden inline-block">CSV</span>
-                </button>
-              </div>
-            </div>
-          </div>
+                  <span className="max-md:hidden inline-block">CSV</span></DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+
         </div>
       )}
     </>
