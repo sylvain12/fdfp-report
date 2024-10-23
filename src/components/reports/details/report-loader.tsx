@@ -46,3 +46,19 @@ export const ReportTableLoader = () => {
     </>
   );
 }
+
+
+// Totals section loader
+export const ReportTotalLoader = () => {
+
+  return (
+    <div className='flex flex-1 gap-2'>
+      {Array.from({ length: 4 }).map((_, index: number) => (
+        <div className='flex flex-1 flex-col text-right gap-1 items-end' key={index}>
+          <Skeleton className='w-[90%] h-[20px]' />
+          <Skeleton className='w-[70%] h-[20px]' />
+        </div>
+      ))}
+    </div>
+  );
+}

@@ -8,20 +8,24 @@ import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 import { filterFormValue } from "./report-table-filters-form";
 import { useDebouncedCallback } from "use-debounce";
+import {ReportTotalLoader} from './report-loader'
 
 export default function ReportTableTotals() {
-  const { data, loading } = useGetData();
-  const { isVisible, setVisibility } = useReportTotalStore();
+  const data = useGetData(state => state.data);
+  const loading = useGetData(state => state.loading);
+  
+  const isVisible =  useReportTotalStore(state => state.isVisible)
+  const setVisibility = useReportTotalStore((state) => state.setVisibility);
   const { year } = filterFormValue.value;
 
   const totalsData = useMemo(() => {
-    // if (loading || data === null) return null;
+    if (loading || data === null) return null;
     return data !== null ? data.totals : null;
   }, [year, data]);
 
   useEffect(() => {
     return () => setVisibility(false);
-  }, [data]);
+  }, []);
 
   return (
     <div
@@ -35,13 +39,15 @@ export default function ReportTableTotals() {
       </div>
       {isVisible && (
         <div className="report-details-totals-items">
-          {totalsData !== null &&
-            totalsData.map((total) => (
-              <div key={total.label} className="report-details-totals-item">
-                <p>{total?.label!}</p>
-                <span className='font-space-grotesk'>{currencyFormatter(total.value, " ")}</span>
-              </div>
-            ))}
+                {totalsData === null && loading ? <ReportTotalLoader /> :
+                  totalsData!.map((total) => (
+                    <div key={total.label} className="report-details-totals-item">
+                      <p>{total?.label!}</p>
+                      <span className='font-space-grotesk'>{currencyFormatter(total.value, " ")}</span>
+                    </div>
+                  ))}
+
+            {/* <ReportTotalLoader /> */}
         </div>
       )}
 
