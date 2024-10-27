@@ -3,6 +3,7 @@ import { Err, Ok, Result } from "@sylvainka12/resultjs";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import * as d3 from "d3";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -135,4 +136,8 @@ export const getReportEntityName = (value: string) => {
   return value !== null ? value.replaceAll(/[' ', %]/g, "") : "0";
 };
 
+
+export const clearMap = () => {
+  d3.selectAll("svg > *").remove();
+}
 // export { getReportPathDetails, parseCookie, buildPagination };
