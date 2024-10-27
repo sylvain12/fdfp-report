@@ -57,11 +57,6 @@ export default function ReportTableFiltersForm() {
 defaultValues: {year: '', key: ''} });
 
   const formRef = useRef<HTMLFormElement>(null);
-  // const tableSelectInput =
-  //   formRef.current !== null ? (formRef.current![1] as HTMLSelectElement) : "";
-  // const yearSelectedInput =
-  //   formRef.current !== null ? (formRef.current![0] as HTMLSelectElement) : "";
-
   const tableSelectInput = form.watch('key')
   const yearSelectedInput = form.watch('year')
   filterFormValue.value = {
