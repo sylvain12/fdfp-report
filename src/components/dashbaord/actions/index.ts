@@ -5,8 +5,9 @@ import z from "zod";
 import {
   DasbboardAgreedProductsDataSchema,
   DashboardDataSchema,
-  DashboardBusinessPartnerDataSchema,
+  BusinessPartnerType,
   DashbordDataType,
+   
 } from "../model";
 import {
   API_DASHBOARD_AGREED_PRODUCT_PATH,
@@ -115,20 +116,38 @@ export const DashboardTrainingLiquidedAction = createServerAction()
   });
 
 // Business Partner Server Action
-export const DashbaordBusinessPartnerAction = createServerAction()
-  .input(
-    z.object({
-      year: z.string(),
-    })
-  )
-  .output(z.object({details: z.array(DashboardBusinessPartnerDataSchema)}))
-  .handler(async ({ input }) => {
-    const res = await fetch(
-      `${businessPartnerURL}?${stringify({ year: input.year })}`
-    );
-    return res.json()
-  });
+// export const DashbaordBusinessPartnerAction = createServerAction()
+//   .input(
+//     z.object({
+//       year: z.string(),
+//     })
+//   )
+//   .output(z.object({details: z.array(DashboardBusinessPartnerDataSchema)}))
+//   .handler(async ({ input }) => {
+//     const res = await fetch(
+//       `${businessPartnerURL}?${stringify({ year: input.year })}`
+//     );
+//     return res.json()
+//   });
 
+export const loaddBusinessPartnerAction = async (year: string
+) => {
+  async function doFetch(): Promise<BusinessPartnerType[]> {
+    try {
+      const res = await fetch(
+        `${businessPartnerURL}?${stringify({ year: year })}`
+      );
+      return await res.json();
+    } catch (error: any) {
+      throw new Error("Error fetching data:", error);
+    }
+  }
+  revalidatePath(businessPartnerURL);
+  return { promise: doFetch() };
+};
+
+
+// Training Action Server Action
 export async function loadTrainingAction(year: string) {
   async function doFetch(): Promise<DashbordDataType[]> {
     try {
@@ -142,5 +161,5 @@ export async function loadTrainingAction(year: string) {
   }
 
   revalidatePath(trainingPlanURL)
-  return {promise: doFetch()}
+  return { promise: doFetch() }
 }

@@ -146,8 +146,9 @@ html {
 
 html,
 body {
-  max-width: 100vw;
+  max-width: 100dvw;
   overflow-x: hidden;
+  height: 95dvh;
 }
 
 body {
@@ -157,7 +158,6 @@ body {
   color: var(--fdfp-text-color-second);
   font-size: 1.5rem;
   font-weight: var(--fw-300);
-  height: 100vh;
 }
 
 a {
@@ -185,7 +185,6 @@ svg path {
     "navbar navbar"
     "content content";
   height: 100%;
-  min-height: 100vh;
 }
 
 
@@ -202,7 +201,7 @@ svg path {
 
 .main-navbar {
   display: grid;
-  grid-template-columns: 70px 100px 1fr 310px;
+  grid-template-columns: 70px 100px 1fr 180px;
   grid-auto-rows: auto;
   grid-area: navbar;
   align-items: center;

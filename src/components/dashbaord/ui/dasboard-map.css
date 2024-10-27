@@ -7,6 +7,27 @@
 @apply font-space-grotesk font-semibold
 }
 
+
+/* Legend */
+.map-legend {
+@apply bg-black translate-y-[-25px] translate-x-[-90px] h-auto
+}
+.map-legend__text {
+  @apply text-fdfp-main font-space-grotesk text-[11px] font-medium
+}
+
+#legend {
+  @apply w-fit grid grid-cols-3 grid-flow-row gap-6 gap-x-[2rem] font-space-grotesk text-[12px]
+}
+
+#legend-title {
+@apply text-foreground font-space-grotesk text-[12px] font-normal uppercase mb-6
+}
+
+.legend-item {
+@apply flex items-center gap-4
+}
+
 }
 
 .tooltip {

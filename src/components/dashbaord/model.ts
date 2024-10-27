@@ -25,12 +25,22 @@ export const DashboardDataSchema = z.object({
   extention: z.string(),
 });
 
-export type BusinessPartnerType = {
+export type BusinessRegionType = {
   region: string;
   total_count: number;
+};
+
+export type BusinessPartnerType = {
+  district: string;
+  total_district: number;
+  regions: BusinessRegionType[];
 }
 
-export const DashboardBusinessPartnerDataSchema = z.object({
-  region: z.string(),
-  total_count: z.number()
+export const BusinessPartnerSchema = z.object({
+  district: z.string(),
+  total_district: z.number(),
+  regions: z.object({
+    region: z.string(),
+    total_count: z.number(),
+  }),
 })

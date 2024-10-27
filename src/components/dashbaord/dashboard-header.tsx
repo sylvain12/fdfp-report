@@ -19,12 +19,12 @@ import {
   DashboardTrainingPlanAction,
   DashboardTrainingProjectAction,
   DashboardTrainingLiquidedAction,
-  DashbaordBusinessPartnerAction,
-  // DashboardTrainingDataAction
-loadTrainingAction
+loadTrainingAction,
+loaddBusinessPartnerAction
 } from "./actions";
 import { useDebounce } from 'use-debounce';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { clearMap } from '@/lib/utils';
 
 
 export default function DashboardHeader() {
@@ -92,24 +92,6 @@ export default function DashboardHeader() {
     },
   });
 
-  // Training Action Liquided Query
-  const {
-    isLoading: isTrainingActionLiquidedLoading,
-    data: trainingActionLiquidedData,
-  } = useQuery({
-    queryKey: ["trainingActionLiquided", year],
-    queryFn: async () => await loadTrainingAction(year).then(r => r.promise),
-  });
-
-  const trainingActionLiquidedMutation = useMutation(
-    {
-      mutationFn: async (year: string) => await loadTrainingAction(year).then(r => r.promise),
-      onSuccess: (data) => {
-        setTrainingAction(data);
-      }
-    }
-  );
-
   // Training Plan Quey
   const { isLoading: isTrainingPlanLoading, data: trainingPlanData } =
     useServerActionQuery(DashboardTrainingPlanAction, {
@@ -144,31 +126,48 @@ export default function DashboardHeader() {
     }
   );
 
+  // Training Action Liquided Query
+  const {
+    isLoading: isTrainingActionLiquidedLoading,
+    data: trainingActionLiquidedData,
+  } = useQuery({
+    queryKey: ["trainingActionLiquided", year],
+    queryFn: async () => await loadTrainingAction(year).then((r) => r.promise),
+  });
+
+  const trainingActionLiquidedMutation = useMutation({
+    mutationFn: async (year: string) =>
+      await loadTrainingAction(year).then((r) => r.promise),
+    onSuccess: (data) => {
+      setTrainingAction(data);
+    },
+  });
+
   // Business Partner Query
   const { isLoading: isBusinessPartnerDataLoading, data: businessPartnerData } =
-    useServerActionQuery(DashbaordBusinessPartnerAction, {
-      input: { year: year },
-      queryKey: ["busnessPartner", debouncedYear],
-      enabled: !!debouncedYear,
+    useQuery({
+      queryKey: ["busnessPartner", year],
+      queryFn: async () =>
+        await loaddBusinessPartnerAction(year).then((r) => r.promise),
     });
 
-  const businessPartnerMutation = useServerActionMutation(
-    DashbaordBusinessPartnerAction,
-    {
-      onSuccess: (data) => {
-        setBusinessPartner(data.details);
-      },
-    }
-  );
+  const businessPartnerMutation = useMutation({
+    mutationFn: async (year: string) =>
+      await loaddBusinessPartnerAction(year).then((r) => r.promise),
+    onSuccess: (data) => {
+      setBusinessPartner(data);
+    },
+  });
 
   // Year change handler
   const handleSubmit = (value: string): void => {
+    // clearMap();
     setDashboardYear(value);
     mutation.mutate({ year: value });
     trainingPlanMutation.mutate({ year: value });
     trainingProjectMutation.mutate({ year: value });
-    trainingActionLiquidedMutation.mutate(value)
-    businessPartnerMutation.mutate({ year: value });
+    trainingActionLiquidedMutation.mutate(value);
+    businessPartnerMutation.mutate(value);
   };
 
   useEffect(() => {
@@ -183,20 +182,22 @@ export default function DashboardHeader() {
     if (trainingProjectData) setTrainingProject(trainingProjectData);
     if (trainingActionLiquidedData)
       setTrainingAction(trainingActionLiquidedData);
-    if (businessPartnerData) setBusinessPartner(businessPartnerData.details);
-  }, [
-    agreedProductsData,
-    trainingPlanData,
-    trainingProjectData,
-    trainingActionLiquidedData,
-    setBusinessPartner,
-    businessPartnerData,
-    isAgreedProductsLoading,
-    isTrainingPlanLoading,
-    isTrainingProjectLoading,
-    isTrainingActionLiquidedLoading,
-    isBusinessPartnerDataLoading,
-  ]);
+    if (businessPartnerData) setBusinessPartner(businessPartnerData);
+  });
+
+// [
+//     agreedProductsData,
+//     trainingPlanData,
+//     trainingProjectData,
+//     trainingActionLiquidedData,
+//     setBusinessPartner,
+//     businessPartnerData,
+//     isAgreedProductsLoading,
+//     isTrainingPlanLoading,
+//     isTrainingProjectLoading,
+//     isTrainingActionLiquidedLoading,
+//     isBusinessPartnerDataLoading,
+//   ]
 
   return (
     <div className="flex justify-between items-center max-md:flex-col max-md:items-start">

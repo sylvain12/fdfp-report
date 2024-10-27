@@ -16,20 +16,23 @@ import React from 'react';
 
 
 export default function ReportTableDetails() {
-  const { showedTable } = useTable();
+  const showedTable = useTable(state => state.showedTable);
   const searchPath = useSearchParams();
-  const { setTables } = useTableFilterStore();
+  const setTables = useTableFilterStore(state => state.setTables);
+  const setLoading = useTableFilterStore(state => state.setLoading);
   const reportTableKey = searchPath.get("table");
   const url = `${API_URL}/${API_SUBGROUP_PATH}/?${stringify({
     subgroup: reportTableKey,
   })}`;
 
-  const { data } = useQuery<TTableFilterStoreStore[]>({
+  const { isLoading: isTableDataLoading, data } = useQuery<TTableFilterStoreStore[]>({
     queryKey: [reportTableKey],
     queryFn: () => fetch(url).then((res) => res.json()),
   });
 
   useEffect(() => {
+    setLoading(isTableDataLoading)
+
     if (data) {
       setTables(data);
     }

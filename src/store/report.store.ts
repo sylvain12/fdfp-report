@@ -10,14 +10,18 @@ export interface TTableFilterStoreStore {
 
 type TableFilterStore = {
   tables: TTableFilterStoreStore[];
+  isLoading: boolean;
   setTables: (content: TTableFilterStoreStore[]) => void;
+  setLoading: (state: boolean) => void;
 };
 
 export const useTableFilterStore = create<TableFilterStore>((set) => ({
   tables: [],
+  isLoading: false,
   setTables: async (content: TTableFilterStoreStore[]) => {
     set({ tables: content });
   },
+  setLoading: (state: boolean) => set(() => ({isLoading: state}))
 }));
 
 export const useReportStore = () => {

@@ -90,15 +90,26 @@ const { payload } = props;
   return (
     <div className="flex-grow flex flex-col gap-[2rem] max-[1225px]:mt-[4rem]">
       <div className="max-md:order-2 text-center">
-        <h2 className="text-[2rem] mb-[2rem] font-clash-display order-1 font-semibold text-center leading-[20px] flex flex-col">
+        <h2 className="text-[2rem] font-clash-display order-1 font-semibold text-center leading-[20px] flex flex-col">
           ENTREPRISES PARTENAIRES
           <span className="text-[1.4rem] font-medium text-fdfp-second">
-            (Survole pour voir les details)
+            (Survole pour voir les détails)
           </span>
         </h2>
         <div className="tooltip" id="tooltip"></div>
-        {/* {isLoading ? <DashboardMapLoader /> : <DashboardMap />} */}
-        <DashboardMap />
+        {isLoading ? (
+          <DashboardMapLoader />
+        ) : (
+          <>
+            <DashboardMap />
+
+            <div className="w-full flex flex-col items-center">
+              <h3 id="legend-title">Nombre {"d'entreprises"} par district</h3>
+              <div id="legend"></div>
+            </div>
+          </>
+        )}
+        {/* <DashboardMap /> */}
       </div>
 
       {/* <div className="max-md:order-1">

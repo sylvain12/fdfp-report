@@ -36,7 +36,7 @@
    }
 
    .nav-right-user {
-      @apply flex items-center text-right flex-1 justify-end;
+      @apply flex items-center text-right flex-1 justify-center;
    }
 
    .nav-right-menu {

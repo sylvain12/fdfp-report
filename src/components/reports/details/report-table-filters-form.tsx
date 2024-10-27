@@ -14,6 +14,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { useTableFilterStore } from "@/store/report.store";
+import {Icon} from '@iconify/react'
 
 import {
   Select,
@@ -46,12 +47,14 @@ export const filterFormValue = signal<{ year: string; table: string }>({
 });
 
 export default function ReportTableFiltersForm() {
-  const { data, loadTable, loading } = useGetData();
+  const loading = useGetData(state => state.loading)
+  const loadTable = useGetData((state) => state.loadTable);
   const searchParams = useSearchParams();
-  const { updatePage } = usePaginationStore();
+  const updatePage = usePaginationStore(state => state.updatePage);
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { tables, setTables } = useTableFilterStore();
+  const tables = useTableFilterStore(state => state.tables)
+  const isTableDataLoaing = useTableFilterStore((state) => state.isLoading);
 
   const form = useForm<Inputs>({ resolver: zodResolver(schema),
 defaultValues: {year: '', key: ''} });
@@ -100,7 +103,9 @@ defaultValues: {year: '', key: ''} });
             <FormItem className="max-md:w-full">
               <FormLabel>Années</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <SelectTrigger className={clsx("h-[38px] w-[70px] font-space-grotesk")}>
+                <SelectTrigger
+                  className={clsx("h-[38px] w-[70px] font-space-grotesk")}
+                >
                   <SelectValue placeholder="---" />
                 </SelectTrigger>
                 <SelectContent>
@@ -128,11 +133,14 @@ defaultValues: {year: '', key: ''} });
             <FormItem className="flex-1 w-full">
               <FormLabel>Tables</FormLabel>
               <Select
-                disabled={tables == undefined}
+                disabled={isTableDataLoaing}
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <SelectTrigger name="key" className="h-[38px] w-full input-select">
+                <SelectTrigger
+                  name="key"
+                  className="h-[38px] w-full input-select"
+                >
                   <SelectValue placeholder="---" />
                 </SelectTrigger>
                 <SelectContent>
@@ -162,7 +170,7 @@ defaultValues: {year: '', key: ''} });
           className="btn btn-icon btn-main btn-main uppercase max-md:w-full max-md:flex max-md:justify-center max-md:mt-4"
         >
           Envoyer
-          {/* <ArrowPathIcon className="w-8" /> */}
+          {loading && <Icon icon="svg-spinners:bars-fade" className="w-8" />}
         </button>
 
         {/* {loading && (

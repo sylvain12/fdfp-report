@@ -94,7 +94,7 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
           <div className="flex max-md:hidden">
             <Tabs defaultValue="plan" className="w-full">
               <TabsList>
-                <TabsTrigger value="plan">Plan de formation</TabsTrigger>
+                <TabsTrigger value="plan">Plans de formation</TabsTrigger>
                 <TabsTrigger value="projects">
                   Projets de formation agréés
                 </TabsTrigger>
@@ -186,7 +186,7 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
             >
               <AccordionItem value="item-1">
                 <AccordionTrigger className="font-clash-display font-medium">
-                  Plan de formation
+                  Plans de formation
                 </AccordionTrigger>
                 <AccordionContent>
                   {isTrainingPlanDataLoading ? (
