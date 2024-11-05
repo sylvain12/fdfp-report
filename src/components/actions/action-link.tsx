@@ -18,10 +18,11 @@ import {
 
 
 export default function ActionLink() {
-  const { data } = useGetData();
+  const data = useGetData(state => state.data);
   const searchParam = useSearchParams();
   const reportName = searchParam.get("name");
   const today = new Date();
+  const exportRef = useRef<HTMLDivElement>(null);
   const formattedDay =
     today.getDay() < 10 ? `0${today.getDay()}` : today.getDay();
   const formattedMonths =
@@ -39,8 +40,24 @@ export default function ActionLink() {
   }_${filterFormValue.value.year}_${formattedDate}`;
 
   const handleExportToExcel = () => {
+const prefix = "hd_";
+ const transformedData = data.details.map((item) => {
+   const transformedItem: any = {};
+
+   for (const key in item) {
+     const newKey = key.toLowerCase().includes("entity_name")
+       ? key
+       : `${prefix}${key}`;
+     if (data.headers[newKey]) {
+       transformedItem[data.headers[newKey]] = item[key];
+     }
+   }
+   return transformedItem;
+ });
     const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(data.details);
+    const ws = XLSX.utils.json_to_sheet(transformedData);
+    
+   
     const fileSheetName = filterFormValue.value.year || "sheet1";
 
     XLSX.utils.book_append_sheet(wb, ws, fileSheetName);
@@ -48,10 +65,22 @@ export default function ActionLink() {
   };
 
   const handleExportToCSV = () => {
-    const header = Object.keys(data.details[0]);
+const prefix = "hd_";
+  const transformedData = data.details.map((item) => {
+        const transformedItem: any = {};
+
+        for (const key in item) {
+          const newKey = key.toLowerCase().includes('entity_name') ? key : `${prefix}${key}`
+          if (data.headers[newKey]) {
+            transformedItem[data.headers[newKey]] = item[key];
+          }
+        }
+        return transformedItem;
+      });
+    const header = Object.keys(transformedData[0]);
     const headerString = header.join(",");
     const replacer = (key: string, value: any) => value ?? "";
-    const rowItems = data.details.map((row: any) =>
+    const rowItems = transformedData.map((row: any) =>
       header
         .map((fieldName) => JSON.stringify(row[fieldName], replacer))
         .join(",")
@@ -64,13 +93,6 @@ export default function ActionLink() {
     link.setAttribute("download", csvFilename);
     document.body.appendChild(link);
     link.click();
-  };
-
-  const exportRef = useRef<HTMLDivElement>(null);
-
-  const handleDisplayExport = () => {
-    exportRef.current?.classList.toggle("hidden");
-    exportRef.current?.classList.add("block");
   };
 
   const handleHideDropdownMenu = () => {
@@ -97,41 +119,52 @@ export default function ActionLink() {
     <>
       {reportName !== null && (
         <div className="relative flex items-center justify-end h-full gap-5">
-  <DropdownMenu>
-    <DropdownMenuTrigger  className={clsx(
-                  "btn btn-icon btn-main-transparent uppercase h-full w-[140px] max-md:w-[70px]",
-                  {
-                    "pointer-events-none opacity-35": data === null,
-                  }
-                )}>
- <Icon
-                  className="export-menu-button-icon-left size-10"
-                  icon="iconoir:database-export"
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={clsx(
+                "btn btn-icon btn-main-transparent uppercase h-full w-[140px] max-md:w-[70px]",
+                {
+                  "pointer-events-none opacity-35": data === null,
+                }
+              )}
+            >
+              <Icon
+                className="export-menu-button-icon-left size-10"
+                icon="iconoir:database-export"
+              />
+              <span className="max-md:hidden inline-block">Exporter</span>
+              <Icon
+                className="export-menu-button-icon-right"
+                icon="line-md:chevron-small-down"
+                width="18px"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[140px] max-md:w-[50px]">
+              <DropdownMenuItem
+                className="text-green-700 cursor-pointer flex items-center gap-4"
+                onClick={handleExportToExcel}
+              >
+                <Icon
+                  icon="vscode-icons:file-type-excel2"
+                  width={"32px"}
+                  className="w-[50px]"
                 />
-                <span className="max-md:hidden inline-block">Exporter</span>
-    <Icon
-                  className="export-menu-button-icon-right"
-                  icon="line-md:chevron-small-down"
-                  width="18px"
-                /></DropdownMenuTrigger>
-    <DropdownMenuContent className='w-[140px] max-md:w-[50px]'>
-        <DropdownMenuItem className='text-green-700 cursor-pointer flex items-center gap-4' onClick={handleExportToCSV}>
-<Icon
-                    icon="vscode-icons:file-type-excel2"
-                    width={"32px"}
-                    className="w-[50px]"
-                  />
-                  <span className="max-md:hidden inline-block">EXCEL</span></DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className='text-red-600 cursor-pointer flex items-center gap-4' onClick={handleExportToCSV}><Icon
-                    icon="iwwa:file-csv"
-                    width={"32px"}
-                    className="text-red-600"
-                  />
-                  <span className="max-md:hidden inline-block">CSV</span></DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-
+                <span className="max-md:hidden inline-block">EXCEL</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="text-red-600 cursor-pointer flex items-center gap-4"
+                onClick={handleExportToCSV}
+              >
+                <Icon
+                  icon="iwwa:file-csv"
+                  width={"32px"}
+                  className="text-red-600"
+                />
+                <span className="max-md:hidden inline-block">CSV</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       )}
     </>
