@@ -72,12 +72,12 @@ export default function NavMobile() {
         })}
       </div>
 
-      <div className="nav-mobile-section">
+      {/* <div className="nav-mobile-section">
         <Link className="nav-mobile-link text-fdfp-second pointer-events-none opacity-25" href="/">
           <AdjustmentsHorizontalIcon className="w-14" />
           Adminitration
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
