@@ -6,6 +6,10 @@ import Navbar from "@/components/navbar/Navbar";
 // import { SWRProvider } from "./swr-provider";
 import { sora, inter, clashDisplay, spaceGrotesk } from "@/fonts";
 import ReactQueryProvider from '@/providers/react-query'
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import Fallback from '@/components/errors/fallback';
+import Loader from '@/components/animation/loader';
 
 export const metadata: Metadata = {
   title: {
@@ -105,9 +109,13 @@ export default function RootLayout({
           <div className="main-navbar">
             <Navbar />
           </div>
-          <div className="main-content">
-            <ReactQueryProvider>{children}</ReactQueryProvider>
-          </div>
+          <ErrorBoundary fallback={<Fallback />}>
+            <Suspense fallback={<Loader />}>
+              <div className="main-content">
+                <ReactQueryProvider>{children}</ReactQueryProvider>
+              </div>
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </body>
     </html>
