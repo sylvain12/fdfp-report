@@ -17,6 +17,9 @@ import { useDashboardAgreedProductsStore, useDashboardTrainngPlanStore, useDashb
 import { DashboardArcordionLoader, SkeletonCard } from './dashboard-loader';
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from '../ui/button';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import AlertFallback from '../errors/alert';
 
 
 
@@ -51,43 +54,44 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
 
   return (
     <div className="w-full flex flex-col">
-        <div>
-          <h2 className="text-[2rem] font-semibold mb-[1rem] font-clash-display">
-            PRODUITS DU FDFP
-          </h2>
-          <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
-            Récapitulatif des produits agréés par le FDFP
-          </p>
-          <div className="grid grid-cols-2 gap-[2rem] w-full max-md:grid-cols-1">
-            {isApprovedProductsLoading ? (
-              <SkeletonCard />
-            ) : (
-              approvedProducts.map((product) => (
-                <Card key={product.label} className="col-span-1">
-                  <CardHeader className="border-b">
-                    <CardTitle className="font-light">
-                      {product.label}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex py-4 gap-3">
-                    <div className="flex-grow">
-                      <p className="font-light text-[1.3rem]">Financement</p>
-                      <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
-                        {currencyFormatter(product.amount)}
-                      </span>
-                    </div>
-                    <div className="pr-[2rem] flex-grow">
-                      <p className="font-light text-[1.3rem]">Effectif</p>
-                      <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
-                        {currencyFormatter(product.total)}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
-            )}
-          </div>
+      <div>
+        <h2 className="text-[2rem] font-semibold mb-[1rem] font-clash-display">
+          PRODUITS DU FDFP
+        </h2>
+        <p className="text-[1.6rem] mb-4 font-clash-display font-medium">
+          Récapitulatif des produits agréés par le FDFP
+        </p>
+        {approvedProducts.length === 0 && !isApprovedProductsLoading && (
+          <AlertFallback onRetry={() => console.log("You retry")} />
+        )}
+        <div className="grid grid-cols-2 gap-[2rem] w-full max-md:grid-cols-1">
+          {isApprovedProductsLoading ? (
+            <SkeletonCard />
+          ) : (
+            approvedProducts.map((product) => (
+              <Card key={product.label} className="col-span-1">
+                <CardHeader className="border-b">
+                  <CardTitle className="font-light">{product.label}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex py-4 gap-3">
+                  <div className="flex-grow">
+                    <p className="font-light text-[1.3rem]">Financement</p>
+                    <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
+                      {currencyFormatter(product.amount)}
+                    </span>
+                  </div>
+                  <div className="pr-[2rem] flex-grow">
+                    <p className="font-light text-[1.3rem]">Effectif</p>
+                    <span className="text-[2rem] text-fdfp-second font-medium font-clash-display">
+                      {currencyFormatter(product.total)}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          )}
         </div>
+      </div>
 
       <div className="mt-[4rem]">
         <div className="flex-1">
@@ -103,6 +107,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="plan">
+                {trainingPlan.length === 0 &&
+                  !isTrainingActionLiquidedLoading && (
+                    <AlertFallback onRetry={() => console.log("You retry")} />
+                  )}
                 <div className="flex gap-[2rem] flex-wrap items-center">
                   {isTrainingPlanDataLoading ? (
                     <DashboardArcordionLoader api="trainingPlan" />
@@ -127,6 +135,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                 </div>
               </TabsContent>
               <TabsContent value="projects">
+                {trainingProject.length === 0 &&
+                  !isTrainingProjectDataLoading && (
+                    <AlertFallback onRetry={() => console.log("You retry")} />
+                  )}
                 <div className="flex gap-[2rem] flex-wrap items center">
                   {isTrainingProjectDataLoading ? (
                     <DashboardArcordionLoader api="trainingProject" />
@@ -151,6 +163,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                 </div>
               </TabsContent>
               <TabsContent value="actions">
+                {trainingActionLiquided.length === 0 &&
+                  !isTrainingActionLiquidedLoading && (
+                    <AlertFallback onRetry={() => console.log("You retry")} />
+                  )}
                 <div className="flex gap-[2rem] flex-wrap items center">
                   {isTrainingActionLiquidedLoading ? (
                     <DashboardArcordionLoader api="trainingAction" />
@@ -189,6 +205,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                   Plans de formation
                 </AccordionTrigger>
                 <AccordionContent>
+                  {trainingPlan.length === 0 &&
+                    !isTrainingActionLiquidedLoading && (
+                      <AlertFallback onRetry={() => console.log("You retry")} />
+                    )}
                   {isTrainingPlanDataLoading ? (
                     <DashboardArcordionLoader api="trainingPlan" />
                   ) : (
@@ -220,6 +240,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                   Projets de formation agréés
                 </AccordionTrigger>
                 <AccordionContent>
+                  {trainingProject.length === 0 &&
+                    !isTrainingProjectDataLoading && (
+                      <AlertFallback onRetry={() => console.log("You retry")} />
+                    )}
                   <div className="flex gap-[2rem] flex-wrap items center">
                     {isTrainingProjectDataLoading ? (
                       <DashboardArcordionLoader api="traininProject" />
@@ -251,6 +275,10 @@ const isTrainingActionLiquidedLoading = useDashboardTrainingActiontStore(state =
                   Actions de formation liquidées
                 </AccordionTrigger>
                 <AccordionContent>
+                  {trainingActionLiquided.length === 0 &&
+                    !isTrainingActionLiquidedLoading && (
+                      <AlertFallback onRetry={() => console.log("You retry")} />
+                    )}
                   <div className="flex gap-[2rem] flex-wrap items center">
                     {isTrainingActionLiquidedLoading ? (
                       <DashboardArcordionLoader api="traininAction" />
