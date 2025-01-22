@@ -8,17 +8,14 @@ COPY package.json bun.lockb ./
 
 RUN bun install --frozen-lockfile
 
+
 FROM oven/bun:1 AS release
 
 COPY --from=base /usr/src/app/node_modules node_modules
-
 COPY . .
 
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+RUN bun run build
 
-RUN bun --bun run build
+EXPOSE 3000
 
-EXPOSE 3004
-
-CMD bun --bun run start -p 3004
+ENTRYPOINT ["bun", "run", "start"]

@@ -10,7 +10,7 @@ export default function ReportCard({ href, name, icon, active }: TLink) {
     <Link
       onClick={() => resetTable()}
       href={href}
-      className={clsx("report-card", {
+      className={clsx("report-card bg-white", {
         "pointer-events-none opacity-25": !active,
       })}
     >

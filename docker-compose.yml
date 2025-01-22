@@ -3,7 +3,7 @@ services:
   fdfpapp:
     image: fdfp-report
     ports:
-      - 3004:3004
+      - 3004:3000
     env_file:
       - .env
     restart: always
