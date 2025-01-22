@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  fdfpapp:
+    image: fdfp-report
+    ports:
+      - 3003:3000
+    env_file:
+      - .env
+    restart: always
