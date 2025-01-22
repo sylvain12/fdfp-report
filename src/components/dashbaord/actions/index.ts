@@ -7,7 +7,6 @@ import {
   DashboardDataSchema,
   BusinessPartnerType,
   DashbordDataType,
-   
 } from "../model";
 import {
   API_DASHBOARD_AGREED_PRODUCT_PATH,

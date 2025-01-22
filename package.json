@@ -27,6 +27,7 @@
     "@types/topojson": "^3.2.6",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.8",
+    "caniuse-lite": "^1.0.30001692",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",

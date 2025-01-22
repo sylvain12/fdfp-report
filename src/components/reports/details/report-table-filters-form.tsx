@@ -57,7 +57,7 @@ export default function ReportTableFiltersForm() {
   const isTableDataLoaing = useTableFilterStore((state) => state.isLoading);
 
   const form = useForm<Inputs>({ resolver: zodResolver(schema),
-defaultValues: {year: '', key: ''} });
+  defaultValues: {year: '', key: ''} });
 
   const formRef = useRef<HTMLFormElement>(null);
   const tableSelectInput = form.watch('key')
