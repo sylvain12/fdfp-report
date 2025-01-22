@@ -19,6 +19,6 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 RUN bun --bun run build
 
-CMD bun --bun run start
-
 EXPOSE 3000
+
+CMD bun --bun run start
